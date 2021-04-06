@@ -1,14 +1,17 @@
 FROM buildpack-deps:focal
 
 COPY install-packages /usr/bin
+
 ### base ###
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN yes | unminimize \
     && install-packages \
-    && apt-get install -yq \
         zip \
         unzip \
         bash-completion \
         build-essential \
+        ninja-build \
         htop \
         jq \
         less \
@@ -21,16 +24,16 @@ RUN yes | unminimize \
         vim \
         multitail \
         lsof \
-    && locale-gen en_US.UTF-8 \
-    && mkdir /var/lib/apt/dazzle-marks \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+        ssl-cert \
+        fish \
+        zsh \
+    && locale-gen en_US.UTF-8
 
 ENV LANG=en_US.UTF-8
 
 ### Git ###
 RUN add-apt-repository -y ppa:git-core/ppa \
-    && apt-get install -yq git \
-    && rm -rf /var/lib/apt/lists/*
+    && install-packages git
 
 ### Gitpod user ###
 # '-l': see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
