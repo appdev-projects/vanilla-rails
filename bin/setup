@@ -19,8 +19,7 @@ FileUtils.chdir APP_ROOT do
 
   # Install JavaScript dependencies
   system! 'bin/yarn'
-
-  system! 'service postgresql start' if `service postgresql status`.match?('down')
+  system! 'service postgresql start'
 
   # puts "\n== Copying sample files =="
   # unless File.exist?('config/database.yml')
