@@ -79,7 +79,9 @@ RUN /bin/bash -l -c "gem install rufo"
 WORKDIR /base-rails
 USER gitpod
 
-RUN cd .. && sudo chown -R $(whoami):$(whoami) base-rails
+WORKDIR /
+RUN /bin/bash -l -c "ls"
+RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) base-rails"
 WORKDIR /base-rails
 COPY Gemfile /base-rails/Gemfile
 COPY Gemfile.lock /base-rails/Gemfile.lock
