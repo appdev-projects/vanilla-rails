@@ -78,7 +78,7 @@ RUN /bin/bash -l -c "gem install rufo"
 
 WORKDIR /base-rails
 USER gitpod
-RUN sudo chown -R $(whoami):$(whoami) .
+RUN sudo chown -R $(whoami):$(whoami) base-rails
 COPY Gemfile /base-rails/Gemfile
 COPY Gemfile.lock /base-rails/Gemfile.lock
 RUN /bin/bash -l -c "gem install bundler:2.2.3"
