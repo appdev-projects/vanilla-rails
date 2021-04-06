@@ -57,8 +57,8 @@ RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - \
     && curl -fsSL https://get.rvm.io | bash -s stable \
     && bash -lc " \
         rvm requirements \
-        && rvm install 2.7.1 \
-        && rvm use 2.7.1 --default \
+        && rvm install 3.0.0 \
+        && rvm use 3.0.0 --default \
         && rvm rubygems current \
         && gem install bundler --no-document \
         && gem install solargraph --no-document" \
@@ -69,12 +69,16 @@ USER gitpod
 # AppDev stuff
 RUN /bin/bash -l -c "gem install htmlbeautifier"
 RUN /bin/bash -l -c "gem install rufo"
-WORKDIR /vanilla-rails
-COPY Gemfile /vanilla-rails/Gemfile
-COPY Gemfile.lock /vanilla-rails/Gemfile.lock
 
-# USER root
-# RUN mkdir /workspace && chmod 755 /workspace
+USER root
+# Patch shotgun so it works with Ruby 3.0.0
+RUN /bin/bash -l -c "wget  -O hotfix_shotgun 'https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/hotfix_shotgun' && chmod 777 hotfix_shotgun && ./hotfix_shotgun"
+
+
+WORKDIR /base-rails
+COPY Gemfile /base-rails/Gemfile
+COPY Gemfile.lock /base-rails/Gemfile.lock
+
 USER gitpod
 
 RUN /bin/bash -l -c "bundle install"
@@ -84,8 +88,9 @@ RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-# RUN sudo apt-get update && sudo apt-get install -y nodejs yarn postgresql-client
+RUN sudo apt-get update && sudo apt-get install -y nodejs yarn postgresql-client
 RUN sudo apt-get update && sudo apt-get install -y yarn
+RUN sudo apt install -y postgresql postgresql-contrib libpq-dev psmisc lsof
 USER gitpod
-RUN echo "rvm use 2.7.1" >> ~/.bashrc
+RUN echo "rvm use 3.0.0" >> ~/.bashrc
 RUN echo "rvm_silence_path_mismatch_check_flag=1" >> ~/.rvmrc
