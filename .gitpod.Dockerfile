@@ -70,6 +70,7 @@ USER gitpod
 RUN /bin/bash -l -c "gem install htmlbeautifier"
 RUN /bin/bash -l -c "gem install rufo"
 
+WORKDIR /base-rails
 USER root
 # Patch shotgun so it works with Ruby 3.0.0
 RUN /bin/bash -l -c "wget  -O hotfix_shotgun 'https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/hotfix_shotgun' && chmod 777 hotfix_shotgun && ./hotfix_shotgun"
