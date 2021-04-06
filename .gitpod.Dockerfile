@@ -1,7 +1,9 @@
 FROM buildpack-deps:focal
 
+COPY install-packages /usr/bin
 ### base ###
 RUN yes | unminimize \
+    && install-packages \
     && apt-get install -yq \
         zip \
         unzip \
