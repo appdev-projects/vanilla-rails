@@ -1,4 +1,5 @@
-image: jelaniwoods/appdev2021-vanilla-rails:test
+image:
+  file: .gitpod.Dockerfile
 
 tasks:
   - init: bin/setup
