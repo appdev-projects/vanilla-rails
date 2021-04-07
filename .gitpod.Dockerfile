@@ -62,8 +62,8 @@ RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - \
     && curl -fsSL https://get.rvm.io | bash -s stable \
     && bash -lc " \
         rvm requirements \
-        && rvm install 3.0.0 \
-        && rvm use 3.0.0 --default \
+        && rvm install 2.7.2 \
+        && rvm use 2.7.2 --default \
         && rvm rubygems current \
         && gem install bundler --no-document \
         && gem install solargraph --no-document" \
@@ -103,7 +103,7 @@ RUN printf "\n# Auto-start PostgreSQL server.\n[[ \$(pg_ctl status | grep PID) ]
 
 # WORKDIR /base-rails
 # USER root
-# Patch shotgun so it works with Ruby 3.0.0
+# Patch shotgun so it works with Ruby 2.7.2
 # RUN /bin/bash -l -c "wget  -O hotfix_shotgun 'https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/hotfix_shotgun' && chmod 777 hotfix_shotgun && ./hotfix_shotgun"
 
 WORKDIR /base-rails
@@ -130,5 +130,5 @@ RUN sudo apt install -y libpq-dev psmisc lsof
 # RUN /bin/bash -l -c "sudo service postgresql start"
 # RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) /var/run/postgresql"
 USER gitpod
-RUN echo "rvm use 3.0.0" >> ~/.bashrc
+RUN echo "rvm use 2.7.2" >> ~/.bashrc
 RUN echo "rvm_silence_path_mismatch_check_flag=1" >> ~/.rvmrc
