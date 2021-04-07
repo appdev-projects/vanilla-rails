@@ -108,7 +108,7 @@ RUN printf "\n# Auto-start PostgreSQL server.\n[[ \$(pg_ctl status | grep PID) ]
 
 WORKDIR /base-rails
 USER gitpod
-RUN /bin/bash -l -c "sudo apt install -y graphviz"
+RUN /bin/bash -l -c "sudo apt update && sudo apt install -y graphviz"
 
 WORKDIR /base-rails
 COPY Gemfile /base-rails/Gemfile
