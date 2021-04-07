@@ -75,6 +75,12 @@ USER gitpod
 RUN /bin/bash -l -c "gem install htmlbeautifier"
 RUN /bin/bash -l -c "gem install rufo"
 
+# Install Google Chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+RUN sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN sudo apt-get -y update
+RUN sudo apt-get -y install google-chrome-stable
+
 # Install PostgreSQL
 RUN sudo install-packages postgresql-12 postgresql-contrib-12
 
@@ -100,11 +106,10 @@ RUN printf "\n# Auto-start PostgreSQL server.\n[[ \$(pg_ctl status | grep PID) ]
 # Patch shotgun so it works with Ruby 3.0.0
 # RUN /bin/bash -l -c "wget  -O hotfix_shotgun 'https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/hotfix_shotgun' && chmod 777 hotfix_shotgun && ./hotfix_shotgun"
 
-
 WORKDIR /base-rails
 USER gitpod
+RUN /bin/bash -l -c "sudo apt install -y graphviz"
 
-WORKDIR /
 WORKDIR /base-rails
 COPY Gemfile /base-rails/Gemfile
 COPY Gemfile.lock /base-rails/Gemfile.lock
