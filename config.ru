@@ -2,7 +2,6 @@
 
 require_relative "config/environment"
 
-
 if Rails.env.development?
   map '/git' do
     run WebGit::Server
