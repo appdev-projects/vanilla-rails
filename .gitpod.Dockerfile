@@ -133,6 +133,13 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
 # Install fuser
 RUN sudo apt install -y libpq-dev psmisc lsof
 
+# Install JS dependencies
+COPY package.json /base-rails/package.json
+COPY yarn.lock /base-rails/yarn.lock
+# For some reason, the copied files were owned by root so bundle could not succeed
+RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) yarn.lock package.json"
+RUN /bin/bash -l -c "yarn"
+
 # Install heroku-cli
 RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
 
