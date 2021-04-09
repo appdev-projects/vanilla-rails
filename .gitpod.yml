@@ -1,5 +1,4 @@
-image:
-  file: .gitpod.Dockerfile
+image: jelaniwoods/appdev2021-vanilla-rails:spring
 
 tasks:
   - init: bin/setup
