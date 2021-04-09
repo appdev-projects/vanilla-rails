@@ -62,8 +62,8 @@ RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - \
     && curl -fsSL https://get.rvm.io | bash -s stable \
     && bash -lc " \
         rvm requirements \
-        && rvm install 2.7.2 \
-        && rvm use 2.7.2 --default \
+        && rvm install 2.7.3 \
+        && rvm use 2.7.3 --default \
         && rvm rubygems current \
         && gem install bundler --no-document \
         && gem install solargraph --no-document" \
@@ -78,8 +78,12 @@ RUN /bin/bash -l -c "gem install rufo"
 # Install Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 RUN sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN sudo apt-get -y update
-RUN sudo apt-get -y install google-chrome-stable
+RUN sudo apt-get -y update \
+    && sudo apt-get -y install google-chrome-stable
+
+# Install Chromedriver
+RUN wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
+RUN unzip chromedriver_linux64.zip
 
 # Install PostgreSQL
 RUN sudo install-packages postgresql-12 postgresql-contrib-12
@@ -101,11 +105,6 @@ ENV PGDATABASE="postgres"
 # PostgreSQL server is running, and if not starts it.
 RUN printf "\n# Auto-start PostgreSQL server.\n[[ \$(pg_ctl status | grep PID) ]] || pg_start > /dev/null\n" >> ~/.bashrc
 
-# WORKDIR /base-rails
-# USER root
-# Patch shotgun so it works with Ruby 2.7.2
-# RUN /bin/bash -l -c "wget  -O hotfix_shotgun 'https://raw.githubusercontent.com/jelaniwoods/dotfiles/master/hotfix_shotgun' && chmod 777 hotfix_shotgun && ./hotfix_shotgun"
-
 WORKDIR /base-rails
 USER gitpod
 RUN /bin/bash -l -c "sudo apt update && sudo apt install -y graphviz"
@@ -118,17 +117,24 @@ RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) Gemfile Gemfile.lock"
 RUN /bin/bash -l -c "gem install bundler:2.2.3"
 
 RUN /bin/bash -l -c "bundle install"
+# Disable skylight dev warning
+RUN /bin/bash -l -c "skylight disable_dev_warning"
 
+# Install Node and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs
+
+# Install Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
+    && sudo apt-get install -y yarn
+
+# Install fuser
+RUN sudo apt install -y libpq-dev psmisc lsof
+
+# Install heroku-cli
 RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-RUN sudo apt-get update && sudo apt-get install -y nodejs yarn
-# RUN sudo apt install -y postgresql postgresql-contrib libpq-dev psmisc lsof
-RUN sudo apt install -y libpq-dev psmisc lsof
-# RUN /bin/bash -l -c "sudo service postgresql start"
-# RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) /var/run/postgresql"
-USER gitpod
-RUN echo "rvm use 2.7.2" >> ~/.bashrc
+# Hack to pre-install bundled gems
+RUN echo "rvm use 2.7.3" >> ~/.bashrc
 RUN echo "rvm_silence_path_mismatch_check_flag=1" >> ~/.rvmrc
