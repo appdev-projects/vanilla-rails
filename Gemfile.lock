@@ -128,6 +128,8 @@ GEM
       warden (~> 1.2.3)
     diffy (3.4.0)
     erubi (1.10.0)
+    faker (2.17.0)
+      i18n (>= 1.6, < 2)
     ffi (1.15.0)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
@@ -368,6 +370,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  faker
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
