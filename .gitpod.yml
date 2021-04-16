@@ -1,4 +1,5 @@
-image: jelaniwoods/appdev2021-vanilla-rails@sha256:39f4fefb3cbbc6f098cb2a0742ae0b622c056058f07491bf271c4decceef4efd
+image:
+  file: .gitpod.Dockerfile
 
 tasks:
   - init: bin/setup
