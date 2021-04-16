@@ -116,29 +116,29 @@ COPY Gemfile.lock /base-rails/Gemfile.lock
 RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) Gemfile Gemfile.lock"
 RUN /bin/bash -l -c "gem install bundler:2.2.3"
 
-# RUN /bin/bash -l -c "bundle install"
-# # Disable skylight dev warning
-# RUN /bin/bash -l -c "skylight disable_dev_warning"
+RUN /bin/bash -l -c "bundle install"
+# Disable skylight dev warning
+RUN /bin/bash -l -c "skylight disable_dev_warning"
 
-# # Install Node and npm
-# RUN curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash - \
-#     && sudo apt-get install -y nodejs
+# Install Node and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs
 
-# # Install Yarn
-# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
-#     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
-#     && sudo apt-get update \
-#     && sudo apt-get install -y yarn
+# Install Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
+    && sudo apt-get update \
+    && sudo apt-get install -y yarn
 
-# # Install fuser
-# RUN sudo apt install -y libpq-dev psmisc lsof
+# Install fuser
+RUN sudo apt install -y libpq-dev psmisc lsof
 
-# # Install JS dependencies
-# COPY package.json /base-rails/package.json
-# COPY yarn.lock /base-rails/yarn.lock
-# # For some reason, the copied files were owned by root so bundle could not succeed
-# RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) yarn.lock package.json"
-# RUN /bin/bash -l -c "yarn"
+# Install JS dependencies
+COPY package.json /base-rails/package.json
+COPY yarn.lock /base-rails/yarn.lock
+# For some reason, the copied files were owned by root so bundle could not succeed
+RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) yarn.lock package.json"
+RUN /bin/bash -l -c "yarn"
 
 # Install heroku-cli
 RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
