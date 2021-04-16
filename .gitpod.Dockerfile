@@ -143,6 +143,30 @@ RUN /bin/bash -l -c "yarn"
 # Install heroku-cli
 RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
 
+# Git global configuration
+RUN git config --global push.default upstream \
+    && git config --global merge.ff only \
+    && git config --global alias.acm '!f(){ git add -A && git commit -am ${1}; };f' \
+    && git config --global alias.as '!git add -A && git stash' \
+    && git config --global alias.p 'push' \
+    && git config --global alias.sla 'log --oneline --decorate --graph --all' \
+    && git config --global alias.co 'checkout' \
+    && git config --global alias.cob 'checkout -b'
+
+# Alias 'git' to 'g'
+RUN echo 'export PATH="$PATH:$GITPOD_REPO_ROOT/bin"' >> ~/.bashrc
+RUN echo "# No arguments: 'git status'\n\
+# With arguments: acts like 'git'\n\
+g() {\n\
+  if [[ \$# > 0 ]]; then\n\
+    git \$@\n\
+  else\n\
+    git status\n\
+  fi\n\
+}\n# Complete g like git\n\
+source /usr/share/bash-completion/completions/git\n\
+__git_complete g __git_main" >> ~/.bash_aliases
+
 # Hack to pre-install bundled gems
 RUN echo "rvm use 2.7.3" >> ~/.bashrc
 RUN echo "rvm_silence_path_mismatch_check_flag=1" >> ~/.rvmrc
