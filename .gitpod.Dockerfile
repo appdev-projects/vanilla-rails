@@ -146,7 +146,7 @@ RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
 # Git global configuration
 RUN git config --global push.default upstream \
     && git config --global merge.ff only \
-    && git config --global alias.acm '!f(){ git add -A && git commit -am ${*}; };f' \
+    && git config --global alias.acm '!f(){ git add -A && git commit -am "${*}"; };f' \
     && git config --global alias.as '!git add -A && git stash' \
     && git config --global alias.p 'push' \
     && git config --global alias.sla 'log --oneline --decorate --graph --all' \
