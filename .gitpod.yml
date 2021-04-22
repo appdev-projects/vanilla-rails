@@ -1,6 +1,7 @@
 image: jelaniwoods/appdev2021-vanilla-rails@sha256:fe07e281a5eb75f7a4cf68a172121bf62a78afd529a123d097575c6233aae1df
 
 tasks:
+  - command: bundle install
   - init: bin/setup
 ports:
   - port: 3000
