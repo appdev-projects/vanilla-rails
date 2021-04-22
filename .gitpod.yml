@@ -2,8 +2,6 @@ image: jelaniwoods/appdev2021-vanilla-rails@sha256:fe07e281a5eb75f7a4cf68a172121
 
 tasks:
   - init: bin/setup
-  - openMode: tab-before
-    command: bundle install 
 ports:
   - port: 3000
     onOpen: open-preview
