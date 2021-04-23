@@ -140,6 +140,12 @@ COPY yarn.lock /base-rails/yarn.lock
 RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) yarn.lock package.json"
 RUN /bin/bash -l -c "yarn"
 
+# Install parity gem
+RUN wget -qO - https://apt.thoughtbot.com/thoughtbot.gpg.key | sudo apt-key add - \
+    && echo "deb http://apt.thoughtbot.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/thoughtbot.list \
+    && sudo apt-get update \
+    && sudo apt-get -y install parity
+
 # Install heroku-cli
 RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
 
