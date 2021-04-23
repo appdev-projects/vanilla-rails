@@ -1,4 +1,4 @@
-image: jelaniwoods/appdev2021-vanilla-rails@sha256:fe07e281a5eb75f7a4cf68a172121bf62a78afd529a123d097575c6233aae1df
+image: jelaniwoods/appdev2021-vanilla-rails@sha256:9d0dc73205215b24c7e313fa8fbbe49c135f497fe9bcbb5eb98d3c9480e679c6
 
 tasks:
   - command: bundle install
