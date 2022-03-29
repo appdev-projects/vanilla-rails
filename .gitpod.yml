@@ -1,4 +1,4 @@
-image: jelaniwoods/appdev2021-vanilla-rails@sha256:35d5756428cbae11f43a94c92d6c384626b1ead2287738299b6010c4e588e781
+image: jelaniwoods/appdev2021-vanilla-rails-hotfix
 
 tasks:
   - command: bundle install
@@ -12,8 +12,6 @@ ports:
 
 vscode:
   extensions:
-    - shd101wyy.markdown-preview-enhanced
     - vortizhe.simple-ruby-erb
-    - CraigMaslowski.erb
-    - Vense.rails-snippets
-    - wingrunr21.vscode-ruby
+    - mbessey.vscode-rufo
+    - aliariff.vscode-erb-beautify
