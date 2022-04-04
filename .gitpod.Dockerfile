@@ -122,7 +122,7 @@ COPY Gemfile /base-rails/Gemfile
 COPY Gemfile.lock /base-rails/Gemfile.lock
 # For some reason, the copied files were owned by root so bundle could not succeed
 RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) Gemfile Gemfile.lock"
-RUN /bin/bash -l -c "gem install bundler:2.2.3"
+RUN /bin/bash -l -c "gem install bundler:2.2.16"
 
 RUN /bin/bash -l -c "bundle install"
 # Disable skylight dev warning
