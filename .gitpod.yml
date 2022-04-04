@@ -1,4 +1,4 @@
-image: jelaniwoods/appdev2021-vanilla-rails-hotfix
+image: jelaniwoods/appdev2022-vanilla-rails-6
 
 tasks:
   - command: bundle install
