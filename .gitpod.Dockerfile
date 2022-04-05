@@ -62,8 +62,8 @@ RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - \
     && curl -fsSL https://get.rvm.io | bash -s stable \
     && bash -lc " \
         rvm requirements \
-        && rvm install 3.0.0 \
-        && rvm use 3.0.0 --default \
+        && rvm install 3.0.3 \
+        && rvm use 3.0.3 --default \
         && rvm rubygems current \
         && gem install bundler --no-document" \
     && echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*' >> /home/gitpod/.bashrc.d/70-ruby
@@ -122,7 +122,7 @@ COPY Gemfile /base-rails/Gemfile
 COPY Gemfile.lock /base-rails/Gemfile.lock
 # For some reason, the copied files were owned by root so bundle could not succeed
 RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) Gemfile Gemfile.lock"
-RUN /bin/bash -l -c "gem install bundler:2.2.16"
+RUN /bin/bash -l -c "gem install bundler:2.2.32"
 
 RUN /bin/bash -l -c "bundle install"
 # Disable skylight dev warning
@@ -190,5 +190,5 @@ parse_git_branch() {\n\
 PS1='\[]0;\u \w\]\[[01;32m\]\u\[[00m\] \[[01;34m\]\w\[[00m\]\[\e[0;38;5;197m\]\$(parse_git_branch)\[\e[0m\] \\\$ '" >> ~/.bashrc
 
 # Hack to pre-install bundled gems
-RUN echo "rvm use 3.0.0" >> ~/.bashrc
+RUN echo "rvm use 3.0.3" >> ~/.bashrc
 RUN echo "rvm_silence_path_mismatch_check_flag=1" >> ~/.rvmrc
