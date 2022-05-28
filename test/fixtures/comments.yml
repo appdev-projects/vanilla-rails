@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commentor: one
+  game: one
+  commentroom: MyString
+  commenttext: MyText
+
+two:
+  commentor: two
+  game: two
+  commentroom: MyString
+  commenttext: MyText
