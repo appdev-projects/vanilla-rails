@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Moves</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Move</th>
+      <th>Legal</th>
+      <th>Accepted</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @moves.each do |move| %>
+      <tr>
+        <td><%= move.game_id %></td>
+        <td><%= move.move %></td>
+        <td><%= move.legal %></td>
+        <td><%= move.accepted %></td>
+        <td><%= link_to 'Show', move %></td>
+        <td><%= link_to 'Edit', edit_move_path(move) %></td>
+        <td><%= link_to 'Destroy', move, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Move', new_move_path %>
