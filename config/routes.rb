@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "games#index"
+  
   resources :comments
   resources :votes
   resources :moves
