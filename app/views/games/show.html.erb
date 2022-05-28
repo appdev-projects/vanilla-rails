@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @game.status %>
+</p>
+
+<p>
+  <strong>Whiteteamcolor:</strong>
+  <%= @game.whiteteamcolor %>
+</p>
+
+<p>
+  <strong>Blackteamcolor:</strong>
+  <%= @game.blackteamcolor %>
+</p>
+
+<p>
+  <strong>Outcome:</strong>
+  <%= @game.outcome %>
+</p>
+
+<p>
+  <strong>Moves:</strong>
+  <%= @game.moves %>
+</p>
+
+<p>
+  <strong>Boardsetup:</strong>
+  <%= @game.boardsetup %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

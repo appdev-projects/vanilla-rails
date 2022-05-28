@@ -1,0 +1,47 @@
+<%= form_with(model: game) do |form| %>
+  <% if game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+        <% game.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :whiteteamcolor %>
+    <%= form.text_field :whiteteamcolor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blackteamcolor %>
+    <%= form.text_field :blackteamcolor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :outcome %>
+    <%= form.text_field :outcome %>
+  </div>
+
+  <div class="field">
+    <%= form.label :moves %>
+    <%= form.text_field :moves %>
+  </div>
+
+  <div class="field">
+    <%= form.label :boardsetup %>
+    <%= form.text_field :boardsetup %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
