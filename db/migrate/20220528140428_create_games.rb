@@ -5,7 +5,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
       t.string :whiteteamcolor
       t.string :blackteamcolor
       t.string :outcome
-      t.string :moves
+      t.string :movehistory
       t.string :boardsetup
 
       t.timestamps

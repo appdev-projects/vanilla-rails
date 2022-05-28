@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2022_05_28_141208) do
     t.string "whiteteamcolor"
     t.string "blackteamcolor"
     t.string "outcome"
-    t.string "moves"
+    t.string "movehistory"
     t.string "boardsetup"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2022_05_28_141208) do
 
   create_table "moves", force: :cascade do |t|
     t.bigint "game_id", null: false
-    t.string "move"
+    t.string "suggestedmove"
     t.boolean "legal"
     t.boolean "accepted"
     t.datetime "created_at", precision: 6, null: false
