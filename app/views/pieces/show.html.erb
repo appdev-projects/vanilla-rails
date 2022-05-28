@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pieceowner:</strong>
+  <%= @piece.pieceowner_id %>
+</p>
+
+<p>
+  <strong>Teamcolor:</strong>
+  <%= @piece.teamcolor %>
+</p>
+
+<p>
+  <strong>Piecetype:</strong>
+  <%= @piece.piecetype %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @piece.points %>
+</p>
+
+<%= link_to 'Edit', edit_piece_path(@piece) %> |
+<%= link_to 'Back', pieces_path %>
