@@ -11,15 +11,47 @@
     </div>
   <% end %>
 
+
+  <div class="row g-2">
+    <div class="col-md">
+      <div class="form-floating">
+        <select class="form-select" id="whiteteamcolor" aria-label="whiteteamcolor">
+          <option selected>Select Team</option>
+          <option value="Red">Red</option>
+          <option value="Orange">Orange</option>
+          <option value="Yellow">Yellow</option>
+          <option value="Green">Green</option>          
+          <option value="Blue">Blue</option>
+          <option value="Purple">Purple</option>
+          <option value="Pink">Pink</option>
+          <option value="Brown">Brown</option>   
+        </select>
+        <label for="whiteteamcolor">White Team</label>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-floating">
+        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+          <option selected>Select Team</option>
+          <option value="Red">Red</option>
+          <option value="Orange">Orange</option>
+          <option value="Yellow">Yellow</option>
+          <option value="Green">Green</option>          
+          <option value="Blue">Blue</option>
+          <option value="Purple">Purple</option>
+          <option value="Pink">Pink</option>
+          <option value="Brown">Brown</option>   
+        </select>
+        <label for="floatingSelectGrid">Black Team</label>
+      </div>
+    </div>    
+  </div>
+
   <div class="field">
     <%= form.label :status %>
     <%= form.text_field :status %>
   </div>
 
-  <div class="field">
-    <%= form.label :whiteteamcolor %>
-    <%= form.text_field :whiteteamcolor %>
-  </div>
 
   <div class="field">
     <%= form.label :blackteamcolor %>
