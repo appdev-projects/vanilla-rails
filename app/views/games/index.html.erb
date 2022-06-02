@@ -13,7 +13,7 @@
         <div class="card-header">
           <h5 class="card-title"><%= game.whiteteamcolor.titleize %> team VS <%= game.blackteamcolor.titleize %> team</h5>
           <p class="card-text">This game started on <%= game.created_at.strftime("%B %e, %Y") %> </p>
-          <a href="/games/<%=game.id%>" class="btn btn-primary"  >Go to game</a>
+          <%= link_to 'Go to game', game_path(game), class: "btn btn-primary" %>
         </div>
       </div>
     </div>
