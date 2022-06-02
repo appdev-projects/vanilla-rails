@@ -4,6 +4,7 @@ class GamesController < ApplicationController
   # GET /games or /games.json
   def index
     @games = Game.all
+    @activegames = Game.active
   end
 
   # GET /games/1 or /games/1.json
