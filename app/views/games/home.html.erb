@@ -1,0 +1,27 @@
+<div style="text-align:center" class="mb-3"><%= image_tag ("Chess Legends Logo.png") , width: 400 %> </div>
+
+<div class="container">
+  <div class="row p-3">
+    <h2 style="text-align:center">Select a Game</h2>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @games.active.each do |game| %>
+    <div class="col">
+      <div class="card">
+        <div class="cols-2 mb-3 mt-3 mx-auto">
+          <%= image_tag (game.whiteteamcolor.titleize + "-W.png") , width: 100 %> 
+          <%= image_tag (game.blackteamcolor.titleize + "-B.png") , width: 100 %> 
+        </div>
+        <div class="card-header">
+          <h5 class="card-title"><%= game.whiteteamcolor.titleize %> team VS <%= game.blackteamcolor.titleize %> team</h5>
+          <p class="card-text">This game started on <%= game.created_at.strftime("%B %e, %Y") %> </p>
+          <%= link_to 'Go to game', game_path(game), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'New Game', new_game_path %>
