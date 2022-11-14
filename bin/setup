@@ -17,6 +17,9 @@ FileUtils.chdir APP_ROOT do
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
+  if !Dir.exist?("node_modules") && Dir.exist?("/base-rails/node_modules")
+    FileUtils.cp_r("/base-rails/node_modules", "node_modules")
+  end
   # Install JavaScript dependencies
   system! 'bin/yarn'
 
