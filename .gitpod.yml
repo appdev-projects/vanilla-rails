@@ -1,4 +1,4 @@
-image: jelaniwoods/appdev2022-vanilla-rails-6
+image: jelaniwoods/appdev2022-vanilla-rails-6-tmp
 
 tasks:
   - command: bundle install
