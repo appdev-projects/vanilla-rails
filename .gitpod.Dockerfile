@@ -122,11 +122,12 @@ COPY Gemfile /base-rails/Gemfile
 COPY Gemfile.lock /base-rails/Gemfile.lock
 # For some reason, the copied files were owned by root so bundle could not succeed
 RUN /bin/bash -l -c "sudo chown -R $(whoami):$(whoami) Gemfile Gemfile.lock"
+RUN /bin/bash -l -c "mkdir gems && bundle config set --local path 'gems'"
 RUN /bin/bash -l -c "gem install bundler:2.2.32"
 
 RUN /bin/bash -l -c "bundle install"
 # Disable skylight dev warning
-RUN /bin/bash -l -c "skylight disable_dev_warning"
+RUN /bin/bash -l -c "bundle exec skylight disable_dev_warning"
 
 # Install Node and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash - \
