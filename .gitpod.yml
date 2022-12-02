@@ -3,7 +3,7 @@ image: jelaniwoods/appdev2022-vanilla-rails-6
 tasks:
   - before: |
       bin/setup
-      bin/manage_extensions
+      .vscode/manage_extensions
 ports:
   - port: 3000
     onOpen: open-preview
