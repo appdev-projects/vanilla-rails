@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+extensions = [
+  "k--kato.intellij-idea-keybindings",
+  "kaiwood.endwise",
+  "castwide.solargraph",
+]
+
+extensions.each do |extension|
+  status = `code --uninstall-extension #{extension}`
+  puts "Uninstalled #{extension} - #{status}"
+end
