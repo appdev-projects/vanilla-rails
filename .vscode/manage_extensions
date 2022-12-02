@@ -7,8 +7,7 @@ extensions = [
 ]
 
 extensions.each do |extension|
-  result = `code --uninstall-extension #{extension}`
-  status = 
+  results = `code --uninstall-extension #{extension}`
   if results.include?("successfully uninstalled")
     status = "successful"
   elsif results.include?("is not installed")
