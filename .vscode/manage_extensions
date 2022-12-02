@@ -15,5 +15,6 @@ extensions.each do |extension|
     status = "(wasn't installed)"
   else
     status = "failed"
+  end
   puts "Uninstalled #{extension} - #{status}"
 end
