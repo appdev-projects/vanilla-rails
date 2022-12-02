@@ -8,6 +8,12 @@ extensions = [
 
 extensions.each do |extension|
   result = `code --uninstall-extension #{extension}`
-  status = results.include?("successfully uninstalled") ? true : false
+  status = 
+  if results.include?("successfully uninstalled")
+    status = "successful"
+  elsif results.include?("is not installed")
+    status = "(wasn't installed)"
+  else
+    status = "failed"
   puts "Uninstalled #{extension} - #{status}"
 end
