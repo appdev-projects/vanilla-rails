@@ -1,8 +1,9 @@
 image: jelaniwoods/appdev2022-vanilla-rails-6
 
 tasks:
-  - command: bundle install
-  - init: bin/setup
+  - before: |
+      bin/setup
+      .vscode/manage_extensions
 ports:
   - port: 3000
     onOpen: open-preview
