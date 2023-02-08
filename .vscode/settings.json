@@ -43,8 +43,8 @@
 		"editor.formatOnSave": true
   },
   "vscode-erb-beautify.keepBlankLines": 1,
-  "vscode-erb-beautify.executePath": "/home/gitpod/.rvm/gems/ruby-3.1.2/wrappers/htmlbeautifier",
-  "rufo.exe": "/home/gitpod/.rvm/gems/ruby-3.1.2/wrappers/rufo",
+  "vscode-erb-beautify.executePath": "/home/gitpod/.rvm/gems/ruby-3.0.3/wrappers/htmlbeautifier",
+  "rufo.exe": "/home/gitpod/.rvm/gems/ruby-3.0.3/wrappers/rufo",
   "ruby.intellisense": false,
   "gitpod.openInStable.neverPrompt": true,
   "redhat.telemetry.enabled": false,
