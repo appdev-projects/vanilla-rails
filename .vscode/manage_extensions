@@ -1,19 +1,35 @@
 #!/usr/bin/env ruby
 
-extensions = [
+unwanted_extensions = [
   "k--kato.intellij-idea-keybindings",
   "kaiwood.endwise",
   "castwide.solargraph",
+  "jnbt.vscode-rufo",
+  "mbessey.vscode-rufo",
 ]
 
-extensions.each do |extension|
+wanted_extensions = [
+  "vscode-rufo-0.0.6.vsix"
+]
+puts "starting..."
+unwanted_extensions.each do |extension|
   results = `code --uninstall-extension #{extension}`
   if results.include?("successfully uninstalled")
     status = "successful"
   elsif results.include?("is not installed")
-    status = "(wasn't installed)"
+    status = "successsful"
   else
     status = "failed"
   end
-  puts "Uninstalled #{extension} - #{status}"
+  puts "Uninstalled #{extension} - #{status}!"
+end
+
+wanted_extensions.each do |extension|
+  results = `code --install-extension .vscode/#{extension}`
+  if results.include?("success")
+    status = "successful"
+  else
+    status = "failed"
+  end
+  puts "Installed #{extension} - #{status}!"
 end

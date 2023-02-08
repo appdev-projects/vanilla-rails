@@ -2,6 +2,7 @@ image: jelaniwoods/appdev2022-vanilla-rails-6
 
 tasks:
   - before: |
+      source $(rvm 3.0.3 do rvm env --path)
       bin/setup
       .vscode/manage_extensions
 ports:
@@ -14,5 +15,4 @@ ports:
 vscode:
   extensions:
     - vortizhe.simple-ruby-erb
-    - mbessey.vscode-rufo
     - aliariff.vscode-erb-beautify
