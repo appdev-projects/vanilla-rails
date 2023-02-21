@@ -1,7 +1,7 @@
 name,question,spiritual_type,number,assessment
-divine_relationship,"A personal relationship with God, the Universe, or the Transcendent",transcendental,1,spiritual_type
-something_more,"Participating in the mystery that there is ""something more"" with sacred or divine qualities ""out there""",transcendental,2,spiritual_type
-creator_relationship,An awareness of my createdness; that my life is a gift from a Creator,transcendental,3,spiritual_type
+divine_relationship,"A personal relationship with God, the Universe, or the Transcendent",transcendentalist,1,spiritual_type
+something_more,"Participating in the mystery that there is ""something more"" with sacred or divine qualities ""out there""",transcendentalist,2,spiritual_type
+creator_relationship,An awareness of my createdness; that my life is a gift from a Creator,transcendentalist,3,spiritual_type
 love_others,"The ability to love others, even when it's hard.",communalist,4,spiritual_type
 chain_link,"Knowing that I am a link in the chain of my family, my community, my ancestors, and/or humanity.",communalist,5,spiritual_type
 authentic_vulnerable,Having a community where it is safe to be authentic and vulnerable,communalist,6,spiritual_type

@@ -8,7 +8,7 @@
         </h1>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="text-center">
           <h3>
             <%= @lesson.description%>
           </h3>
@@ -21,33 +21,50 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <%= @lesson.learning_session_id%>
+              Today's Teaching: <%= @lesson.description%>
             </button>
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <%= render partial: @teaching_link %>
               <div>
-              <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: "teaching_done"} %>
+                <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: "teaching_done"} %>
               </div>
             </div>
           </div>
         </div>
+
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              <%= @lesson.practice_session_id%>
+              Today's Practice
             </button>
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <%= render partial: @practice_link %>
               <div>
-              <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: "practice_done"} %>
+                <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: "practice_done"} %>
               </div>
             </div>
           </div>
         </div>
+<% if @lesson.day < 5 %>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+              SHALOM Step 1: Connecting With The Deeper Self
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div>
+                <%= render template: "assessment_questions/index", locals: {study_session: @study_session, spiritual_type: @lesson.spiritual_type} %>
+              </div>
+            </div>
+          </div>
+        </div>
+<%end%>
       </div>
     </div>
     <div class="card-footer">

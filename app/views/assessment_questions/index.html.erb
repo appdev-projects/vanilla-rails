@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Assessment Questions</h1>
+<h3>Assessment Questions</h3>
 
 <br>
-<% AssessmentQuestion.where(spiritual_type: spiritual_type, assessment: "spiritual_type").each do |assessment_question| %>
+
+<% AssessmentQuestion.where(spiritual_type: spiritual_type.downcase, assessment: "spiritual_type").each do |assessment_question| %>
   <div class="row list-group-item">
     <div class="col-md-5">
       <div class="card card-body-question text-center" style="background-color: white;">

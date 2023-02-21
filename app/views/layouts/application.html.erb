@@ -45,7 +45,7 @@
                 <a class="nav-link" href="<%=lesson_path(current_seeker.previous_lesson.id + 1)%>">My Lessons</a>
               </li>
               <li class="nav-item">
-              <%= button_to "Sign Out", destroy_seeker_session_path, method: :delete %>
+              <%= link_to "Sign Out", destroy_seeker_session_path, class: "nav-link", method: :delete  %>
                 </li>
               <% else %>
                 <li class="nav-item">
