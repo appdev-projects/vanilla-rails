@@ -64,9 +64,9 @@ class LessonEventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson_event
-      if current_seeker.active_course_id == nil
+      if current_seeker.previous_lesson == nil
       else 
-      current_course = Course.find_by(id: current_seeker.active_course_id)
+      current_course = Course.find_by(id: current_seeker.previous_lesson.course_id)
       @lesson_event = LessonEvent.find(params[:id])
       end
     end

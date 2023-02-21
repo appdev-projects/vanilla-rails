@@ -15,8 +15,6 @@
 #  practice_session_id :string
 #
 class Lesson < ApplicationRecord
-  
-  has_many :learners, class_name: "Seeker", foreign_key: "last_lesson_id"
 
   has_many  :lesson_events, class_name: "LessonEvent", foreign_key: "lesson_id"
 

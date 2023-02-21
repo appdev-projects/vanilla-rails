@@ -3,4 +3,12 @@ class Seeker < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+has_many  :lesson_events, class_name: "LessonEvent", foreign_key: "seeker_id", dependent: :destroy
+
+has_one :last_session, -> { where(status: "complete") }, class_name: "LessonEvent", foreign_key: "seeker_id"
+has_one :previous_lesson, through: :last_session, source: :lesson
+
+validates(:full_name, { :presence => true })
+
 end
