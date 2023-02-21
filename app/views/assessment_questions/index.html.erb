@@ -2,24 +2,35 @@
 
 <h1>Assessment Questions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @assessment_questions.each do |assessment_question| %>
-      <tr>
-        <td><%= link_to 'Show', assessment_question %></td>
-        <td><%= link_to 'Edit', edit_assessment_question_path(assessment_question) %></td>
-        <td><%= link_to 'Destroy', assessment_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <br>
-
-<%= link_to 'New Assessment Question', new_assessment_question_path %>
+<% AssessmentQuestion.where(spiritual_type: spiritual_type, assessment: "spiritual_type").each do |assessment_question| %>
+  <div class="row list-group-item">
+    <div class="col-md-5">
+      <div class="card card-body-question text-center" style="background-color: white;">
+        <label for="q1-ideal"><%= assessment_question.question %></label>
+      </div>
+    </div>
+    <div class="container col-md-7 align-self-center" style="margin-top: 1rem; margin-bottom: 1rem;">
+      <div class="row">
+        <div class="col text-left">
+          Very Unimportant
+        </div>
+        <div class="col justify-content-end text-right">
+          Very Important
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="q1-ideal" step="1" name="q1-ideal" list="tickmarks">
+          <datalist id="tickmarks">
+            <option value="1" label="1"></option>
+            <option value="2" label="2"></option>
+            <option value="3" label="3"></option>
+            <option value="4" label="4"></option>
+            <option value="5" label="5"></option>
+          </datalist>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
