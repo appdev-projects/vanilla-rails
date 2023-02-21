@@ -15,6 +15,46 @@ ActiveRecord::Schema.define(version: 2023_02_21_003004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "assessment_questions", force: :cascade do |t|
+    t.string "name"
+    t.string "question"
+    t.string "spiritual_type"
+    t.string "number"
+    t.string "assessment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "spiritual_type"
+    t.string "title"
+    t.string "short_description"
+    t.integer "lessons_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lesson_events", force: :cascade do |t|
+    t.integer "seeker_id"
+    t.integer "lesson_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "practice_id"
+    t.integer "day", default: 0
+    t.string "title"
+    t.string "description"
+    t.string "learning_session_id"
+    t.string "practice_session_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "spiritual_type"
+  end
+
   create_table "seekers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

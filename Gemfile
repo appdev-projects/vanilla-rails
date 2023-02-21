@@ -16,6 +16,10 @@ gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # Devise
 gem 'devise'
+# JQuery
+gem 'jquery-rails'
+# Rails_db for Rails >= 6
+gem 'rails_db', '>= 2.3.1'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
