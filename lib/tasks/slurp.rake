@@ -11,17 +11,10 @@ namespace :slurp do
 
       s = Seeker.new
       s.email = row["email"]
-      s.full_name = row["full_name"]
       s.password = row["password"]
-      s.personal_score = row["personal_score"]
-      s.communal_score = row["communal_score"]
-      s.environmental_score = row["environmental_score"]
-      s.transcendental_score = row["transcendental_score"]
-      s.spiritual_type = row["spiritual_type"]
-      s.active_course_id = row["active_course_id"]
       s.save
 
-      puts "#{s.email}, #{s.full_name} saved"
+      puts "#{s.email}, #{s.password} saved"
     end
     puts "There are now #{Seeker.count} rows in the seekers table"
   end
@@ -86,13 +79,13 @@ namespace :slurp do
       l.title = row["title"]
       l.description = row["description"]
       l.spiritual_type = row["spiritual_type"]
-      l.teaching_link = row["teaching_link"]
-      l.audio_link = row["audio_link"]
+      l.learning_session_id = row["learning_session_id"]
+      l.practice_session_id = row["practice_session_id"]
       l.save
 
       puts "#{l.title}, #{l.description} saved"
     end
-    puts "There are now #{Lesson.count} rows in the Lesson Events table"
+    puts "There are now #{Lesson.count} rows in the Lessons table."
   end
 
   task lesson_events: :environment do
@@ -112,7 +105,7 @@ namespace :slurp do
 
       puts "#{e.seeker_id}, #{e.status} saved"
     end
-    puts "There are now #{LessonEvent.count} rows in the Lesson Events table"
+    puts "There are now #{LessonEvent.count} rows in the Lesson Events table."
   end
 
 
