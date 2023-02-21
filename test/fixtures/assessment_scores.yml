@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seeker_id: 1
+  personalist: 1.5
+  communalist: 1.5
+  environmentalist: 1.5
+  transcendentalist: 1.5
+  spiritual_type: MyString
+
+two:
+  seeker_id: 1
+  personalist: 1.5
+  communalist: 1.5
+  environmentalist: 1.5
+  transcendentalist: 1.5
+  spiritual_type: MyString

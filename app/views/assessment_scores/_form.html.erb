@@ -1,0 +1,47 @@
+<%= form_with(model: assessment_score) do |form| %>
+  <% if assessment_score.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(assessment_score.errors.count, "error") %> prohibited this assessment_score from being saved:</h2>
+
+      <ul>
+        <% assessment_score.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :seeker_id %>
+    <%= form.number_field :seeker_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :personalist %>
+    <%= form.text_field :personalist %>
+  </div>
+
+  <div class="field">
+    <%= form.label :communalist %>
+    <%= form.text_field :communalist %>
+  </div>
+
+  <div class="field">
+    <%= form.label :environmentalist %>
+    <%= form.text_field :environmentalist %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transcendentalist %>
+    <%= form.text_field :transcendentalist %>
+  </div>
+
+  <div class="field">
+    <%= form.label :spiritual_type %>
+    <%= form.text_field :spiritual_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
