@@ -27,29 +27,6 @@ namespace :slurp do
   end
 
 
-  task practices: :environment do
-
-    require "csv"
-
-    csv_text = File.read(Rails.root.join("lib", "csvs", "App Dev Project Data Examples - practices.csv"))
-    csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
-    
-    csv.each do |row|
-
-      pr = Practice.new
-      pr.name = row["name"]
-      pr.body_mind = row["body_mind"]
-      pr.spoken_silent = row["spoken_silent"]
-      pr.extemp_ritual = row["extemp_ritual"]
-      pr.description = row["description"]
-      pr.save
-
-      puts "#{pr.name}, #{pr.description} saved"
-    end
-    puts "There are now #{Practice.count} rows in the Practices table"
-  end
-
-
   task courses: :environment do
 
     require "csv"
@@ -97,7 +74,7 @@ namespace :slurp do
 
     require "csv"
 
-    csv_text = File.read(Rails.root.join("lib", "csvs", "App Dev Project Data Examples - lesson_plans.csv"))
+    csv_text = File.read(Rails.root.join("lib", "csvs", "App Dev Project Data Examples - lessons.csv"))
     csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
     
     csv.each do |row|
