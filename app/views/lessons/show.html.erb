@@ -7,13 +7,6 @@
           <%= @lesson.title%>
         </h1>
       </div>
-      <div class="row">
-        <div class="text-center">
-          <h3>
-            <%= @lesson.description%>
-          </h3>
-        </div>
-      </div>
     </div>
     <div class="card-body">
 
@@ -59,7 +52,7 @@
           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <div>
-                <%= render template: "assessment_questions/index", locals: {study_session: @study_session, spiritual_type: @lesson.spiritual_type} %>
+                <%= render partial: "assessment_scores/form", locals: {study_session: @study_session, type_assessment: @lesson.spiritual_type, assessment_score: @type_score} %>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :require_login
   before_action :set_lesson, only: %i[ show edit update destroy ]
-  #before_action :current_place, only: %i[ show ]
+  before_action :set_score, only: %i[ show ]
 
   # GET /lessons or /lessons.json
   def index
@@ -90,6 +90,16 @@ class LessonsController < ApplicationController
     else
       @course = Course.find_by(:id => current_seeker.previous_lesson.course_id)
       @lesson = Lesson.find_by(:id => current_seeker.last_session.id + 1)
+    end
+  end
+  # def current user's score
+  def set_score
+    if current_seeker.type_score == nil
+      @type_score = AssessmentScore.create({
+        seeker_id: current_seeker.id
+      })
+    else
+      @type_score = current_seeker.type_score
     end
   end
 

@@ -11,37 +11,41 @@
     </div>
   <% end %>
 
+  <% AssessmentQuestion.where(spiritual_type: type_assessment.downcase, assessment: "spiritual_type").each do |assessment_question| %>
+    <div class="row list-group-item">
+      <div class="row container-fluid text-center">
+        <label for="q1-ideal"><%= assessment_question.question %></label>
+      </div>
+      <div class="row">
+          <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="q1-ideal" step="1" name="q1-ideal" list="tickmarks">
+          <datalist id="tickmarks">
+            <option value="1" label="1"></option>
+            <option value="2" label="2"></option>
+            <option value="3" label="3"></option>
+            <option value="4" label="4"></option>
+            <option value="5" label="5"></option>
+          </datalist>
+      </div>
+      <div class="row">
+        <div class="col text-left">
+          Very Unimportant
+        </div>
+        <div class="col text-end">
+          Very Important
+        </div>
+      </div>
+    </div>
+
   <div class="field">
-    <%= form.label :seeker_id %>
-    <%= form.number_field :seeker_id %>
+    <%= form.hidden_field :seeker_id, value: current_seeker.id %>
   </div>
 
   <div class="field">
-    <%= form.label :personalist %>
-    <%= form.text_field :personalist %>
+    <%= form.hidden_field :type_assessment, value: 5 %>
   </div>
+<% end %>
 
-  <div class="field">
-    <%= form.label :communalist %>
-    <%= form.text_field :communalist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :environmentalist %>
-    <%= form.text_field :environmentalist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :transcendentalist %>
-    <%= form.text_field :transcendentalist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :spiritual_type %>
-    <%= form.text_field :spiritual_type %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="actions">
+  <%= form.submit "Done" %>
+</div>
 <% end %>
