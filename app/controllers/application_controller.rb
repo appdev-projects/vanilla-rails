@@ -36,11 +36,10 @@ class ApplicationController < ActionController::Base
       @lesson_event = @study_session
     else
 
-      # Create New LessonEvent
-      @study_session = LessonEvent.create({
+      # Find last LessonEvent
+      @study_session = LessonEvent.find_by({
         seeker_id: current_seeker.id,
         lesson_id: @lesson.id,
-        status: 0,
       })
       @lesson_event = @study_session
     end
