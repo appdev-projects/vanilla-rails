@@ -16,8 +16,12 @@ class LessonsController < ApplicationController
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
         lesson_id: 1,
-        status: 3,
+        status: 0,
       })
+
+      # Define Content Links
+      @teaching_link = "teaching_content/course_1/lesson_1"
+      @practice_link = "practice_content/course_1/lesson_1"
     else
 
       # Create New LessonEvent
@@ -26,11 +30,11 @@ class LessonsController < ApplicationController
         lesson_id: @lesson.id,
         status: 0,
       })
-    end
 
-    # Define Content Links
-    @teaching_link = "teaching_content/course_" + current_seeker.previous_lesson.course_id.to_s + "/lesson_" + (current_seeker.previous_lesson.id.to_i + 1).to_s
-    @practice_link = "practice_content/course_" + current_seeker.previous_lesson.course_id.to_s + "/lesson_" + (current_seeker.previous_lesson.id.to_i + 1).to_s
+      # Define Content Links
+      @teaching_link = "teaching_content/course_" + @lesson.course_id.to_s + "/lesson_" + (current_seeker.previous_lesson.id.to_i + 1).to_s
+      @practice_link = "practice_content/course_" + @lesson.course_id.to_s + "/lesson_" + (current_seeker.previous_lesson.id.to_i + 1).to_s
+    end
   end
 
   # GET /lessons/new
@@ -92,11 +96,12 @@ class LessonsController < ApplicationController
       @lesson = Lesson.find_by(:id => current_seeker.last_session.id + 1)
     end
   end
+
   # def current user's score
   def set_score
     if current_seeker.type_score == nil
       @type_score = AssessmentScore.create({
-        seeker_id: current_seeker.id
+        seeker_id: current_seeker.id,
       })
     else
       @type_score = current_seeker.type_score

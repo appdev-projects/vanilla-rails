@@ -10,6 +10,4 @@ has_one :last_session, -> { where(status: "complete") }, class_name: "LessonEven
 has_one :previous_lesson, through: :last_session, source: :lesson
 has_one :type_score, class_name: "AssessmentScore", foreign_key: "seeker_id"
 
-validates(:full_name, { :presence => true })
-
 end
