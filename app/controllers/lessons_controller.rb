@@ -1,6 +1,8 @@
 class LessonsController < ApplicationController
   before_action :require_login
+  before_action :set_course, only: %i[ show edit update destroy]
   before_action :set_lesson, only: %i[ show edit update destroy ]
+  before_action :set_lesson_event, only: %i[ show edit update destroy ]
   before_action :set_score, only: %i[ show ]
 
   # GET /lessons or /lessons.json
@@ -15,7 +17,7 @@ class LessonsController < ApplicationController
     if current_seeker.previous_lesson == nil
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
-        lesson_id: 1,
+        lesson_id: @lesson.id,
         status: 0,
       })
 
@@ -26,14 +28,14 @@ class LessonsController < ApplicationController
 
       # Create New LessonEvent
       @study_session = LessonEvent.create({
-        seeker_id: current_seeker.id,
-        lesson_id: @lesson.id,
+        seeker_id: current_seeker,
+        lesson_id: @lesson,
         status: 0,
       })
 
       # Define Content Links
-      @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.id.to_i).to_s
-      @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.id.to_i).to_s
+      @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
+      @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
     end
   end
 
@@ -86,36 +88,6 @@ class LessonsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_lesson
-    if current_seeker.last_session == nil
-      @course = Course.find(1)
-      @lesson = Lesson.find_by({course: @course, day: 1} )
-      
-    else
-      @course = Course.find_by(:id => params.fetch("course_id"))
-      @lesson = Lesson.find_by(:id => params.fetch("id"))
-    end
-  end
-
-  # def current user's score
-  def set_score
-    if current_seeker.type_score == nil
-      @type_score = AssessmentScore.create({
-        seeker_id: current_seeker.id,
-      })
-    else
-      @type_score = current_seeker.type_score
-    end
-  end
-
-  # def logged-in Seeker and Error Message
-  def require_login
-    unless signed_in?
-      flash[:error] = "You must be logged in to access this section"
-      redirect_to seeker_session_path # halts request cycle
-    end
-  end
 
   # Only allow a list of trusted parameters through.
   def lesson_params

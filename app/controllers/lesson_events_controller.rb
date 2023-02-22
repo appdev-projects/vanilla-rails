@@ -1,5 +1,7 @@
 class LessonEventsController < ApplicationController
   before_action :require_login
+  before_action :set_course, only: %i[ show edit update destroy]
+  before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
 
   # GET /lesson_events or /lesson_events.json
@@ -39,7 +41,7 @@ class LessonEventsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson_event.update(lesson_event_params) && @lesson_event.status == "complete"
-        format.html { redirect_to course_lesson_path({ course_id: @lesson_event.lesson.course, id: Lesson.find_by( id: @lesson_event.lesson_id + 1)}), notice: "Well done, friend." }
+        format.html { redirect_to course_lesson_path({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by( id: @lesson_event.lesson_id + 1)}), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
       elsif @lesson_event.update(lesson_event_params) && @lesson_event.status != "complete"
         format.html { redirect_back fallback_location: course_lesson_url({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by( id: @lesson_event.lesson_id)}), notice: "One step closer to the Sacred." }
@@ -62,19 +64,7 @@ class LessonEventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lesson_event
-      @lesson_event = LessonEvent.find(params[:id])
-      current_course = Course.find_by(id: @lesson_event.lesson.course_id)
-    end
 
-    # def logged-in Seeker and Error Message
-    def require_login
-      unless signed_in?
-        flash[:error] = "You must be logged in to access this section"
-        redirect_to seeker_session_path # halts request cycle
-      end
-    end
 
     # Only allow a list of trusted parameters through.
     def lesson_event_params
