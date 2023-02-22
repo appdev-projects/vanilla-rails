@@ -39,10 +39,10 @@ class LessonEventsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson_event.update(lesson_event_params) && @lesson_event.status == "complete"
-        format.html { redirect_to lesson_path(@lesson_event.lesson_id + 1), notice: "Well done, friend." }
+        format.html { redirect_to course_lesson_path({ course_id: @lesson_event.lesson.course, id: Lesson.find_by( id: @lesson_event.lesson_id + 1)}), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
       elsif @lesson_event.update(lesson_event_params) && @lesson_event.status != "complete"
-        format.html { redirect_to lesson_path(@lesson_event.lesson_id), notice: "One step closer to the Sacred." }
+        format.html { redirect_back fallback_location: course_lesson_url({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by( id: @lesson_event.lesson_id)}), notice: "One step closer to the Sacred." }
         format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
       else
         format.html { render :edit, status: :unprocessable_entity }

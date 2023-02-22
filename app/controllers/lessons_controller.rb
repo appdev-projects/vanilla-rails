@@ -32,8 +32,8 @@ class LessonsController < ApplicationController
       })
 
       # Define Content Links
-      @teaching_link = "teaching_content/course_" + @lesson.course_id.to_s + "/lesson_" + (current_seeker.previous_lesson.id.to_i + 1).to_s
-      @practice_link = "practice_content/course_" + @lesson.course_id.to_s + "/lesson_" + (current_seeker.previous_lesson.id.to_i + 1).to_s
+      @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.id.to_i).to_s
+      @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.id.to_i).to_s
     end
   end
 
@@ -89,11 +89,12 @@ class LessonsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson
     if current_seeker.last_session == nil
-      @lesson = Lesson.find(1)
       @course = Course.find(1)
+      @lesson = Lesson.find_by({course: @course, day: 1} )
+      
     else
-      @course = Course.find_by(:id => current_seeker.previous_lesson.course_id)
-      @lesson = Lesson.find_by(:id => current_seeker.last_session.id + 1)
+      @course = Course.find_by(:id => params.fetch("course_id"))
+      @lesson = Lesson.find_by(:id => params.fetch("id"))
     end
   end
 
