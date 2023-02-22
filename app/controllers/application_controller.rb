@@ -13,21 +13,15 @@ class ApplicationController < ActionController::Base
 
   # Use callbacks to share common setup or constraints between actions.
   def set_course
-    if current_seeker.last_session == nil
-      @course = Course.find(1)
-    else
-      @course = Course.find_by(:id => params.fetch("course_id"))
-    end
+      @course = Course.find(current_seeker.active_course_id)
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson
     if current_seeker.last_session == nil
-      @course = Course.find(1)
-      @lesson = Lesson.find_by({ course_id: @course, day: 1 })
+      @lesson = Lesson.find_by({ course_id: @course.id, day: 1 })
     else
-      @course = Course.find_by(:id => params.fetch("course_id"))
-      @lesson = Lesson.find_by({ course: @course, day: params.fetch(:id) })
+      @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.last_session.lesson_id + 1 })
     end
   end
 
@@ -37,18 +31,18 @@ class ApplicationController < ActionController::Base
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
         lesson_id: @lesson.id,
-        status: 0
+        status: 0,
       })
-      @lesson_event = @study_session 
+      @lesson_event = @study_session
     else
 
       # Create New LessonEvent
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
-        lesson_id: Lesson.find(params.fetch("id")),
-        status: 0 
-        })
-      @lesson_event = @study_session 
+        lesson_id: @lesson.id,
+        status: 0,
+      })
+      @lesson_event = @study_session
     end
   end
 
@@ -64,6 +58,6 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :active_course_id])
   end
 end

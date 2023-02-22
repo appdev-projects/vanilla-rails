@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_action :require_login
-  before_action :set_course, only: %i[ show edit update destroy]
+  before_action :set_course, only: %i[ show edit update destroy ]
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
   before_action :set_score, only: %i[ show ]
@@ -13,30 +13,9 @@ class LessonsController < ApplicationController
   # GET /lessons/1 or /lessons/1.json
   def show
 
-    #Create First LessonEvent for New Seekers
-    if current_seeker.previous_lesson == nil
-      @study_session = LessonEvent.create({
-        seeker_id: current_seeker.id,
-        lesson_id: @lesson.id,
-        status: 0,
-      })
-
-      # Define Content Links
-      @teaching_link = "teaching_content/course_1/lesson_1"
-      @practice_link = "practice_content/course_1/lesson_1"
-    else
-
-      # Create New LessonEvent
-      @study_session = LessonEvent.create({
-        seeker_id: current_seeker,
-        lesson_id: @lesson,
-        status: 0,
-      })
-
-      # Define Content Links
-      @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
-      @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
-    end
+    # Define Content Links
+    @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
+    @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
   end
 
   # GET /lessons/new
@@ -87,7 +66,6 @@ class LessonsController < ApplicationController
   end
 
   private
-
 
   # Only allow a list of trusted parameters through.
   def lesson_params
