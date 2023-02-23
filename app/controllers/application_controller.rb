@@ -27,20 +27,27 @@ class ApplicationController < ActionController::Base
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson_event
-    if current_seeker.previous_lesson == nil
+    if current_seeker.last_session == nil
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
         lesson_id: @lesson.id,
         status: 0,
       })
       @lesson_event = @study_session
-    else
+    
+      elsif current_seeker.last_session.status = 3
+
+        @study_session = LessonEvent.create({
+          seeker_id: current_seeker.id,
+          lesson_id: current_seeker.last_session.lesson_id + 1,
+          status: 0,
+        })
+        @lesson_event = @study_session
 
       # Find last LessonEvent
-      @study_session = LessonEvent.find_by({
-        seeker_id: current_seeker.id,
-        lesson_id: @lesson.id,
-      })
+        else
+      @study_session = current_seeker.last_session
+      
       @lesson_event = @study_session
     end
   end
