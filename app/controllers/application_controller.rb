@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   # Use callbacks to share common setup or constraints between actions.
   def set_course
-      @course = Course.find(current_seeker.active_course_id)
+    @course = Course.find(current_seeker.active_course_id)
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -34,20 +34,18 @@ class ApplicationController < ActionController::Base
         status: 0,
       })
       @lesson_event = @study_session
-    
-      elsif current_seeker.last_session.status = 3
-
-        @study_session = LessonEvent.create({
-          seeker_id: current_seeker.id,
-          lesson_id: current_seeker.last_session.lesson_id + 1,
-          status: 0,
-        })
-        @lesson_event = @study_session
+    elsif current_seeker.last_session.status = 3
+      @study_session = LessonEvent.create({
+        seeker_id: current_seeker.id,
+        lesson_id: current_seeker.last_session.lesson_id + 1,
+        status: 0,
+      })
+      @lesson_event = @study_session
 
       # Find last LessonEvent
-        else
+    else
       @study_session = current_seeker.last_session
-      
+
       @lesson_event = @study_session
     end
   end
