@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Commenter</th>
+      <th>Completed</th>
+      <th>In progress</th>
+      <th>Incomplete</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.body %></td>
+        <td><%= task.commenter_id %></td>
+        <td><%= task.completed_id %></td>
+        <td><%= task.in_progress_id %></td>
+        <td><%= task.incomplete_id %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task', new_task_path %>

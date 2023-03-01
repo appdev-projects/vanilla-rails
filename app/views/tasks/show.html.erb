@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @task.body %>
+</p>
+
+<p>
+  <strong>Commenter:</strong>
+  <%= @task.commenter_id %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @task.completed_id %>
+</p>
+
+<p>
+  <strong>In progress:</strong>
+  <%= @task.in_progress_id %>
+</p>
+
+<p>
+  <strong>Incomplete:</strong>
+  <%= @task.incomplete_id %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>
