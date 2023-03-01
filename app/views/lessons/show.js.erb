@@ -1,1 +1,24 @@
-$("#collapseOne").toggle();
+<% if @lesson_event.status == "teaching_done" %>
+$("#collapseOne").removeClass("show");
+$("#collapseTwo").addClass("show");
+$("#collapseOneButton").attr("aria-expanded","false");
+$("#collapseTwoButton").attr("aria-expanded","true");
+$("#collapseOneButton").addClass("collapsed");
+$("#collapseTwoButton").removeClass("collapsed");
+
+<% elsif @lesson_event.status == "practice_done" && @lesson.day < 5 %>
+
+$("#collapseTwo").removeClass("show");
+$("#collapseThree").addClass("show");
+$("#collapseTwoButton").attr("aria-expanded","false");
+$("#collapseThreeButton").attr("aria-expanded","true");
+$("#collapseTwoButton").addClass("collapsed");
+$("#collapseThreeButton").removeClass("collapsed");
+
+<% else %>
+
+$("#collapseTwo").removeClass("show");
+$("#collapseTwoButton").attr("aria-expanded","false");
+$("#collapseTwoButton").addClass("collapsed");
+
+<%end%>

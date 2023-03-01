@@ -8,8 +8,7 @@
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
-    <%= f.hidden :active_course_id,
-                value: 1 %>
+    <%= f.input :active_course_id, as: :hidden, :input_html => { value: 1 }%>
     <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),

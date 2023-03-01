@@ -11,6 +11,10 @@
 #
 class LessonEvent < ApplicationRecord
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "lesson_id", "seeker_id", "status", "updated_at"]
+  end
+  
   enum status: { not_started: 0, teaching_done: 1, practice_done: 2, complete: 3}
 
   belongs_to :seeker, required: true, class_name: "Seeker", foreign_key: "seeker_id"

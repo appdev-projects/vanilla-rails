@@ -72,4 +72,5 @@ class LessonEventsController < ApplicationController
   def lesson_event_params
     params.require(:lesson_event).permit(:seeker_id, :lesson_id, :status)
   end
+
 end
