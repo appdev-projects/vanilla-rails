@@ -30,28 +30,13 @@ task sample_data: :environment do
   end
 
   users = User.all
-
-
-
-  create_table "tasks", force: :cascade do |t|
-    t.text "body"
-    t.integer "commenter_id"
-    t.boolean "completed_id"
-    t.boolean "in_progress_id"
-    t.boolean "incomplete_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-
-
-
+  
   users.each do |user|
     rand(15).times do
         if rand < 0.25
           task = user.comments.create(
             body: Faker::Quote.jack_handey,
-            commenter_id: follower
+            commenter_id: user.id
           )
           p task.errors.full_messages
         end
