@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'rack-cors'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'devise'
+gem 'html'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
