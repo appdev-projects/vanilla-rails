@@ -45,20 +45,21 @@
                 <a class="nav-link" href="<%=course_lesson_path({ course_id: @course, id: @lesson})%>">My Lessons</a>
               </li>
               <li class="nav-item">
-              <%= link_to "Sign Out", destroy_seeker_session_path, class: "nav-link", method: :delete  %>
-                </li>
-              <% else %>
-                <li class="nav-item">
-                  <a class="nav-link" href="<%=new_seeker_session_path%>">Sign In</a>
-                </li>
-              <% end %>
+                <%= link_to "Sign Out", destroy_seeker_session_path, class: "nav-link", method: :delete  %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=new_seeker_session_path%>">Sign In</a>
+              </li>
+            <% end %>
 
-            </ul>
-          </div>
+          </ul>
         </div>
-      </nav>
-      <%= yield %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </body>
-  </html>
+      </div>
+    </nav>
+    <p class="notice" id="notice"><%= notice %></p>
+    <p class="alert" id="alert"><%= alert %></p>
+    <%= yield %>
+
+  </body>
+</html>

@@ -40,12 +40,11 @@ class LessonEventsController < ApplicationController
   # PATCH/PUT /lesson_events/1 or /lesson_events/1.json
   def update
     respond_to do |format|
-      if @lesson_event.update(lesson_event_params) && @lesson_event.status == "complete"
-        format.html { redirect_to course_lesson_path({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by(id: @lesson_event.lesson_id + 1) }), notice: "Well done, friend." }
+      if @lesson_event.update(lesson_event_params) == true && @lesson_event.status == "complete"
+        format.html { redirect_back_or_to course_lesson_path({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by(id: @lesson_event.lesson_id + 1) }), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
-      elsif @lesson_event.update(lesson_event_params) && @lesson_event.status != "complete"
-        format.html { redirect_back fallback_location: course_lesson_url({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by(id: @lesson_event.lesson_id) }), notice: "One step closer to the Sacred." }
-        format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
+      elsif @lesson_event.update(lesson_event_params) == true && @lesson_event.status != "complete"
+        flash[:notice] = "Remember the nearness of the Sacred."
         format.js do
           render template: "lessons/show.js.erb"
         end
@@ -72,5 +71,4 @@ class LessonEventsController < ApplicationController
   def lesson_event_params
     params.require(:lesson_event).permit(:seeker_id, :lesson_id, :status)
   end
-
 end
