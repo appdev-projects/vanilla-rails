@@ -51,4 +51,7 @@
   "emmet.includeLanguages": {
     "erb": "html"
   },
+  "githubPullRequests.ignoredPullRequestBranches": [
+    "main"
+  ],
 }
