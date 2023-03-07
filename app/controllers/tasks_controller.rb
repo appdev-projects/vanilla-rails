@@ -1,9 +1,18 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ show update destroy ]
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    #@tasks = Task.all
+    @uncompleted_tasks = Task.where(status: 0)
+    @in_progress_tasks = Task.where(status: 1)
+    @completed_tasks = Task.where(status: 2)
+    render json: {
+      uncompleted_tasks: @uncompleted_tasks,
+      in_progress_tasks: @in_progress_tasks,
+      completed_tasks: @completed_tasks
+    }
+
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -23,27 +32,40 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+#    respond_to do |format|
+#      if @task.save
+#        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+#        format.json { render :show, status: :created, location: @task }
+#      else
+#        format.html { render :new, status: :unprocessable_entity }
+#        format.json { render json: @task.errors, status: :unprocessable_entity }
+#      end
+
+    if @task.save
+      render json: @task, status: :created
+    else
+      render json: @task.errors, status: :unprocessable_entity
+    end
+
+
     end
   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @task.update(task_params)
+      render json: @task
+    else
+      render json: @task.errors, status: :unprocessable_entity
+    end
+#    respond_to do |format|
+#      if @task.update(task_params)
+#        format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
+#        format.json { render :show, status: :ok, location: @task }
+#      else
+#        format.html { render :edit, status: :unprocessable_entity }
+#        format.json { render json: @task.errors, status: :unprocessable_entity }
+#      end
     end
   end
 
@@ -65,6 +87,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:body, :commenter_id, :completed_id, :in_progress_id, :incomplete_id)
+      params.require(:task).permit(:body, :commenter_id, :completed_id, :in_progress_id, :incomplete_id, :status)
     end
 end
