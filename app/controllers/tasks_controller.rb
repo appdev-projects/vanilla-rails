@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.by_user(current_user.id)
-    #render json: @tasks
+    render json: @tasks
   end
 
   # GET /tasks/1 or /tasks/1.json

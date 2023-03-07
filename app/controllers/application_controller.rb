@@ -10,6 +10,19 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def authenticate_user_from_token!
+    user_token = params[:user_token]
+    user       = user_token && User.find_by_authentication_token(user_token)
+  
+    if user
+      # This lets us use current_user for JSON requests
+      sign_in user, store: false
+    end
+  end
+
+  acts_as_token_authentication_handler_for User,
+  if: ->(controller) { controller.user_token_authenticable? }
+
   def user_token_authenticable?
     # This ensure the token can be used only for JSON requests (you may want to enable it for XML too, for example)
     return false unless request.format.json?
