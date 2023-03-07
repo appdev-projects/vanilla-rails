@@ -13,9 +13,6 @@ task sample_data: :environment do
   end
 
   people << { first_name: "Alice", last_name: "Smith" }
-  #people << { first_name: "Bob", last_name: "Smith" }
-  #people << { first_name: "Carol", last_name: "Smith" }
-  #people << { first_name: "Doug", last_name: "Smith" }
 
   people.each do |person|
     username = person.fetch(:first_name).downcase
@@ -35,7 +32,7 @@ task sample_data: :environment do
     rand(15).times do
         if rand < 0.25
           task = Task.create(
-            body: Faker::Quote.jack_handey,
+            body: Faker::Company.bs,
             commenter_id: user.id
           )
           p task.errors.full_messages
