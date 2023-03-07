@@ -32,22 +32,14 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-#    respond_to do |format|
-#      if @task.save
-#        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
-#        format.json { render :show, status: :created, location: @task }
-#      else
-#        format.html { render :new, status: :unprocessable_entity }
-#        format.json { render json: @task.errors, status: :unprocessable_entity }
-#      end
-
-    if @task.save
-      render json: @task, status: :created
-    else
-      render json: @task.errors, status: :unprocessable_entity
-    end
-
-
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+        format.json { render :show, status: :created, location: @task }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -66,7 +58,6 @@ class TasksController < ApplicationController
 #        format.html { render :edit, status: :unprocessable_entity }
 #        format.json { render json: @task.errors, status: :unprocessable_entity }
 #      end
-    end
   end
 
   # DELETE /tasks/1 or /tasks/1.json
