@@ -13,9 +13,9 @@ task sample_data: :environment do
   end
 
   people << { first_name: "Alice", last_name: "Smith" }
-  people << { first_name: "Bob", last_name: "Smith" }
-  people << { first_name: "Carol", last_name: "Smith" }
-  people << { first_name: "Doug", last_name: "Smith" }
+  #people << { first_name: "Bob", last_name: "Smith" }
+  #people << { first_name: "Carol", last_name: "Smith" }
+  #people << { first_name: "Doug", last_name: "Smith" }
 
   people.each do |person|
     username = person.fetch(:first_name).downcase
@@ -34,15 +34,15 @@ task sample_data: :environment do
   users.each do |user|
     rand(15).times do
         if rand < 0.25
-          task = user.comments.create(
+          task = Task.create(
             body: Faker::Quote.jack_handey,
             commenter_id: user.id
           )
           p task.errors.full_messages
         end
       end
-    end
   end
+  
 
   ending = Time.now
   p "It took #{(ending - starting).to_i} seconds to create sample data."

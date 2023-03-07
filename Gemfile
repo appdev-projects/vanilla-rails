@@ -26,6 +26,7 @@ gem 'rack-cors'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'devise'
 gem 'html'
+gem 'faker'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
