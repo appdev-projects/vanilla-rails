@@ -33,7 +33,8 @@ task sample_data: :environment do
         if rand < 0.25
           task = Task.create(
             body: Faker::Company.bs,
-            commenter_id: user.id
+            commenter_id: user.id,
+            status: rand(0..2)
           )
           p task.errors.full_messages
         end

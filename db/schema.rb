@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2023_03_01_173453) do
     t.boolean "completed_id"
     t.boolean "in_progress_id"
     t.boolean "incomplete_id"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

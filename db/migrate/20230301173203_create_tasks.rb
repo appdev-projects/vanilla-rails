@@ -6,6 +6,7 @@ class CreateTasks < ActiveRecord::Migration[6.1]
       t.boolean :completed_id
       t.boolean :in_progress_id
       t.boolean :incomplete_id
+      t.integer :status
 
       t.timestamps
     end
