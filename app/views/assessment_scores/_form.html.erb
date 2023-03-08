@@ -17,7 +17,7 @@
         <label for="question-<%= assessment_question.number%>"><%= assessment_question.question %></label>
       </div>
       <div class="row">
-        <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="question-<%= assessment_question.number%>" step="1" name="question-<%= assessment_question.number%>" list="tickmarks">
+        <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="question-<%= assessment_question.number%>" step="1" name="question-<%= assessment_question.number%>" list="tickmarks" score=1>
         <datalist id="tickmarks">
           <option value="1" label="1"></option>
           <option value="2" label="2"></option>
@@ -35,14 +35,11 @@
         </div>
       </div>
     </div>
-
     <script>
       $(document).on('input', '#question-<%=assessment_question.number%>', function() {
-          $('#slider_value').value = ($(this).val());
-      });
+        $('#question-<%=assessment_question.number%>').attr('score', $(this).val());
+        });
     </script>
-    <div id="slider_value" value="this"></div>
-
   <% end %>
 
   <div class="field">
