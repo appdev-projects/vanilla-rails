@@ -4,13 +4,13 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.by_user(current_user.id)
-    render json: @tasks
+    #render json: @tasks
   end
 
   # GET /tasks/1 or /tasks/1.json
   def show
     #@task = current_user.tasks.find(params[:id])
-    render json: @task
+    #render json: @task
   end
 
   # GET /tasks/new
@@ -24,24 +24,26 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    #@task = current_user.tasks.build(task_params)
     @task = Task.new(task_params)
+    @task.commenter_id = current_user.id
+    @task.status = 0
+    #@task.username = current_user.username
 
-    if @task.save
-      render json: @task, status: :created, location: @task
-    else
-      render json: @task.errors, status: :unprocessable_entity
+    #if @task.save
+    #  render json: @task, status: :created, location: @task
+    #else
+    #  render json: @task.errors, status: :unprocessable_entity
+    #end
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+        format.json { render :show, status: :created, location: @task }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
-
-#    respond_to do |format|
-#      if @task.save
-#        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
-#        format.json { render :show, status: :created, location: @task }
-#      else
-#        format.html { render :new, status: :unprocessable_entity }
-#        format.json { render json: @task.errors, status: :unprocessable_entity }
-#      end
-#    end
 
   end
 
@@ -49,20 +51,21 @@ class TasksController < ApplicationController
   def update
     @task = current_user.tasks.find(params[:id])
 
-    if @task.update(task_params)
-      render json: @task
-    else
-      render json: @task.errors, status: :unprocessable_entity
-    end
+#    if @task.update(task_params)
+#      render json: @task
+#    else
+#      render json: @task.errors, status: :unprocessable_entity
+#    end
 
-#    respond_to do |format|
-#      if @task.update(task_params)
-#        format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
-#        format.json { render :show, status: :ok, location: @task }
-#      else
-#        format.html { render :edit, status: :unprocessable_entity }
-#        format.json { render json: @task.errors, status: :unprocessable_entity }
-#      end
+    respond_to do |format|
+      if @task.update(task_params)
+        format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /tasks/1 or /tasks/1.json
