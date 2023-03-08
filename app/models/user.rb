@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many  :tasks, class_name: "Task", foreign_key: "commenter_id", dependent: :destroy
 
-  validates :username,
+  validates #:username,
     presence: true,
     uniqueness: true,
     format: { 
