@@ -42,6 +42,13 @@
     </script>
   <% end %>
 
+  <script>
+  $(document).on('input', '.slider', function() {
+  var scores = $(this).attr( 'score' );
+  console.log( scores );
+  })
+  </script>
+
   <div class="field">
     <%= form.hidden_field :type_assessment, value: :slider_value %>
   </div>
