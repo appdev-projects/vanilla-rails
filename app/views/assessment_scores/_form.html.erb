@@ -57,19 +57,17 @@
      console.log(scoreTotal);
      score = scoreTotal / scoresList.length;
     console.log(score);
+    $('#assessment_score_<%=type_assessment.downcase%>').attr('value', score)
     });
-  </script>
 
-  <div class="field">
-    <%= form.hidden_field :type_assessment, value: :slider_value %>
-  </div>
+  </script>
 
   <div class="field">
     <%= form.hidden_field :seeker_id, value: current_seeker.id %>
   </div>
 
   <div class="field">
-    <%= form.hidden_field :type_assessment, value: 5 %>
+    <%= form.hidden_field type_assessment, value: 5 %>
   </div>
 
   <div class="actions">
