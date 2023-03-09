@@ -41,7 +41,7 @@ class LessonEventsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson_event.update(lesson_event_params) == true && @lesson_event.status == "complete"
-        format.html { redirect_back_or_to course_lesson_path({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by(id: @lesson_event.lesson_id + 1) }), notice: "Well done, friend." }
+        format.html { redirect_to course_lesson_path({ course_id: @lesson_event.lesson.course_id }, { id: (@lesson_event.lesson.id + 1) }), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
       elsif @lesson_event.update(lesson_event_params) == true && @lesson_event.status != "complete"
         flash[:notice] = "Remember the nearness of the Sacred."
