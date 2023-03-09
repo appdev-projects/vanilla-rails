@@ -11,19 +11,9 @@
 </p>
 
 <p>
-  <strong>Completed:</strong>
-  <%= @task.completed_id %>
-</p>
+  <strong>Status:</strong>
+  <%= @task.status %>
 
-<p>
-  <strong>In progress:</strong>
-  <%= @task.in_progress_id %>
-</p>
-
-<p>
-  <strong>Incomplete:</strong>
-  <%= @task.incomplete_id %>
-</p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

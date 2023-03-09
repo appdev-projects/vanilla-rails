@@ -18,7 +18,9 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.collection_select(:task, Task.all, :commenter_id, :status, { :prompt => 'Current Status'}, { class: 'form-control' }) %>
+    <%= form.select :status, options_for_select(%w[uncompleted in_progress completed]) %>
+
+    <%#= form.collection_select(:task, Task.all, :commenter_id, :status, { :prompt => 'Current Status'}, { class: 'form-control' }) %>
   </div>
 
   <div class="actions">
