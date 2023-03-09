@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def require_login
     unless signed_in?
       flash[:error] = "You must be logged in to access this section"
-      redirect_to seeker_session_path # halts request cycle
+      redirect_to new_seeker_registration_path
     end
   end
 
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def set_lesson
     if current_seeker.last_session == nil
       @lesson = Lesson.find_by({ course_id: @course.id, day: 1 })
-    elsif @last_lesson == Lesson.find_by({ course_id: @course.id, id: current_seeker.last_session.lesson_id + 1 })
+    else
       @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.last_session.lesson_id + 1 })
     end
   end
