@@ -44,7 +44,9 @@ class AssessmentScoresController < ApplicationController
       if @assessment_score.update(assessment_score_params)
         format.html { redirect_back_or_to course_lesson_path({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by(id: @lesson_event.lesson_id + 1) }), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @assessment_score }
-        format.js
+        format.js do
+          render template: "assessment_scores/show.js.erb"
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @assessment_score.errors, status: :unprocessable_entity }
@@ -73,4 +75,3 @@ class AssessmentScoresController < ApplicationController
       params.require(:assessment_score).permit(:seeker_id, :personalist, :communalist, :environmentalist, :transcendentalist, :spiritual_type)
     end
 end
-
