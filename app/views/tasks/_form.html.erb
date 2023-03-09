@@ -16,6 +16,11 @@
     <%= form.text_area :body %>
   </div>
 
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.collection_select(:task, Task.all, :commenter_id, :status, { :prompt => 'Current Status'}, { class: 'form-control' }) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
