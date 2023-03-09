@@ -9,13 +9,13 @@ class User < ApplicationRecord
 
   has_many  :tasks, class_name: "Task", foreign_key: "commenter_id", dependent: :destroy
 
-  #validates #:username,
-  #  presence: true,
-  #  uniqueness: true,
-  #  format: { 
-  #    with: /\A[\w_\.]+\z/i,
-  #    message: "can only contain letters, numbers, periods, and underscores"
-  #  }
+  validates :username,
+    presence: true,
+    uniqueness: true,
+    format: { 
+      with: /\A[\w_\.]+\z/i,
+      message: "can only contain letters, numbers, periods, and underscores"
+    }
 
 
   def ensure_website_has_scheme

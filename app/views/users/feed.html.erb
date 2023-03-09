@@ -1,0 +1,17 @@
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="display-4">
+      feed
+    </h1>
+
+    <p class="lead text-muted">total tasks</p>
+  </div>
+</div>
+
+<% @user.tasks.each do |task| %>
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <%= render "tasks/task", task: task %>
+    </div>
+  </div>
+<% end %>

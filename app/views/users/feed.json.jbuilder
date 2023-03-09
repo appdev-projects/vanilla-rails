@@ -1,1 +1,1 @@
-json.array! @task.index, partial: "tasks/task", as: :task
+json.array! @user.tasks, partial: "tasks/task", as: :task
