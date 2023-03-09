@@ -17,13 +17,20 @@ class ApplicationController < ActionController::Base
   end
 
   # Use callbacks to share common setup or constraints between actions.
+
+  def set_last_lesson
+    current_syllabus = Lesson.all.where(course_id: @course.id)
+    @last_lesson = current_syllabus.last
+  end
+
   def set_lesson
     if current_seeker.last_session == nil
       @lesson = Lesson.find_by({ course_id: @course.id, day: 1 })
-    else
+    elsif @last_lesson == Lesson.find_by({ course_id: @course.id, id: current_seeker.last_session.lesson_id + 1 })
       @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.last_session.lesson_id + 1 })
     end
   end
+
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson_event
