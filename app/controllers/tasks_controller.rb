@@ -6,13 +6,10 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.by_user(current_user.id)
-    #render json: @tasks
   end
 
   # GET /tasks/1 or /tasks/1.json
   def show
-    #@task = current_user.tasks.find(params[:id])
-    #render json: @task
   end
 
   # GET /tasks/new
@@ -29,13 +26,6 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.commenter_id = current_user.id
     @task.status = 0
-    #@task.username = current_user.username
-
-    #if @task.save
-    #  render json: @task, status: :created, location: @task
-    #else
-    #  render json: @task.errors, status: :unprocessable_entity
-    #end
 
     respond_to do |format|
       if @task.save
@@ -52,12 +42,6 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     @task = @user.tasks.find(params[:id])
-
-#    if @task.update(task_params)
-#      render json: @task
-#    else
-#      render json: @task.errors, status: :unprocessable_entity
-#    end
 
     respond_to do |format|
       if @task.update(task_params)
