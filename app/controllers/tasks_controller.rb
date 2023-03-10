@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_user#, only: %i[feed]
+  before_action :must_be_owner_to_view, only: %i[ index show ]
 
   # GET /tasks or /tasks.json
   def index
@@ -49,7 +51,7 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    @task = current_user.tasks.find(params[:id])
+    @task = @user.tasks.find(params[:id])
 
 #    if @task.update(task_params)
 #      render json: @task
