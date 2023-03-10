@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def require_login
     unless signed_in?
       flash[:error] = "You must be logged in to access this section"
-      redirect_to new_seeker_registration_path
+      redirect_to "/seekers/sign_up"
     end
   end
 
@@ -26,8 +26,6 @@ class ApplicationController < ActionController::Base
   def set_lesson
     if current_seeker.complete_sessions.last == nil
       @lesson = Lesson.find_by({ course_id: @course.id, day: 1 })
-    elsif (current_seeker.complete_sessions.last.lesson_id + 1) >= @final_lesson.id
-      @lesson = Lesson.find(24)
     else
       @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.complete_sessions.last.lesson_id + 1 })
     end
@@ -81,4 +79,15 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :active_course_id])
   end
+
+  def set_skr_sprtl_type
+    if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil 
+    scores = Array.new
+    scores = [{type: :personalist, score: @type_score.personalist}, { type: :communalist, score:  @type_score.communalist},{ type: :environmentalist, score:  @type_score.environmentalist},{ type: :transcendentalist, score:  @type_score.transcendentalist} ]
+
+    @type_score.spiritual_type = scores.max_by{|k| k[:score] }[:type].to_s
+    @type_score.save
+    end
+  end
+
 end

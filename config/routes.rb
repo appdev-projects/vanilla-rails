@@ -11,8 +11,11 @@ Rails.application.routes.draw do
     resources :lessons
   end
 
-  get "welcome/index", to: "registrations#new"
+  devise_scope :seeker do
+  get "/welcome/index", to: "registrations#welcome"
+  end
 
-  
-
+  devise_scope :seeker do
+    get "/seeker/sign_up", to: "registrations#welcome"
+    end
 end

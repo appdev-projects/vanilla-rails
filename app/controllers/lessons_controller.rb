@@ -5,6 +5,7 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
   before_action :set_score, only: %i[ show ]
+  before_action :set_skr_sprtl_type
   
 
   # GET /lessons or /lessons.json

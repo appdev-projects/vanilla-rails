@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="height: 100%; width: 100%">
   <div class="row">
     <div class="container col-lg-6">
       <h1 class="text-center">
@@ -54,11 +54,19 @@
   <hr class="invisible">
   <div class="row">
     <div class="d-grid col-6 mx-auto">
-      <a href="<%=new_seeker_registration_path%>" class="btn">
-        <button class="btn btn-primary">
-          Get Started
-        </button>
-      </a>
+      <%= link_to "Get Started", new_seeker_registration_path, class: "btn btn-primary", id:"start-button", local: false, remote: true %>
+      <br>
     </div>
   </div>
 </div>
+<script>
+
+$('#start-button').click(function() {
+     $('#start-button').hide("slow", function(){
+      <%= render partial: "devise/registrations/new_partial" local: {resource: seeker}%>
+     })
+})
+$('#start-button').click(function() {
+     $('#start-button').hide("slow");
+})
+</script>
