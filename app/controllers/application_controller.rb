@@ -18,40 +18,50 @@ class ApplicationController < ActionController::Base
 
   # Use callbacks to share common setup or constraints between actions.
 
-  def set_last_lesson
+  def set_final_lesson
     current_syllabus = Lesson.all.where(course_id: @course.id)
-    @last_lesson = current_syllabus.last
+    @final_lesson = current_syllabus.last
   end
 
   def set_lesson
-    if current_seeker.last_session == nil
+    if current_seeker.complete_sessions.last == nil
       @lesson = Lesson.find_by({ course_id: @course.id, day: 1 })
+    elsif (current_seeker.complete_sessions.last.lesson_id + 1) >= @final_lesson.id
+      @lesson = Lesson.find(24)
     else
-      @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.last_session.lesson_id + 1 })
+      @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.complete_sessions.last.lesson_id + 1 })
     end
   end
 
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson_event
-    if current_seeker.last_session == nil
+    if current_seeker.complete_sessions.last == nil
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
         lesson_id: @lesson.id,
         status: 0,
       })
       @lesson_event = @study_session
-    elsif current_seeker.last_session.status = 3
+    elsif current_seeker.complete_sessions.last.status = 3
+      if @lesson != @final_lesson
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
-        lesson_id: current_seeker.last_session.lesson_id + 1,
+        lesson_id: current_seeker.complete_sessions.last.lesson_id + 1,
         status: 0,
       })
       @lesson_event = @study_session
-
+      else 
+        @study_session = LessonEvent.create({
+          seeker_id: current_seeker.id,
+          lesson_id: current_seeker.complete_sessions.last.lesson_id,
+          status: 0,
+        })
+        @lesson_event = @study_session
+        end
       # Find last LessonEvent
     else
-      @study_session = current_seeker.last_session
+      @study_session = current_seeker.complete_sessions.last
 
       @lesson_event = @study_session
     end

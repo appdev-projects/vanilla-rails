@@ -3,6 +3,8 @@ class LessonEventsController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
+  before_action :set_score, only: %i[ update ]
+  before_action :set_final_lesson
 
   # GET /lesson_events or /lesson_events.json
   def index

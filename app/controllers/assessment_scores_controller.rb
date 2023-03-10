@@ -4,6 +4,7 @@ class AssessmentScoresController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
+  before_action :set_final_lesson
 
   # GET /assessment_scores or /assessment_scores.json
   def index

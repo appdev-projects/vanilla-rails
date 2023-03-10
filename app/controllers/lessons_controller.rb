@@ -1,9 +1,11 @@
 class LessonsController < ApplicationController
   before_action :require_login
   before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_final_lesson
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
   before_action :set_score, only: %i[ show ]
+  
 
   # GET /lessons or /lessons.json
   def index
@@ -12,13 +14,9 @@ class LessonsController < ApplicationController
 
   # GET /lessons/1 or /lessons/1.json
   def show
-    if @lesson == @final_lesson
-      "lessons/final_show"
-    else
       # Define Content Links
       @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
       @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
-    end
   end
 
   # GET /lessons/new
