@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def welcome
+    resource = "seeker"
+    render "welcome/index"
+  end
+
   protected
 
   # def logged-in Seeker and Error Message

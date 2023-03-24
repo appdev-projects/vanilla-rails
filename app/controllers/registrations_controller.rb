@@ -6,11 +6,6 @@ class RegistrationsController < Devise::RegistrationsController
   before_action :set_score, except: %i[welcome new]
   before_action :set_skr_sprtl_type, except: %i[welcome new]
 
-  def welcome
-    resource = "seeker"
-    render "welcome/index"
-  end
-
   # POST /resource
   def create
     build_resource(sign_up_params)

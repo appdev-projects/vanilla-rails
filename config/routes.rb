@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "lessons#show"
+  root "application#welcome"
 
   resources :lesson_events
   resources :assessment_scores

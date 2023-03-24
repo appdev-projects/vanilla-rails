@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="container col-md-6">
+    <h2 class="text-center">
+      This is a sub-heading.
+    </h2>
+  </div>
+  <hr class="invisible">
+  <div class="container col-md-6">
+    <h6 class="text-center">
+      This is filler text that gives a little more color.
+    </h6>
+  </div>
+</div>
+<hr class="invisible">
+<div class="row">
+  <div class="d-grid col-6 mx-auto">
+    <%= link_to "Get Started", new_seeker_registration_path, class: "btn btn-primary", id:"start-button", local: false, remote: true %>
+    <br>
+  </div>
+</div>
+</div>
+<script>
+  $('#start-button').click(function() {
+       $('#start-button').hide("slow", function(){
+        $('#sign-up').show("fast");
+       })
+  })
+</script>
+
+<div id="sign-up" class="container col-lg-6" style="display: none">
+  <div class="card" >
+    <div class= "card-header">
+      Sign up
+      <div class="card-body">
+        <%= simple_form_for(:seeker, url: registration_path(:seeker), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" }%>
+            <%= f.input :active_course_id, as: :hidden, :input_html => { value: 1 }%>
+            <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+            <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up", class: "btn btn-primary"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
