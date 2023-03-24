@@ -32,7 +32,7 @@
     <div class= "card-header">
       Sign up
       <div class="card-body">
-        <%= simple_form_for(:seeker, url: registration_path(:seeker), html: { method: :put }) do |f| %>
+        <%= simple_form_for(:seeker, url: seeker_registration_path ) do |f| %>
           <%= f.error_notification %>
 
           <div class="form-inputs">
