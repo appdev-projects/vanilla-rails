@@ -12,7 +12,7 @@
 #
 class Course < ApplicationRecord
 
-  has_many  :students, through: :last_active_course, source: :seeker
+  has_many  :students, class_name: "Seeker", foreign_key: "active_course_id"
   has_many  :lessons, class_name: "Lesson", foreign_key: "course_id", dependent: :destroy
 
 end
