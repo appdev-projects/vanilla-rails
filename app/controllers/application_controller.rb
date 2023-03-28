@@ -2,8 +2,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def welcome
-    resource = "seeker"
-    render "welcome/index"
+    if signed_in?
+      set_course
+      set_lesson
+      redirect_to(course_lesson_path(course_id: @course.id, id: @lesson.id))
+    else
+      resource = "seeker"
+      render "welcome/index"
+    end
   end
 
   protected
@@ -36,7 +42,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson_event
     p current_seeker
@@ -55,19 +60,19 @@ class ApplicationController < ActionController::Base
       p @lesson_event
     elsif current_seeker.complete_sessions.last.status = 3
       if @lesson != @final_lesson
-      @study_session = LessonEvent.create({
-        seeker_id: current_seeker.id,
-        lesson_id: current_seeker.complete_sessions.last.lesson_id + 1,
-        status: 0,
-      })
-      @lesson_event = @study_session
-      p @study_session
-      p current_seeker
-      p current_seeker.complete_sessions
-      p current_seeker.complete_sessions.last
-      p current_seeker.complete_sessions.last.status
-      p @lesson_event
-      else 
+        @study_session = LessonEvent.create({
+          seeker_id: current_seeker.id,
+          lesson_id: current_seeker.complete_sessions.last.lesson_id + 1,
+          status: 0,
+        })
+        @lesson_event = @study_session
+        p @study_session
+        p current_seeker
+        p current_seeker.complete_sessions
+        p current_seeker.complete_sessions.last
+        p current_seeker.complete_sessions.last.status
+        p @lesson_event
+      else
         @study_session = LessonEvent.create({
           seeker_id: current_seeker.id,
           lesson_id: current_seeker.complete_sessions.last.lesson_id,
@@ -77,7 +82,7 @@ class ApplicationController < ActionController::Base
 
         p @study_session
         p @lesson_Event
-        end
+      end
       # Find last LessonEvent
     else
       @study_session = current_seeker.complete_sessions.last
@@ -104,13 +109,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_skr_sprtl_type
-    if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil 
-    scores = Array.new
-    scores = [{type: :personalist, score: @type_score.personalist}, { type: :communalist, score:  @type_score.communalist},{ type: :environmentalist, score:  @type_score.environmentalist},{ type: :transcendentalist, score:  @type_score.transcendentalist} ]
+    if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil
+      scores = Array.new
+      scores = [{ type: :personalist, score: @type_score.personalist }, { type: :communalist, score: @type_score.communalist }, { type: :environmentalist, score: @type_score.environmentalist }, { type: :transcendentalist, score: @type_score.transcendentalist }]
 
-    @type_score.spiritual_type = scores.max_by{|k| k[:score] }[:type].to_s
-    @type_score.save
+      @type_score.spiritual_type = scores.max_by { |k| k[:score] }[:type].to_s
+      @type_score.save
     end
   end
-
 end
