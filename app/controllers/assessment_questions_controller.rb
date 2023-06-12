@@ -1,5 +1,7 @@
 class AssessmentQuestionsController < ApplicationController
   before_action :set_assessment_question, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ export ]
+  before_action :set_lesson, only: %i[ export ]
 
   # GET /assessment_questions or /assessment_questions.json
   def index
@@ -57,6 +59,20 @@ class AssessmentQuestionsController < ApplicationController
     end
   end
 
+  def export
+    aq = AssessmentQuestion.all
+      
+      respond_to do |format|
+        format.html do
+          render
+        end
+        format.csv do
+           send_data(aq.to_csv, { :filename =>  "export_aq.csv"} )
+        end
+      end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assessment_question
@@ -65,6 +81,6 @@ class AssessmentQuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assessment_question_params
-      params.require(:assessment_question).permit(:name, :question, :string, :spiritual_type, :number_string, :assessment)
+      params.fetch(:assessment_question, {})
     end
 end

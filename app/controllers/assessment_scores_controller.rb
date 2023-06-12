@@ -1,5 +1,10 @@
 class AssessmentScoresController < ApplicationController
+  before_action :require_login
   before_action :set_assessment_score, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy export ]
+  before_action :set_lesson, only: %i[ show edit update destroy export ]
+  before_action :set_lesson_event, only: %i[ show edit update destroy ]
+  before_action :set_final_lesson
 
   # GET /assessment_scores or /assessment_scores.json
   def index
@@ -38,8 +43,11 @@ class AssessmentScoresController < ApplicationController
   def update
     respond_to do |format|
       if @assessment_score.update(assessment_score_params)
-        format.html { redirect_to assessment_score_url(@assessment_score), notice: "Assessment score was successfully updated." }
+        format.html { redirect_back_or_to course_lesson_path({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by(id: @lesson_event.lesson_id + 1) }), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @assessment_score }
+        format.js do
+          render template: "assessment_scores/show.js.erb"
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @assessment_score.errors, status: :unprocessable_entity }
@@ -55,6 +63,19 @@ class AssessmentScoresController < ApplicationController
       format.html { redirect_to assessment_scores_url, notice: "Assessment score was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def export
+    as = AssessmentScore.all
+      
+      respond_to do |format|
+        format.html do
+          render
+        end
+        format.csv do
+           send_data(as.to_csv, { :filename =>  "export_as.csv"} )
+        end
+      end
   end
 
   private
