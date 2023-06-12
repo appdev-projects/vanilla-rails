@@ -1,4 +1,4 @@
-<%= form_with(model: assessment_score) do |form| %>
+<%= form_with(model: assessment_score, method: :patch, local: false, remote: true) do |form| %>
   <% if assessment_score.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(assessment_score.errors.count, "error") %> prohibited this assessment_score from being saved:</h2>
@@ -10,38 +10,67 @@
       </ul>
     </div>
   <% end %>
+  <script>
+    var scoresArray = new Array();
+    var score = new Array();
+    var scoresList = new Array();
+  </script>
+
+  <% AssessmentQuestion.where(spiritual_type: type_assessment.downcase, assessment: "spiritual_type").each do |assessment_question| %>
+    <div class="row list-group-item">
+      <div class="row container-fluid text-center">
+        <label for="question-<%= assessment_question.number%>"><%= assessment_question.question %></label>
+      </div>
+      <div class="row">
+        <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="question-<%= assessment_question.number%>" step="1" name="question-<%= assessment_question.number%>" list="tickmarks" score=1>
+        <datalist id="tickmarks">
+          <option value="1" label="1"></option>
+          <option value="2" label="2"></option>
+          <option value="3" label="3"></option>
+          <option value="4" label="4"></option>
+          <option value="5" label="5"></option>
+        </datalist>
+      </div>
+      <div class="row">
+        <div class="col text-left">
+          Very Unimportant
+        </div>
+        <div class="col text-end">
+          Very Important
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).on('input', '#question-<%=assessment_question.number%>', function() {
+        var score<%=assessment_question.number%> = Number($(this).val());
+        scoresArray.score<%=assessment_question.number%> = score<%=assessment_question.number%>;
+        console.log( scoresArray );
+        });
+    </script>
+  <% end %>
+
+  <script>
+    $(document).on('input', '.slider', function() {
+     scoresList =  Object.values(scoresArray);
+     console.log( scoresList );
+     var scoreTotal = scoresList.reduce((a, b) => a + b);
+     console.log(scoreTotal);
+     score = scoreTotal / scoresList.length;
+    console.log(score);
+    $('#assessment_score_<%=type_assessment.downcase%>').attr('value', score)
+    });
+
+  </script>
 
   <div class="field">
-    <%= form.label :seeker_id %>
-    <%= form.number_field :seeker_id %>
+    <%= form.hidden_field :seeker_id, value: current_seeker.id %>
   </div>
 
   <div class="field">
-    <%= form.label :personalist %>
-    <%= form.text_field :personalist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :communalist %>
-    <%= form.text_field :communalist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :environmentalist %>
-    <%= form.text_field :environmentalist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :transcendentalist %>
-    <%= form.text_field :transcendentalist %>
-  </div>
-
-  <div class="field">
-    <%= form.label :spiritual_type %>
-    <%= form.text_field :spiritual_type %>
+    <%= form.hidden_field type_assessment, value: 5 %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Done" %>
   </div>
 <% end %>
