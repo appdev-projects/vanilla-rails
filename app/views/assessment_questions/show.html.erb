@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @assessment_question.name %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @assessment_question.question %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @assessment_question.string %>
+</p>
+
+<p>
+  <strong>Spiritual type:</strong>
+  <%= @assessment_question.spiritual_type %>
+</p>
+
+<p>
+  <strong>Number string:</strong>
+  <%= @assessment_question.number_string %>
+</p>
+
+<p>
+  <strong>Assessment:</strong>
+  <%= @assessment_question.assessment %>
+</p>
+
+<%= link_to 'Edit', edit_assessment_question_path(@assessment_question) %> |
+<%= link_to 'Back', assessment_questions_path %>

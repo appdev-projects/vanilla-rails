@@ -1,0 +1,47 @@
+<%= form_with(model: assessment_question) do |form| %>
+  <% if assessment_question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(assessment_question.errors.count, "error") %> prohibited this assessment_question from being saved:</h2>
+
+      <ul>
+        <% assessment_question.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :question %>
+    <%= form.text_field :question %>
+  </div>
+
+  <div class="field">
+    <%= form.label :string %>
+    <%= form.text_field :string %>
+  </div>
+
+  <div class="field">
+    <%= form.label :spiritual_type %>
+    <%= form.text_field :spiritual_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_string %>
+    <%= form.text_field :number_string %>
+  </div>
+
+  <div class="field">
+    <%= form.label :assessment %>
+    <%= form.text_field :assessment %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
