@@ -3,7 +3,7 @@ class CreateCourses < ActiveRecord::Migration[6.1]
     create_table :courses do |t|
       t.string :spiritual_type
       t.string :title
-      t.string :short-description
+      t.string :short_description
       t.integer :lessons_count
 
       t.timestamps
