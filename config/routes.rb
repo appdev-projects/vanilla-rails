@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :assessment_scores
   resources :lesson_events
   resources :assessment_questions
   resources :lessons

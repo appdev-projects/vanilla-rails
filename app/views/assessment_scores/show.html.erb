@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Seeker:</strong>
+  <%= @assessment_score.seeker_id %>
+</p>
+
+<p>
+  <strong>Personalist:</strong>
+  <%= @assessment_score.personalist %>
+</p>
+
+<p>
+  <strong>Communalist:</strong>
+  <%= @assessment_score.communalist %>
+</p>
+
+<p>
+  <strong>Environmentalist:</strong>
+  <%= @assessment_score.environmentalist %>
+</p>
+
+<p>
+  <strong>Transcendentalist:</strong>
+  <%= @assessment_score.transcendentalist %>
+</p>
+
+<p>
+  <strong>Spiritual type:</strong>
+  <%= @assessment_score.spiritual_type %>
+</p>
+
+<%= link_to 'Edit', edit_assessment_score_path(@assessment_score) %> |
+<%= link_to 'Back', assessment_scores_path %>
