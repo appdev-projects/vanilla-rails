@@ -28,9 +28,6 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-# Install Devise
-gem 'devise'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -65,12 +62,15 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
+  gem 'devise'
   gem 'htmlbeautifier'
+  gem 'jquery-rails'
   gem 'pry-rails'
   gem 'rack-canonical-host'
   gem 'rails-erd'
   gem 'rollbar'
   gem 'rufo'
+  gem 'simple_form'
   gem 'standard', require: false
   gem 'solargraph'
   gem 'rubocop-rails', require: false
