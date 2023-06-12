@@ -13,4 +13,31 @@
 #  updated_at          :datetime         not null
 #
 class Lesson < ApplicationRecord
+  has_many :lesson_events, class_name: "LessonEvent", foreign_key: "lesson_id"
+  belongs_to :course, class_name: "Course", foreign_key: "course_id"
+
+  def self.to_csv
+    require "csv"
+    lessons = self.all
+    headers = ["course_id", "practice_id", "day", "title", "description", "learning_session_id", "practice_session_id", "spiritual_type"]
+
+    csv = CSV.generate(headers: true) do |csv|
+      csv << headers
+
+      lessons.each do |lesson_attr|
+        row = []
+        row.push(lesson_attr.course_id)
+        row.push(lesson_attr.practice_id)
+        row.push(lesson_attr.day)
+        row.push(lesson_attr.title)
+        row.push(lesson_attr.description)
+        row.push(lesson_attr.learning_session_id)
+        row.push(lesson_attr.practice_session_id)
+        row.push(lesson_attr.spiritual_type)
+        csv << row
+      end
+    end
+
+    return csv
+  end
 end
