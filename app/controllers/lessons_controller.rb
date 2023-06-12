@@ -1,77 +1,89 @@
-class LessonEventsController < ApplicationController
+class LessonsController < ApplicationController
   before_action :require_login
-  before_action :set_course, only: %i[ show edit update destroy ]
-  before_action :set_lesson, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy export ]
+  before_action :set_final_lesson, except: %i[ export ]
+  before_action :set_lesson, only: %i[ show edit update destroy export ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
-  before_action :set_score, only: %i[ update ]
-  before_action :set_final_lesson
-  before_action :set_skr_sprtl_type
+  before_action :set_score, only: %i[ show ]
+  before_action :set_skr_sprtl_type, except: %i[ export ]
+  
 
-  # GET /lesson_events or /lesson_events.json
+  # GET /lessons or /lessons.json
   def index
-    @lesson_events = LessonEvent.all
+    @lessons = Lesson.all
   end
 
-  # GET /lesson_events/1 or /lesson_events/1.json
+  # GET /lessons/1 or /lessons/1.json
   def show
+      # Define Content Links
+      @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
+      @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
   end
 
-  # GET /lesson_events/new
+  # GET /lessons/new
   def new
-    @lesson_event = LessonEvent.new
+    @lesson = Lesson.new
   end
 
-  # GET /lesson_events/1/edit
+  # GET /lessons/1/edit
   def edit
   end
 
-  # POST /lesson_events or /lesson_events.json
+  # POST /lessons or /lessons.json
   def create
-    @lesson_event = LessonEvent.new(lesson_event_params)
+    @lesson = Lesson.new(lesson_params)
 
     respond_to do |format|
-      if @lesson_event.save
-        format.html { redirect_to lesson_event_url(@lesson_event.lesson_id), notice: "Lesson event was successfully created." }
-        format.json { render :show, status: :created, location: @lesson_event }
+      if @lesson.save
+        format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully created." }
+        format.json { render :show, status: :created, location: @lesson }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @lesson_event.errors, status: :unprocessable_entity }
+        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /lesson_events/1 or /lesson_events/1.json
+  # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
     respond_to do |format|
-      if @lesson_event.update(lesson_event_params) == true && @lesson_event.status == "complete"
-        format.html { redirect_to course_lesson_path({ course_id: @lesson_event.lesson.course_id }, { id: (@lesson_event.lesson.id + 1) }), notice: "Well done, friend." }
-        format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
-      elsif @lesson_event.update(lesson_event_params) == true && @lesson_event.status != "complete"
-        flash[:notice] = "Remember the nearness of the Sacred."
-        format.js do
-          render template: "lessons/show.js.erb"
-        end
+      if @lesson.update(lesson_params)
+        format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully updated." }
+        format.json { render :show, status: :ok, location: @lesson }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @lesson_event.errors, status: :unprocessable_entity }
+        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /lesson_events/1 or /lesson_events/1.json
+  # DELETE /lessons/1 or /lessons/1.json
   def destroy
-    @lesson_event.destroy
+    @lesson.destroy
 
     respond_to do |format|
-      format.html { redirect_to lesson_events_url, notice: "Lesson event was successfully destroyed." }
+      format.html { redirect_to lessons_url, notice: "Lesson was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def export
+    lessons = Lesson.all
+      
+      respond_to do |format|
+        format.html do
+          render
+        end
+        format.csv do
+           send_data(lessons.to_csv, { :filename =>  "export_lessons.csv"} )
+        end
+      end
   end
 
   private
 
   # Only allow a list of trusted parameters through.
-  def lesson_event_params
-    params.require(:lesson_event).permit(:seeker_id, :lesson_id, :status)
+  def lesson_params
+    params.fetch(:lesson, {})
   end
 end

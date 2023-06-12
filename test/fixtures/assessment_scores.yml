@@ -1,4 +1,17 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: assessment_scores
+#
+#  id                :bigint           not null, primary key
+#  seeker_id         :integer
+#  personalist       :float
+#  communalist       :float
+#  environmentalist  :float
+#  transcendentalist :float
+#  spiritual_type    :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
 
 one:
   seeker_id: 1
