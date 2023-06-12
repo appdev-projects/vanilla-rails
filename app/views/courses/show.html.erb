@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Spiritual type:</strong>
+  <%= @course.spiritual_type %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @course.title %>
+</p>
+
+<p>
+  <strong>Short-description:</strong>
+  <%= @course.short-description %>
+</p>
+
+<p>
+  <strong>Lessons count:</strong>
+  <%= @course.lessons_count %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
