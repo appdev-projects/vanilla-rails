@@ -1,0 +1,2 @@
+class LessonEvent < ApplicationRecord
+end
