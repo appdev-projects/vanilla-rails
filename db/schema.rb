@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_13_162702) do
+ActiveRecord::Schema.define(version: 2023_06_13_173844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2023_06_13_162702) do
     t.string "question"
     t.string "string"
     t.string "spiritual_type"
-    t.string "number_string"
+    t.string "number"
     t.string "assessment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2023_06_13_162702) do
     t.integer "practice_session_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "spiritual_type"
   end
 
   create_table "seekers", force: :cascade do |t|

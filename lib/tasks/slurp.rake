@@ -75,11 +75,9 @@ namespace :slurp do
 
       l = Lesson.new
       l.course_id = row["course_id"]
-      l.practice_id = row["practice_id"]
       l.day = row["day"]
       l.title = row["title"]
       l.description = row["description"]
-      l.spiritual_type = row["spiritual_type"]
       l.learning_session_id = row["learning_session_id"]
       l.practice_session_id = row["practice_session_id"]
       l.save
