@@ -1,3 +1,5 @@
+console.log("Updating Status");
+
 <% if @lesson_event.status == "teaching_done" %>
 $("#collapseOne").removeClass("show");
 $("#collapseTwo").addClass("show");
@@ -5,6 +7,8 @@ $("#collapseOneButton").attr("aria-expanded","false");
 $("#collapseTwoButton").attr("aria-expanded","true");
 $("#collapseOneButton").addClass("collapsed");
 $("#collapseTwoButton").removeClass("collapsed");
+
+console.log("Teaching Done");
 
 <% elsif @lesson_event.status == "practice_done" && @lesson.day < 5 %>
 
@@ -15,10 +19,14 @@ $("#collapseThreeButton").attr("aria-expanded","true");
 $("#collapseTwoButton").addClass("collapsed");
 $("#collapseThreeButton").removeClass("collapsed");
 
+console.log("Practice Done");
+
 <% else %>
 
 $("#collapseTwo").removeClass("show");
 $("#collapseTwoButton").attr("aria-expanded","false");
 $("#collapseTwoButton").addClass("collapsed");
+
+console.log("Nothing Done");
 
 <%end%>

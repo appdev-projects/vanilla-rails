@@ -20,7 +20,7 @@
             <div class="accordion-body">
               <%= render partial: @teaching_link %>
               <div>
-                <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: "teaching_done"} %>
+                <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: :teaching_done} %>
               </div>
             </div>
           </div>

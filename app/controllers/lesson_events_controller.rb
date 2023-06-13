@@ -49,7 +49,7 @@ class LessonEventsController < ApplicationController
       elsif @lesson_event.update(lesson_event_params) == true && @lesson_event.status != "complete"
         flash[:notice] = "Remember the nearness of the Sacred."
         format.js do
-          render template: "lessons/show.js.erb"
+          render template: "lessons/show"
         end
       else
         format.html { render :edit, status: :unprocessable_entity }
