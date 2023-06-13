@@ -22,6 +22,11 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#Heroku-needed gems
+  gem 'devise'
+  gem 'jquery-rails'
+  gem 'simple_form'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -62,15 +67,12 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
-  gem 'devise'
   gem 'htmlbeautifier'
-  gem 'jquery-rails'
   gem 'pry-rails'
   gem 'rack-canonical-host'
   gem 'rails-erd'
   gem 'rollbar'
   gem 'rufo'
-  gem 'simple_form'
   gem 'standard', require: false
   gem 'solargraph'
   gem 'rubocop-rails', require: false
