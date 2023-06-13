@@ -80,6 +80,7 @@ namespace :slurp do
       l.description = row["description"]
       l.learning_session_id = row["learning_session_id"]
       l.practice_session_id = row["practice_session_id"]
+      l.spiritual_type = row["spiritual_type"]
       l.save
 
       puts "#{l.title}, #{l.description} saved"
