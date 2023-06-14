@@ -2,7 +2,7 @@ image: jelaniwoods/appdev2023-vanilla-rails-6
 
 tasks:
   - before: |
-      source $(rvm 3.0.3 do rvm env --path)
+      source $(rvm 3.2.2 do rvm env --path)
       bin/setup
       .vscode/manage_extensions
 ports:

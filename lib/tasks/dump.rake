@@ -1,6 +1,6 @@
 namespace :db do
 
-desc "Dumps the database to db/APP_NAME.dump"
+desc "Dumps the database to APP_NAME.dump"
 task :dump => :environment do
   cmd = nil
   with_config do |app, host, db, user|
