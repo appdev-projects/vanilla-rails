@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: vanilla_rails_production
-  username: vanilla_rails
+  username: va3.2nilla_rails
   password: <%= ENV['VANILLA_RAILS_DATABASE_PASSWORD'] %>
