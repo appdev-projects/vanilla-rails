@@ -67,6 +67,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
+  gem 'erb-formatter'
   gem 'htmlbeautifier'
   gem 'pry-rails'
   gem 'rack-canonical-host'

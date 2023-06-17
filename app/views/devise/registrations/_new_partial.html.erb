@@ -52,6 +52,20 @@
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email", class: "container-fluid" }%>
+            <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_area :first_name, autofocus: true, autocomplete: "first name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+    <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.telephone_field :phone_number, autofocus: true, autocomplete: "phone number" %>
+  </div>
             <%= f.input :active_course_id, as: :hidden, :input_html => { value: 1 }%>
             <%= f.input :password,
                 required: true,
