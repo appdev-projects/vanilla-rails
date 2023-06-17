@@ -1,4 +1,4 @@
-image: jelaniwoods/appdev2023-vanilla-rails-6
+image: gitpod/workspace-ruby-3.2
 
 tasks:
   - before: |

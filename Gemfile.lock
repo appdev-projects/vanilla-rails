@@ -121,6 +121,8 @@ GEM
     diff-lcs (1.5.0)
     diffy (3.4.2)
     e2mmap (0.1.0)
+    erb-formatter (0.4.3)
+      syntax_tree (~> 6.0)
     erubi (1.12.0)
     ffi (1.15.5)
     git (1.18.0)
@@ -187,6 +189,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
+    prettier_print (1.2.1)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -349,6 +352,8 @@ GEM
     standard-performance (1.1.0)
       lint_roller (~> 1.0)
       rubocop-performance (~> 1.18.0)
+    syntax_tree (6.1.1)
+      prettier_print (>= 1.2.0)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.3.2)
@@ -400,6 +405,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  erb-formatter
   htmlbeautifier
   jbuilder (~> 2.7)
   jquery-rails
