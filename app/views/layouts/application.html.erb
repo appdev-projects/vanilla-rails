@@ -30,7 +30,7 @@
   </head>
   <nav class="navbar navbar-dark bg-dark" onload="ClearForm()">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><%= image_tag 'logo-white.png', height: "62.5rem", width: "125rem" %></a>
+      <a class="navbar-brand" href="<%= course_lesson_path(@course, @lesson)%>"><%= image_tag 'logo-white.png', height: "62.5rem", width: "125rem" %></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -42,6 +42,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<%=course_lesson_path({ course_id: @course, id: @lesson})%>">My Path</a>
+            </li>
+                        <li class="nav-item">
+              <a class="nav-link" href="<%= courses_path %>">Courses</a>
             </li>
             <li class="nav-item">
               <%= link_to "Sign Out", destroy_seeker_session_path, class: "nav-link", method: :delete  %>

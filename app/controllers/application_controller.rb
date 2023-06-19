@@ -32,65 +32,18 @@ class ApplicationController < ActionController::Base
     @course = Course.find(1)
   end
 
-  # Use callbacks to share common setup or constraints between actions.
-
-  def set_final_lesson
-    current_syllabus = Lesson.all.where(course_id: @course.id)
-    @final_lesson = current_syllabus.last
-  end
 
   def set_lesson
     @lesson = Lesson.find(1)
   end
 
-
-  # Use callbacks to share common setup or constraints between actions.
   def set_lesson_event
-    if current_seeker.complete_sessions.last == nil
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
         lesson_id: @lesson.id,
         status: 0,
       })
       @lesson_event = @study_session
-      p @study_session
-      p current_seeker
-      p current_seeker.complete_sessions
-      p current_seeker.complete_sessions.last
-      p @lesson_event
-    elsif current_seeker.complete_sessions.last.status = 3
-      if @lesson != @final_lesson
-      @study_session = LessonEvent.create({
-        seeker_id: current_seeker.id,
-        lesson_id: current_seeker.complete_sessions.last.lesson_id + 1,
-        status: 0,
-      })
-      @lesson_event = @study_session
-      p @study_session
-      p current_seeker
-      p current_seeker.complete_sessions
-      p current_seeker.complete_sessions.last
-      p current_seeker.complete_sessions.last.status
-      p @lesson_event
-      else 
-        @study_session = LessonEvent.create({
-          seeker_id: current_seeker.id,
-          lesson_id: current_seeker.complete_sessions.last.lesson_id,
-          status: 0,
-        })
-        @lesson_event = @study_session
-
-        p @study_session
-        p @lesson_Event
-        end
-      # Find last LessonEvent
-    else
-      @study_session = current_seeker.complete_sessions.last
-
-      @lesson_event = @study_session
-      p @study_session
-      p @lesson_event
-    end
   end
 
   # def current user's score

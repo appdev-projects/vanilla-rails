@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_19_195607) do
+ActiveRecord::Schema.define(version: 2023_06_19_215145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2023_06_19_195607) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "active_course_id"
+    t.integer "active_lesson_id"
     t.index ["email"], name: "index_seekers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_seekers_on_reset_password_token", unique: true
   end
