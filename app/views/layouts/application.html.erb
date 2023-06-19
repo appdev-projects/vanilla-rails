@@ -38,7 +38,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <% if (signed_in?) == true %>
             <li class="nav-item">
-              <a class="nav-link" href="<%=edit_seeker_registration_path%>">My Sanctuary</a>
+              <a class="nav-link" href="<%=assessment_scores_path%>">My Sanctuary</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<%=course_lesson_path({ course_id: @course, id: @lesson})%>">My Path</a>

@@ -1,7 +1,6 @@
 class LessonsController < ApplicationController
   before_action :require_login
   before_action :set_course, only: %i[ show edit update destroy export ]
-  before_action :set_final_lesson, except: %i[ export ]
   before_action :set_lesson, only: %i[ show edit update destroy export ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
   before_action :set_score, only: %i[ show ]

@@ -1,120 +1,35 @@
-<div class="container">
-  <div class="card" style="margin-top: 10vh; margin-bottom: 10vh">
-    <div class="card-header">
-      <div class="row">
-        <h1 class="text-center">
-          My Spirituality Profile
-        </h1>
-      </div>
-    </div>
-    <div class="card-body">
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button id="collapseOneButton" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              My Spiritual Type
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <h5> My leading spiritual type is <%= current_seeker.type_score.spiritual_type %>.</h5>
-              <p>Everyone has the capacity to connect with the sacred on many dimension, but it seems like  <%= current_seeker.type_score.spiritual_type %> is the way you tend to gravitate. Read below about what that means, how we came up with this, and what the other spiritual types are like.</p>
-              <p><%= render partial: "devise/shared/spiritual_types"%></p>
-            </div>
-          </div>
-        </div>
-      </div>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.error_notification %>
 
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button id="collapseTwoButton"class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            My Spiritual Type Scores
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <table>
-              <tr>
-                <th> Assessment Results</th>
-              </tr>
-              <tr>
-                <td>Personalist</td>
-                <td><%= current_seeker.type_score.personalist.to_s%></td>
-              </tr>
-              <tr>
-                <td>Communalist</td>
-                <td><%= current_seeker.type_score.communalist.to_s%></td>
-              </tr>
-              <tr>
-                <td>Environmentalist</td>
-                <td><%= current_seeker.type_score.environmentalist.to_s%></td>
-              </tr>
-              <tr>
-                <td>Transcendentalist</td>
-                <td><%= current_seeker.type_score.transcendentalist.to_s%></td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button id="collapseThreeButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Edit My Account
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="card card-body">
-                  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                    <%= f.error_notification %>
-                    <h5>Edit My Email or Password</h5>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
 
-                    <div class="form-inputs">
-                      <%= f.input :email, required: true, autofocus: true, input_html: {class: "container-fluid"} %>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
 
-                      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-                      <% end %>
-
-                      <%= f.input :password,
+    <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
                 required: false,
-                input_html: { autocomplete: "new-password", class: "container-fluid" } %>
-                      <%= f.input :password_confirmation,
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
                 required: false,
-                input_html: { autocomplete: "new-password", class: "container-fluid" } %>
-                      <%= f.input :current_password,
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :current_password,
                 hint: "we need your current password to confirm your changes",
                 required: true,
-                input_html: { autocomplete: "current-password", class: "container-fluid" } %>
-                    </div>
-
-                    <div class="form-actions">
-                      <%= f.button :submit, "Update", class: "btn btn-primary" %>
-                    </div>
-                  <% end %>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-body">
-                    <h5>Cancel my account</h5>
-
-                    <div>
-                    <p>
-                    Sorry to see you go, but we won't stand in your way :) 
-                    </p>
-                    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                input_html: { autocomplete: "current-password" } %>
   </div>
-</div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+
+<%= link_to "Back", :back %>

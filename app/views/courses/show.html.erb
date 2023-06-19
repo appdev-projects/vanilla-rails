@@ -12,7 +12,7 @@
 
 <p>
   <strong>Short-description:</strong>
-  <%= @course.short-description %>
+  <%= @course.short_description %>
 </p>
 
 <p>
@@ -20,5 +20,5 @@
   <%= @course.lessons_count %>
 </p>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= render partial %>
 <%= link_to 'Back', courses_path %>

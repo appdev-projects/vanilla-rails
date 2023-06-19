@@ -10,6 +10,7 @@ class AssessmentScoresController < ApplicationController
 
   # GET /assessment_scores/1 or /assessment_scores/1.json
   def show
+    render "sanctuary"
   end
 
   # GET /assessment_scores/new
