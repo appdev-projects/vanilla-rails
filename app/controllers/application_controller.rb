@@ -1,24 +1,20 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :set_course, only: %i[ welcome ]
-  # before_action :set_lesson, only: %i[ welcome ]
+  before_action :require_login, except: %i[ welcome ]
+  before_action :set_course, except: %i[ welcome ]
+  before_action :set_lesson, except: %i[ welcome ]
 
   def welcome
     if signed_in? == false
       resource = "seeker"
       render "welcome/index"
     else 
-      @course = Course.find(current_seeker.active_course_id)
-
-      if current_seeker.complete_sessions.last == nil
-        @lesson = Lesson.find_by({ course_id: @course.id, day: 1 })
-      else
-        @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.complete_sessions.last.lesson_id + 1 })
-      end
+      @course = Course.find(1)
+      @lesson = Lesson.find(1)
+    end
       
       redirect_to course_lesson_path(@course.id, @lesson.id)
   
-    end
   end
 
   protected
@@ -33,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   # Use callbacks to share common setup or constraints between actions.
   def set_course
-    @course = Course.find(current_seeker.active_course_id)
+    @course = Course.find(1)
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -44,18 +40,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_lesson
-    if current_seeker.complete_sessions.last == nil
-      @lesson = Lesson.find_by({ course_id: @course.id, day: 1 })
-    else
-      @lesson = Lesson.find_by({ course_id: @course.id, id: current_seeker.complete_sessions.last.lesson_id + 1 })
-    end
+    @lesson = Lesson.find(1)
   end
 
 
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson_event
-    p current_seeker
-    p seeker_signed_in?
     if current_seeker.complete_sessions.last == nil
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
@@ -115,7 +105,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :active_course_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :first_name, :phone_number, :password, :active_course_id])
   end
 
   def set_skr_sprtl_type

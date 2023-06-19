@@ -5,17 +5,12 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   before_action :require_login,       only: %i[ edit update destroy ]
-  before_action :set_course,          only: %i[ edit update destroy ]
-  before_action :set_lesson,          only: %i[ edit update destroy ]
-  before_action :set_lesson_event,    only: %i[ edit update destroy ]
-  before_action :set_score,           only: %i[ edit update destroy ]
-  before_action :set_final_lesson,    only: %i[ edit update destroy ]
-  before_action :set_skr_sprtl_type,  only: %i[ edit update destroy ]
+
   protected
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    course_lesson_path(course_id: 1, id: 1) if is_navigational_format?
+    courses_path if is_navigational_format?
   end
   
   # GET /resource/sign_up

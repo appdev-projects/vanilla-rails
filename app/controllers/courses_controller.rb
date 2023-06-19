@@ -1,7 +1,5 @@
 class CoursesController < ApplicationController
   before_action :require_login
-  before_action :set_course, only: %i[ export ]
-  before_action :set_lesson, only: %i[ export ]
 
   # Action for data exports
 
@@ -16,6 +14,10 @@ class CoursesController < ApplicationController
            send_data(courses.to_csv, { :filename =>  "export_courses.csv"} )
         end
       end
+  end
+
+  def index
+    @courses = Course.all
   end
 
 
