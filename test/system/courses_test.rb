@@ -15,7 +15,7 @@ class CoursesTest < ApplicationSystemTestCase
     click_on "New Course"
 
     fill_in "Lessons count", with: @course.lessons_count
-    fill_in "Short-description", with: @course.short-description
+    fill_in "short_description", with: @course.short_description
     fill_in "Spiritual type", with: @course.spiritual_type
     fill_in "Title", with: @course.title
     click_on "Create Course"
@@ -29,7 +29,7 @@ class CoursesTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Lessons count", with: @course.lessons_count
-    fill_in "Short-description", with: @course.short-description
+    fill_in "short_description", with: @course.short_description
     fill_in "Spiritual type", with: @course.spiritual_type
     fill_in "Title", with: @course.title
     click_on "Update Course"
