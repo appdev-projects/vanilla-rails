@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_13_192221) do
+ActiveRecord::Schema.define(version: 2023_06_19_195607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(version: 2023_06_13_192221) do
     t.string "spiritual_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "divine_relationship"
+    t.integer "something_more"
+    t.integer "creator_relationship"
+    t.integer "love_others"
+    t.integer "chain_link"
+    t.integer "authentic_vulnerable"
+    t.integer "nature_oneness"
+    t.integer "magic_vibrations"
+    t.integer "environment_harmony"
+    t.integer "inner_peace"
+    t.integer "self_knowing"
+    t.integer "inner_resources"
   end
 
   create_table "courses", force: :cascade do |t|
