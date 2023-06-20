@@ -1,6 +1,6 @@
   
-<div class="row">
-  <div class="container-fluid">
+<div class="row align-items-center">
+  <div class="container-fluid  align-items-center">
     <p>
       <h2 class="text-center">
         This is a sub-heading.
@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="container-fluid">
+    <div class="container-fluid  align-items-center">
 
       <h6 class="text-center">
         This is filler text that gives a little more color.
@@ -19,9 +19,8 @@
 </div>
 
 <div id="start-button" class="row">
-  <div class="d-grid col-6 mx-auto">
+  <div class="d-grid col-6 mx-auto align-items-center">
     <%= link_to "Get Started", new_seeker_registration_path, class: "btn btn-primary", local: false, remote: true %>
-    <br>
   </div>
 </div>
 <script>
@@ -75,6 +74,8 @@
                 autofocus: true,
                 input_html: { autocomplete: "new-password", class: "container-fluid" } %>
       </div>
+      <%= f.hidden_field :active_course_id, value: 1 %>
+      <%= f.hidden_field :active_lesson_id, value: 1 %>
       <hr>
     </div>
     <div class="form-actions container">

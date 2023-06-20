@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  seeker_id  :integer
 #  lesson_id  :integer
-#  status     :string
+#  status     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

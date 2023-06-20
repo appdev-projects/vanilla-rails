@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
       resource = "seeker"
       render "welcome/index"
     else 
-      @course = Course.find(1)
-      @lesson = Lesson.find(1)
+      @course = Course.find(current_seeker.active_course_id)
+      @lesson = Lesson.find(current_seeker.active_lesson_id)
 
       redirect_to course_lesson_path(@course, @lesson)
     end
@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_course
-    @course = Course.find(1)
+    @course = Course.find(current_seeker.active_course_id)
   end
 
   def set_lesson
-    @lesson = Lesson.find(1)
+    @lesson = Lesson.find(current_seeker.active_lesson_id)
   end
 
   def set_lesson_event

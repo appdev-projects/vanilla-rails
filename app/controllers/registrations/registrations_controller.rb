@@ -3,8 +3,8 @@
 class Registrations::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :set_course, except: %i[ edit update destroy ]
-  before_action :set_lesson, except: %i[ edit update destroy ]
+  before_action :set_course, except: %i[ create edit update destroy ]
+  before_action :set_lesson, except: %i[ create edit update destroy ]
 
   before_action :require_login,       only: %i[ edit update destroy ]
 

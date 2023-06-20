@@ -11,6 +11,7 @@
 #  practice_session_id :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  spiritual_type      :string
 #
 class Lesson < ApplicationRecord
   has_many :lesson_events, class_name: "LessonEvent", foreign_key: "lesson_id"

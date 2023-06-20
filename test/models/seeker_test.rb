@@ -12,6 +12,8 @@
 #  phone_number           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  active_course_id       :integer
+#  active_lesson_id       :integer
 #
 require "test_helper"
 
