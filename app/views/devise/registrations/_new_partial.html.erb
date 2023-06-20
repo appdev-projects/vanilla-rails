@@ -1,93 +1,85 @@
-<div class="container">
+  
+<div class="row">
+  <div class="container-fluid">
+    <p>
+      <h2 class="text-center">
+        This is a sub-heading.
+      </h2>
+
+    </div>
+  </div>
   <div class="row">
     <div class="container-fluid">
-      <p>
-        <h2 class="text-center">
-          This is a sub-heading.
-        </h2>
 
-      </div>
-    </div>
-    <div class="row">
-      <div class="container-fluid">
-
-        <h6 class="text-center">
-          This is filler text that gives a little more color.
-        </h6>
-      </p>
-    </div>
+      <h6 class="text-center">
+        This is filler text that gives a little more color.
+      </h6>
+    </p>
   </div>
+</div>
 
-  <div id="start-button" class="row">
-    <div class="d-grid col-6 mx-auto">
-      <%= link_to "Get Started", new_seeker_registration_path, class: "btn btn-primary", local: false, remote: true %>
-      <br>
-    </div>
+<div id="start-button" class="row">
+  <div class="d-grid col-6 mx-auto">
+    <%= link_to "Get Started", new_seeker_registration_path, class: "btn btn-primary", local: false, remote: true %>
+    <br>
   </div>
-  <script>
-    <!-- Resetting a form on page load -->
+</div>
+<script>
+  <!-- Resetting a form on page load -->
 
-    window.onload = function() {
-        console.log('The page has fully loaded');
-        $('#sign-up').hide();
-    }
-      $('#start-button').click(function() {
-      $('#start-button').hide("slow", function(){
-      $('#sign-up').show("fast");
-      })
-      })
-  </script>
+  window.onload = function() {
+      console.log('The page has fully loaded');
+      $('#sign-up').hide();
+  }
+    $('#start-button').click(function() {
+    $('#start-button').hide("slow", function(){
+    $('#sign-up').show("fast");
+    })
+    })
+</script>
 
-  <div id="sign-up" class="container-fluid">
-    <div class="card">
-      <div class= "card-header">
-        Sign up
-      </div>
-      <div class="container card-body">
-        <%= simple_form_for(:seeker, url: seeker_registration_path ) do |f| %>
-          <%= f.error_notification %>
+<div id="sign-up" class="container-fluid">
+  <%= simple_form_for(:seeker, url: seeker_registration_path ) do |f| %>
+    <%= f.error_notification %>
 
-          <div class="form-inputs container">
-            <div class="field">
-              <%= f.input :email,
+    <div class="form-inputs container">
+      <div class="field">
+        <%= f.input :email,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email", class: "container-fluid" }%>
-            </div>
-            <div class="field">
-              <%= f.input :first_name,
+      </div>
+      <div class="field">
+        <%= f.input :first_name,
               required: true,
               autofocus: true, 
               input_html: { autocomplete: "email", class: "container-fluid" }%>
-            </div>
+      </div>
 
-            <div class="field">
-              <%= f.input :phone_number,
+      <div class="field">
+        <%= f.input :phone_number,
               required: true,
               autofocus: true, 
               input_html: { autocomplete: "email", class: "container-fluid" }%>
-            </div>
-            <div class="field">
-              <%= f.input :password,
+      </div>
+      <div class="field">
+        <%= f.input :password,
                 required: true,
                 autofocus: true, 
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password", class: "container-fluid" } %>
-            </div>
-            <div class="field">
-              <%= f.input :password_confirmation,
+      </div>
+      <div class="field">
+        <%= f.input :password_confirmation,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "new-password", class: "container-fluid" } %>
-            </div>
-            <hr>
-          </div>
-          <div class="form-actions container">
-            <%= f.button :submit, "Sign up", class: "btn btn-primary container"%>
-          </div>
-        <% end %>
       </div>
+      <hr>
     </div>
-    <hr class="invisible">
-  </div>
+    <div class="form-actions container">
+      <%= f.button :submit, "Sign up", class: "btn btn-primary container"%>
+    </div>
+  <% end %>
 </div>
+<hr class="invisible">

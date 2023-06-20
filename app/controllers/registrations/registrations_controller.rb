@@ -15,11 +15,12 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
         params[:seeker].delete(:password)
        params[:seeker].delete(:password_confirmation)
       end
-      current_seeker.update( current_seeker.active_course_id => params[:seeker][:active_course_id])
+      current_seeker.active_course_id = params[:seeker][:active_course_id]
+      current_seeker.active_lesson_id = Lesson.find_by( course_id: params[:seeker][:active_course_id], day: 1).id
       current_seeker.save
 
       @active_course = Course.find(current_seeker.active_course_id)
-      @active_lesson = Lesson.find_by( course_id: @active_course, day: 1)
+      @active_lesson = Lesson.find( current_seeker.active_lesson_id )
 
       redirect_to course_lesson_path(@active_course, @active_lesson)
     end
