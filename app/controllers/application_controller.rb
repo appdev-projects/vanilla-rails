@@ -56,7 +56,8 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :first_name, :phone_number, :password, :active_course_id])
+    devise_parameter_sanitizer.permit( :sign_up, keys: [:email, :first_name, :phone_number, :password, :active_course_id, :active_lesson_id] )
+    devise_parameter_sanitizer.permit( :account_update, keys: [:email, :first_name, :phone_number, :password, :active_course_id, :active_lesson_id] )
   end
 
   def set_skr_sprtl_type
