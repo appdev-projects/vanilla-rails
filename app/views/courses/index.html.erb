@@ -1,53 +1,52 @@
-<div class="container-fluid">
+<div class="container-fluid align-items-center">
   <br class = "invisible">
   <div class="container text-center">
     <h1>Courses</h1>
   </div>
   <br class = "invisible">
 </div>
-  <% @courses.each do |course| %>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-2">
-        </div>
-        <div class="col-8">
-          <div class="container">
-            <div class="row">
-              <div class="col-3">
-                <%= image_tag "logo-mobile", style: "height: 100px"%>
+<% @courses.each do |course| %>
+  <div class="container-fluid align-items-center">
+    <div class="row">
+      <div class="col-2">
+      </div>
+      <div class="col-8">
+        <div class="container align-items-center">
+          <div class="row align-items-center">
+            <div class="col-3">
+              <%= image_tag "logo-mobile", style: "height: 100px"%>
+            </div>
+            <div class="card col-9">
+              <div class="card-header">
+                <div class="h5" style="margin-top: .5rem">
+                  <%= course.title %>
+                </div>
               </div>
-              <div class="card col-9">
-                <div class="card-header">
-                  <div class="h5" style="margin-top: .5rem">
-                    <%= course.title %>
+              <div class="card-body align-items-center">
+                <div class="row align-items-center">
+                  <div class="col-9">
+                    <%= course.short_description %>
+                  </div>
+                  <div class="col-3">
+                    <%= render partial: "devise/registrations/edit", locals: {resource: :seeker, resource_name: current_seeker, course: course} %>
                   </div>
                 </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <%= course.short_description %>
-                    </div>
-                    <div class="col-md-2">
-                      <% if course.lessons_count == nil %>
-                        <h6>10</h6>
-                        <p>lessons</p>
-                      <% else %>
-                        <%= p course.lessons_count %>
-                      <% end %>
-                    </div>
-                    <div class="col-md-2">
-                      <%= link_to "Show", course, class: "btn btn-primary", local: false, remote: true %>
-                    </div>
-                  </div>
-                </div>
+              </div>
+              <div class="card-footer align-items-center">
+                <% if course.lessons_count == nil %>
+                  <h6>10 lessons</h6>
+                <% else %>
+                  <%= p course.lessons_count %>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <br class="invisible">
     </div>
+    <br class="invisible">
   </div>
+</div>
 <% end %>
 
 </div>
