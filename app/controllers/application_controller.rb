@@ -60,14 +60,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit( :account_update, keys: [:email, :first_name, :phone_number, :password, :active_course_id, :active_lesson_id] )
   end
 
-  def set_skr_sprtl_type
-    if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil 
-    scores = Array.new
-    scores = [{type: :personalist, score: @type_score.personalist}, { type: :communalist, score:  @type_score.communalist},{ type: :environmentalist, score:  @type_score.environmentalist},{ type: :transcendentalist, score:  @type_score.transcendentalist} ]
-
-    @type_score.spiritual_type = scores.max_by{|k| k[:score] }[:type].to_s
-    @type_score.save
-    end
-  end
-
 end

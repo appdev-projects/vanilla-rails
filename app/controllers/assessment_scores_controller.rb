@@ -54,6 +54,16 @@ class AssessmentScoresController < ApplicationController
         format.json { render json: @assessment_score.errors, status: :unprocessable_entity }
       end
     end
+# CHANGE TO CALCULATION OF SPIRITUAL TYPE FIELD
+    if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil 
+      scores = Array.new
+      scores = [{type: :personalist, score: @type_score.personalist}, { type: :communalist, score:  @type_score.communalist},{ type: :environmentalist, score:  @type_score.environmentalist},{ type: :transcendentalist, score:  @type_score.transcendentalist} ]
+  
+      @type_score.spiritual_type = scores.max_by{|k| k[:score] }[:type].to_s
+      @type_score.save
+
+
+    
   end
 
   # DELETE /assessment_scores/1 or /assessment_scores/1.json
