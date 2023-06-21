@@ -1,41 +1,43 @@
-<p id="notice"><%= notice %></p>
-<div class="container text-center">
-  <h1>Courses</h1>
+<div class="container-fluid">
+  <br class = "invisible">
+  <div class="container text-center">
+    <h1>Courses</h1>
+  </div>
+  <br class = "invisible">
 </div>
-<br class = "invisible">
-
-<% @courses.each do |course| %>
-  <div class="row">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
-      <div class="container">
-        <div class="row">
-          <div class="col-3">
-            <%= image_tag "logo-mobile", style: "height: 100px"%>
-          </div>
-          <div class="card col-9">
-            <div class="card-header">
-              <div class="h5">
-                <%= course.title %>
+  <% @courses.each do |course| %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+          <div class="container">
+            <div class="row">
+              <div class="col-3">
+                <%= image_tag "logo-mobile", style: "height: 100px"%>
               </div>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <%= course.short_description %>
+              <div class="card col-9">
+                <div class="card-header">
+                  <div class="h5" style="margin-top: .5rem">
+                    <%= course.title %>
+                  </div>
                 </div>
-                <div class="col-md-2">
-                  <% if course.lessons_count == nil %>
-                    <h6>10</h6>
-                    <p>lessons</p>
-                  <% else %>
-                    <%= p course.lessons_count %>
-                  <% end %>
-                </div>
-                <div class="col-md-2">
-                  <div class="btn btn-primary">
-                    <%= link_to 'Show', course %>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <%= course.short_description %>
+                    </div>
+                    <div class="col-md-2">
+                      <% if course.lessons_count == nil %>
+                        <h6>10</h6>
+                        <p>lessons</p>
+                      <% else %>
+                        <%= p course.lessons_count %>
+                      <% end %>
+                    </div>
+                    <div class="col-md-2">
+                      <%= link_to "Show", course, class: "btn btn-primary", local: false, remote: true %>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -43,12 +45,9 @@
           </div>
         </div>
       </div>
+      <br class="invisible">
     </div>
-    </div>
-    <br class="invisible">
+  </div>
+<% end %>
+
 </div>
-  <% end %>
-
-<br>
-
-<%= link_to 'New Course', new_course_path %>
