@@ -1,16 +1,15 @@
 class AssessmentScoresController < ApplicationController
   before_action :require_login
-  before_action :set_assessment_score, only: %i[ show edit update destroy ]
+  before_action :scope_assessment_score, only: %i[ show edit update destroy ]
   before_action :set_lesson_event, only: %i[ show edit update destroy ]
 
   # GET /assessment_scores or /assessment_scores.json
   def index
-    @assessment_scores = AssessmentScore.all
+    render "sanctuary"
   end
 
-  # GET /assessment_scores/1 or /assessment_scores/1.json
+  # GET /assessment_scores/1 or /assessment_scores/1.json 
   def show
-    render "sanctuary"
   end
 
   # GET /assessment_scores/new
@@ -78,8 +77,8 @@ class AssessmentScoresController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_assessment_score
-      @assessment_score = AssessmentScore.find(params[:id])
+    def scope_assessment_score
+      @assessment_score = AssessmentScore.find(seeker_id: current_seeker.id)
     end
 
     # Only allow a list of trusted parameters through.

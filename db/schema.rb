@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_20_163207) do
+ActiveRecord::Schema.define(version: 2023_06_21_170836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -28,25 +28,25 @@ ActiveRecord::Schema.define(version: 2023_06_20_163207) do
 
   create_table "assessment_scores", force: :cascade do |t|
     t.integer "seeker_id"
-    t.float "personalist"
-    t.float "communalist"
-    t.float "environmentalist"
-    t.float "transcendentalist"
-    t.string "spiritual_type"
+    t.float "personalist", default: 0.0
+    t.float "communalist", default: 0.0
+    t.float "environmentalist", default: 0.0
+    t.float "transcendentalist", default: 0.0
+    t.string "spiritual_type", default: "not_set"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "divine_relationship"
-    t.integer "something_more"
-    t.integer "creator_relationship"
-    t.integer "love_others"
-    t.integer "chain_link"
-    t.integer "authentic_vulnerable"
-    t.integer "nature_oneness"
-    t.integer "magic_vibrations"
-    t.integer "environment_harmony"
-    t.integer "inner_peace"
-    t.integer "self_knowing"
-    t.integer "inner_resources"
+    t.integer "divine_relationship", default: 0
+    t.integer "something_more", default: 0
+    t.integer "creator_relationship", default: 0
+    t.integer "love_others", default: 0
+    t.integer "chain_link", default: 0
+    t.integer "authentic_vulnerable", default: 0
+    t.integer "nature_oneness", default: 0
+    t.integer "magic_vibrations", default: 0
+    t.integer "environment_harmony", default: 0
+    t.integer "inner_peace", default: 0
+    t.integer "self_knowing", default: 0
+    t.integer "inner_resources", default: 0
   end
 
   create_table "courses", force: :cascade do |t|
