@@ -5,7 +5,11 @@ class AssessmentScoresController < ApplicationController
 
   # GET /assessment_scores or /assessment_scores.json
   def index
+    if current_seeker.type_score == nil
+      render "not_yet"
+    else
     render "sanctuary"
+    end
   end
 
   # GET /assessment_scores/1 or /assessment_scores/1.json 
