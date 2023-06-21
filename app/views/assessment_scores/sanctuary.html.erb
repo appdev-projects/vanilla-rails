@@ -67,50 +67,7 @@
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="row">
-              <div class="col-md-6">
-                <div class="card card-body">
-                  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                    <%= f.error_notification %>
-                    <h5>Edit My Email or Password</h5>
-
-                    <div class="form-inputs">
-                      <%= f.input :email, required: true, autofocus: true, input_html: {class: "container-fluid"} %>
-
-                      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-                      <% end %>
-
-                      <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password", class: "container-fluid" } %>
-                      <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password", class: "container-fluid" } %>
-                      <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password", class: "container-fluid" } %>
-                    </div>
-
-                    <div class="form-actions">
-                      <%= f.button :submit, "Update", class: "btn btn-primary" %>
-                    </div>
-                  <% end %>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card card-body">
-                    <h5>Cancel my account</h5>
-
-                    <div>
-                    <p>
-                    Sorry to see you go, but we won't stand in your way :) 
-                    </p>
-                    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-                  </div>
-                </div>
-              </div>
+              <%= render partial: "devise/registrations/old_edit", locals: {resource: :seeker, resource_name: current_seeker}%>
             </div>
           </div>
         </div>

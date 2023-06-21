@@ -1,42 +1,16 @@
 class AssessmentScoresController < ApplicationController
   before_action :require_login
-  before_action :scope_assessment_score, only: %i[ show edit update destroy ]
-  before_action :set_lesson_event, only: %i[ show edit update destroy ]
+  before_action :set_lesson_event, only: %i[ show update destroy ]
 
-  # GET /assessment_scores or /assessment_scores.json
-  def index
-    if current_seeker.type_score == nil
-      render "not_yet"
-    else
-    render "sanctuary"
-    end
-  end
 
   # GET /assessment_scores/1 or /assessment_scores/1.json 
   def show
-  end
-
-  # GET /assessment_scores/new
-  def new
-    @assessment_score = AssessmentScore.new
-  end
-
-  # GET /assessment_scores/1/edit
-  def edit
-  end
-
-  # POST /assessment_scores or /assessment_scores.json
-  def create
-    @assessment_score = AssessmentScore.new(assessment_score_params)
-
-    respond_to do |format|
-      if @assessment_score.save
-        format.html { redirect_to assessment_score_url(@assessment_score), notice: "Assessment score was successfully created." }
-        format.json { render :show, status: :created, location: @assessment_score }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @assessment_score.errors, status: :unprocessable_entity }
-      end
+    if current_seeker.type_score == nil
+      render "not_yet"
+    elsif current_seeker.type_score.spiritual_type == "not set"
+      render "not_yet"
+    else
+    render "sanctuary"
     end
   end
 
@@ -54,27 +28,16 @@ class AssessmentScoresController < ApplicationController
         format.json { render json: @assessment_score.errors, status: :unprocessable_entity }
       end
     end
-# CHANGE TO CALCULATION OF SPIRITUAL TYPE FIELD
-    if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil 
-      scores = Array.new
-      scores = [{type: :personalist, score: @type_score.personalist}, { type: :communalist, score:  @type_score.communalist},{ type: :environmentalist, score:  @type_score.environmentalist},{ type: :transcendentalist, score:  @type_score.transcendentalist} ]
+  end
   
-      @type_score.spiritual_type = scores.max_by{|k| k[:score] }[:type].to_s
-      @type_score.save
-
-
-    
-  end
-
-  # DELETE /assessment_scores/1 or /assessment_scores/1.json
-  def destroy
-    @assessment_score.destroy
-
-    respond_to do |format|
-      format.html { redirect_to assessment_scores_url, notice: "Assessment score was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+# CHANGE TO CALCULATION OF SPIRITUAL TYPE FIELD
+    # if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil 
+    #   scores = Array.new
+    #   scores = [{type: :personalist, score: @type_score.personalist}, { type: :communalist, score:  @type_score.communalist},{ type: :environmentalist, score:  @type_score.environmentalist},{ type: :transcendentalist, score:  @type_score.transcendentalist} ]
+  
+    #   @type_score.spiritual_type = scores.max_by{|k| k[:score] }[:type].to_s
+    #   @type_score.save 
+  # end
 
   def export
     as = AssessmentScore.all
@@ -90,10 +53,6 @@ class AssessmentScoresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def scope_assessment_score
-      @assessment_score = AssessmentScore.find(seeker_id: current_seeker.id)
-    end
 
     # Only allow a list of trusted parameters through.
     def assessment_score_params

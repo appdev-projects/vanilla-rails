@@ -1,42 +1,6 @@
 class LessonEventsController < ApplicationController
   before_action :require_login
-  before_action :set_lesson_event, only: %i[ show edit update destroy ]
-  before_action :set_score, only: %i[ update ]
-  before_action :set_final_lesson
-
-
-  # GET /lesson_events or /lesson_events.json
-  def index
-    @lesson_events = LessonEvent.all
-  end
-
-  # GET /lesson_events/1 or /lesson_events/1.json
-  def show
-  end
-
-  # GET /lesson_events/new
-  def new
-    @lesson_event = LessonEvent.new
-  end
-
-  # GET /lesson_events/1/edit
-  def edit
-  end
-
-  # POST /lesson_events or /lesson_events.json
-  def create
-    @lesson_event = LessonEvent.new(lesson_event_params)
-
-    respond_to do |format|
-      if @lesson_event.save
-        format.html { redirect_to lesson_event_url(@lesson_event.lesson_id), notice: "Lesson event was successfully created." }
-        format.json { render :show, status: :created, location: @lesson_event }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @lesson_event.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  before_action :set_lesson_event, only: %i[ update ]
 
   # PATCH/PUT /lesson_events/1 or /lesson_events/1.json
   def update
@@ -53,16 +17,6 @@ class LessonEventsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @lesson_event.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /lesson_events/1 or /lesson_events/1.json
-  def destroy
-    @lesson_event.destroy
-
-    respond_to do |format|
-      format.html { redirect_to lesson_events_url, notice: "Lesson event was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

@@ -37,9 +37,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <% if (signed_in?) == true %>
+            <% if current_seeker.type_score == nil %>
             <li class="nav-item">
-              <a class="nav-link" href="<%=assessment_scores_path%>">My Sanctuary</a>
+              <a class="nav-link" style="text-decoration: line-through" href="#">My Sanctuary (Not Yet Available)</a>
             </li>
+            <% else %>
+            <li class="nav-item">
+              <a class="nav-link" href="<%=assessment_score_path(id: current_seeker.type_score.id)%>">My Sanctuary</a>
+            </li>
+            <% end %>
             <li class="nav-item">
               <a class="nav-link" href="<%=course_lesson_path({ course_id: @course, id: @lesson})%>">My Path</a>
             </li>
