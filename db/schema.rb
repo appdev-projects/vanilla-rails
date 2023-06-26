@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_21_170836) do
+ActiveRecord::Schema.define(version: 2023_06_26_172458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -35,18 +35,18 @@ ActiveRecord::Schema.define(version: 2023_06_21_170836) do
     t.string "spiritual_type", default: "not_set"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "divine_relationship", default: 0
-    t.integer "something_more", default: 0
-    t.integer "creator_relationship", default: 0
-    t.integer "love_others", default: 0
-    t.integer "chain_link", default: 0
-    t.integer "authentic_vulnerable", default: 0
-    t.integer "nature_oneness", default: 0
-    t.integer "magic_vibrations", default: 0
-    t.integer "environment_harmony", default: 0
-    t.integer "inner_peace", default: 0
-    t.integer "self_knowing", default: 0
-    t.integer "inner_resources", default: 0
+    t.float "divine_relationship", default: 0.0
+    t.float "something_more", default: 0.0
+    t.float "creator_relationship", default: 0.0
+    t.float "love_others", default: 0.0
+    t.float "chain_link", default: 0.0
+    t.float "authentic_vulnerable", default: 0.0
+    t.float "nature_oneness", default: 0.0
+    t.float "magic_vibrations", default: 0.0
+    t.float "environment_harmony", default: 0.0
+    t.float "inner_peace", default: 0.0
+    t.float "self_knowing", default: 0.0
+    t.float "inner_resources", default: 0.0
   end
 
   create_table "courses", force: :cascade do |t|
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2023_06_21_170836) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "spiritual_type"
+    t.string "practice_description"
   end
 
   create_table "seekers", force: :cascade do |t|

@@ -13,21 +13,22 @@
         <div class="accordion-header" id="headingOne">
           <div class="row">
             <div class="col-10">
-              <div class="row card-header">
-                Today's Teaching:
+              <div class="row" style="margin-top: 5vh; margin-bottom 5vh">
+                <h3>Today's Teaching:</h3>
               </div>
               <div class="row card-body">
                 <%= @lesson.description%>
               </div>
             </div>
             <div class="col-2 d-flex justify-content-center">
-              <button id="collapseOneButton" class="accordion-button collapsed btn container-fluid" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              <button id="collapseOneButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
               </button>
             </div>
           </div>
         </div>
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body">
+            <br>
             <%= render partial: @teaching_link %>
             <div>
               <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: :teaching_done} %>
@@ -38,52 +39,74 @@
       </div>
     </div>
     <br class="invisible">
-    <div class="card">
-      <div id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button id="collapseTwoButton"class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Today's Practice
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+    <div class="card" id="accordionExample">
+      <div class="accordion-item container-fluid">
+        <div class="accordion-header" id="headingTwo">
+          <div class="row">
+            <div class="col-10">
+              <div class="row" style="margin-top: 5vh; margin-bottom 5vh">
+                <h3>Today's Practice:</h3>
+              </div>
+              <div class="row card-body">
+                <%= @lesson.practice_description%>
+              </div>
+            </div>
+            <div class="col-2 d-flex justify-content-center">
+              <button id="collapseTwoButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <br>
+            <%= render partial: @practice_link %>
+            <div>
+              <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: :teaching_done} %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <br class="invisible">
+    <div class="card" id="accordionExample">
+      <% if @lesson.day < 5 %>
+        <div class="accordion-item container-fluid">
+          <div class="accordion-header" id="headingThree">
+            <div class="row">
+              <div class="col-10">
+                <div class="row" style="margin-top: 5vh; margin-bottom 5vh">
+                  <h3>Today's Spiritual Assessment:</h3>
+                </div>
+              </div>
+              <div class="col-2 d-flex justify-content-center">
+                <button id="collapseThreeButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <%= render partial: @practice_link %>
+              <br>
+              <%= render partial: "assessment_scores/form", locals: {study_session: @study_session, type_assessment: @lesson.spiritual_type, assessment_score: @type_score} %>
               <div>
-                <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: "practice_done"} %>
+                <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: :teaching_done} %>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <br class="invisible">
-    <div class="card">
-      <div id="accordionExample">
-        <% if @lesson.day < 5 %>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-              <button id="collapseThreeButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Spiritual Assessment
-              </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div>
-                  <%= render partial: "assessment_scores/form", locals: {study_session: @study_session, type_assessment: @lesson.spiritual_type, assessment_score: @type_score} %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <%end%>
-      </div>
-    </div>
-    <div class="card" style="margin-top: 10vh">
-      <% if @lesson != @final_lesson%>
-        <%= render partial: "lesson_events/form", locals: {study_session: @study_session, status_value: "complete" } %>
-      <%else%>
-        <p>Thanks for trying our prototype!</p>
-      <%end%>
-    </div>
+    <%end%>
+    <br>
+    <% if @lesson != @final_lesson%>
+
+      <%= render partial: "lesson_events/form_complete", locals: {study_session: @study_session, status_value: "complete" } %>
+    <%else%>
+      <p>Thanks for trying our prototype!</p>
+    <%end%>
   </div>
+  <br>
+  <br>
 </div>

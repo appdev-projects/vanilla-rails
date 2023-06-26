@@ -11,18 +11,18 @@
 #  spiritual_type       :string           default("not_set")
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  divine_relationship  :integer          default(0)
-#  something_more       :integer          default(0)
-#  creator_relationship :integer          default(0)
-#  love_others          :integer          default(0)
-#  chain_link           :integer          default(0)
-#  authentic_vulnerable :integer          default(0)
-#  nature_oneness       :integer          default(0)
-#  magic_vibrations     :integer          default(0)
-#  environment_harmony  :integer          default(0)
-#  inner_peace          :integer          default(0)
-#  self_knowing         :integer          default(0)
-#  inner_resources      :integer          default(0)
+#  divine_relationship  :float            default(0.0)
+#  something_more       :float            default(0.0)
+#  creator_relationship :float            default(0.0)
+#  love_others          :float            default(0.0)
+#  chain_link           :float            default(0.0)
+#  authentic_vulnerable :float            default(0.0)
+#  nature_oneness       :float            default(0.0)
+#  magic_vibrations     :float            default(0.0)
+#  environment_harmony  :float            default(0.0)
+#  inner_peace          :float            default(0.0)
+#  self_knowing         :float            default(0.0)
+#  inner_resources      :float            default(0.0)
 #
 
 one:
