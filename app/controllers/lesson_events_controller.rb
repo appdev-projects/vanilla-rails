@@ -1,6 +1,7 @@
 class LessonEventsController < ApplicationController
   before_action :require_login
   before_action :set_lesson_event
+  before_action :set_score
 
   # PATCH/PUT /lesson_events/1 or /lesson_events/1.json
   def update

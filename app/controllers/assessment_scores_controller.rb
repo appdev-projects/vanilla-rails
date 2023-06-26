@@ -1,5 +1,6 @@
 class AssessmentScoresController < ApplicationController
   before_action :require_login
+  before_action :set_score
 
 
   # GET /assessment_scores/1 or /assessment_scores/1.json 
@@ -16,15 +17,15 @@ class AssessmentScoresController < ApplicationController
   # PATCH/PUT /assessment_scores/1 or /assessment_scores/1.json
   def update
     respond_to do |format|
-      if @assessment_score.update(assessment_score_params)
-        format.html { redirect_back_or_to course_lesson_path({ course_id: @lesson_event.lesson.course_id, id: Lesson.find_by(id: @lesson_event.lesson_id + 1) }), notice: "Well done, friend." }
-        format.json { render :show, status: :ok, location: @assessment_score }
+      if @type_score.update(assessment_score_params)
+        format.html { redirect_back_or_to course_lesson_path({ course_id: @study_session.lesson.course_id, id: Lesson.find_by(id: @study_session.lesson_id + 1) }), notice: "Well done, friend." }
+        format.json { render :show, status: :ok, location: @type_score }
         format.js do
           render template: "assessment_scores/show.js.erb"
         end
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @assessment_score.errors, status: :unprocessable_entity }
+        format.json { render json: @type_score.errors, status: :unprocessable_entity }
       end
     end
   end

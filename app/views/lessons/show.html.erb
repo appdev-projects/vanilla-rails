@@ -116,7 +116,7 @@
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <br>
-            <%= render partial: "assessment_scores/form", locals: {study_session: @study_session, type_assessment: @lesson.spiritual_type, assessment_score: @type_score, aq_count: @aq_count} %>
+            <%= render partial: "assessment_scores/form", locals: {assessment_score: @type_score, study_session: @study_session, type_assessment: @lesson.spiritual_type, aq_count: @aq_count} %>
           </div>
         </div>
       </div>
