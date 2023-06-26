@@ -1,22 +1,21 @@
-<%= form_with(model: study_session, method: :patch, local: false, remote: true) do |form| %>
-  <% if study_session.errors.any? %>
+<%= form_with(model: @study_session, method: :patch, local: false, remote: true) do |form| %>
+  <% if @study_session.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(study_session.errors.count, "error") %> Sorry, couldn't save this. Please try refreshing your page. </h2>
+      <h2><%= pluralize(@study_session.errors.count, "error") %> Sorry, couldn't save this. Please try refreshing your page. </h2>
 
       <ul>
-        <% study_session.errors.full_messages.each do |message| %>
+        <% @study_session.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.hidden_field :seeker_id, value: current_seeker.id %>
   </div>
 
   <div class="field">
-    <%= form.hidden_field :lesson_id, value: study_session.lesson_id %>
+    <%= form.hidden_field :lesson_id, value: @study_session.lesson_id %>
   </div>
 
   <div class="field">

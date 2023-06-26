@@ -1,14 +1,14 @@
 class LessonEventsController < ApplicationController
   before_action :require_login
-  before_action :set_lesson_event, only: %i[ update ]
+  before_action :set_lesson_event
 
   # PATCH/PUT /lesson_events/1 or /lesson_events/1.json
   def update
     respond_to do |format|
-      if @lesson_event.update(lesson_event_params) == true && @lesson_event.status == "complete"
+      if @study_session.update(lesson_event_params) == true && @study_session.status == "complete"
         format.html { redirect_to course_lesson_path({ course_id: @lesson_event.lesson.course_id }, { id: (@lesson_event.lesson.id + 1) }), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @lesson_event.lesson_id }
-      elsif @lesson_event.update(lesson_event_params) == true && @lesson_event.status != "complete"
+      elsif @study_session.update(lesson_event_params) == true && @study_session.status != "complete"
         flash[:notice] = "Remember the nearness of the Sacred."
         format.js do
           render template: "lessons/show"

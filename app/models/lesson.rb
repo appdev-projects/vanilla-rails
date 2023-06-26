@@ -16,6 +16,7 @@
 #
 class Lesson < ApplicationRecord
   has_many :lesson_events, class_name: "LessonEvent", foreign_key: "lesson_id"
+  has_many  :assessment_questions, class_name: "AssessmentQuestion", foreign_key: "lesson_id"
   belongs_to :course, class_name: "Course", foreign_key: "course_id"
 
   #Route for Data Dump

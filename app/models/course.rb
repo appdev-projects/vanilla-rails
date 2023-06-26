@@ -14,6 +14,7 @@ class Course < ApplicationRecord
 
   has_many  :students, class_name: "Seeker", foreign_key: "active_course_id"
   has_many  :lessons, class_name: "Lesson", foreign_key: "course_id", dependent: :destroy
+  has_many  :assessment_questions, class_name: "AssessmentQuestion", foreign_key: "course_id"
 
   def self.to_csv
     require 'csv'

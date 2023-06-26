@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_26_173546) do
+ActiveRecord::Schema.define(version: 2023_06_26_180635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2023_06_26_173546) do
     t.string "assessment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_id"
+    t.integer "lesson_id"
   end
 
   create_table "assessment_scores", force: :cascade do |t|
@@ -47,6 +49,18 @@ ActiveRecord::Schema.define(version: 2023_06_26_173546) do
     t.float "inner_peace", default: 0.0
     t.float "self_knowing", default: 0.0
     t.float "inner_resources", default: 0.0
+    t.float "divine_relationship_lived"
+    t.float "something_more_lived"
+    t.float "creator_relationship_lived"
+    t.float "love_others_lived"
+    t.float "chain_link_lived"
+    t.float "authentic_vulnerable_lived"
+    t.float "nature_oneness_lived"
+    t.float "magic_vibrations_lived"
+    t.float "environment_harmony_lived"
+    t.float "inner_peace_lived"
+    t.float "self_knowing_lived"
+    t.float "inner_resources_lived"
   end
 
   create_table "courses", force: :cascade do |t|

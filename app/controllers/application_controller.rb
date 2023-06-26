@@ -8,13 +8,12 @@ class ApplicationController < ActionController::Base
     if signed_in? == false
       resource = "seeker"
       render "welcome/index"
-    else 
+    else
       @course = Course.find(current_seeker.active_course_id)
       @lesson = Lesson.find(current_seeker.active_lesson_id)
 
       redirect_to course_lesson_path(@course, @lesson)
     end
-  
   end
 
   protected
@@ -36,12 +35,16 @@ class ApplicationController < ActionController::Base
   end
 
   def set_lesson_event
-      @study_session = LessonEvent.new({
+    if current_seeker.lesson_events.last.status == 3
+
+      @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,
         lesson_id: @lesson.id,
         status: 0,
       })
-      @lesson_event = @study_session
+    else
+      @study_session = current_seeker.lesson_events.last
+    end
   end
 
   # def current user's score
@@ -56,8 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit( :sign_up, keys: [:email, :first_name, :phone_number, :password, :active_course_id, :active_lesson_id] )
-    devise_parameter_sanitizer.permit( :account_update, keys: [:email, :first_name, :phone_number, :password, :active_course_id, :active_lesson_id] )
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :first_name, :phone_number, :password, :active_course_id, :active_lesson_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :first_name, :phone_number, :password, :active_course_id, :active_lesson_id])
   end
-
 end

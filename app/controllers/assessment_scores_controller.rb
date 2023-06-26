@@ -1,6 +1,5 @@
 class AssessmentScoresController < ApplicationController
   before_action :require_login
-  before_action :set_lesson_event, only: %i[ show update destroy ]
 
 
   # GET /assessment_scores/1 or /assessment_scores/1.json 

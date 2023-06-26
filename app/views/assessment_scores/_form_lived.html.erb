@@ -16,7 +16,7 @@
     var scoresList = new Array();
   </script>
 
-  <% AssessmentQuestion.where(spiritual_type: type_assessment.downcase, assessment: "spiritual_type").each do |assessment_question| %>
+  <% AssessmentQuestion.all.each do |assessment_question| %>
     <div class="row list-group-item">
       <div class="row container-fluid text-center">
         <label for="question-<%= assessment_question.number%>"><%= assessment_question.question %></label>

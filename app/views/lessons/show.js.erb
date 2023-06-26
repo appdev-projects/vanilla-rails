@@ -1,6 +1,6 @@
 console.log("Updating Status");
 
-<% if @lesson_event.status == "teaching_done" %>
+<% if @study_session.status == "teaching_done" %>
 $("#collapseOne").removeClass("show");
 $("#collapseTwo").addClass("show");
 $("#collapseOneButton").attr("aria-expanded","false");
@@ -10,7 +10,7 @@ $("#collapseTwoButton").removeClass("collapsed");
 
 console.log("Teaching Done");
 
-<% elsif @lesson_event.status == "practice_done" && @lesson.day < 5 %>
+<% elsif @study_session.status == "practice_done" && @lesson.day < 5 %>
 
 $("#collapseTwo").removeClass("show");
 $("#collapseThree").addClass("show");

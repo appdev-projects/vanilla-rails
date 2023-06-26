@@ -12,6 +12,7 @@ class LessonsController < ApplicationController
       # Define Content Links
       @teaching_link = "teaching_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
       @practice_link = "practice_content/course_" + @course.id.to_s + "/lesson_" + (@lesson.day.to_i).to_s
+      @aq_count = @lesson.assessment_questions.count
   end
 
   def export
