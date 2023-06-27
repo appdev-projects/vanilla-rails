@@ -5,12 +5,13 @@
 #  id             :bigint           not null, primary key
 #  name           :string
 #  question       :string
-#  string         :string
 #  spiritual_type :string
-#  number_string  :string
+#  number         :integer
 #  assessment     :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  course_id      :integer
+#  lesson_id      :integer
 #
 require "test_helper"
 

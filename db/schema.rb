@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_19_195607) do
+ActiveRecord::Schema.define(version: 2023_06_27_155737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -24,29 +24,43 @@ ActiveRecord::Schema.define(version: 2023_06_19_195607) do
     t.string "assessment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_id"
+    t.integer "lesson_id"
   end
 
   create_table "assessment_scores", force: :cascade do |t|
     t.integer "seeker_id"
-    t.float "personalist"
-    t.float "communalist"
-    t.float "environmentalist"
-    t.float "transcendentalist"
-    t.string "spiritual_type"
+    t.float "personalist", default: 0.0
+    t.float "communalist", default: 0.0
+    t.float "environmentalist", default: 0.0
+    t.float "transcendentalist", default: 0.0
+    t.string "spiritual_type", default: "not_set"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "divine_relationship"
-    t.integer "something_more"
-    t.integer "creator_relationship"
-    t.integer "love_others"
-    t.integer "chain_link"
-    t.integer "authentic_vulnerable"
-    t.integer "nature_oneness"
-    t.integer "magic_vibrations"
-    t.integer "environment_harmony"
-    t.integer "inner_peace"
-    t.integer "self_knowing"
-    t.integer "inner_resources"
+    t.float "divine_relationship", default: 0.0
+    t.float "something_more", default: 0.0
+    t.float "creator_relationship", default: 0.0
+    t.float "love_others", default: 0.0
+    t.float "chain_link", default: 0.0
+    t.float "authentic_vulnerable", default: 0.0
+    t.float "nature_oneness", default: 0.0
+    t.float "magic_vibrations", default: 0.0
+    t.float "environment_harmony", default: 0.0
+    t.float "inner_peace", default: 0.0
+    t.float "self_knowing", default: 0.0
+    t.float "inner_resources", default: 0.0
+    t.float "divine_relationship_lived", default: 0.0
+    t.float "something_more_lived", default: 0.0
+    t.float "creator_relationship_lived", default: 0.0
+    t.float "love_others_lived", default: 0.0
+    t.float "chain_link_lived", default: 0.0
+    t.float "authentic_vulnerable_lived", default: 0.0
+    t.float "nature_oneness_lived", default: 0.0
+    t.float "magic_vibrations_lived", default: 0.0
+    t.float "environment_harmony_lived", default: 0.0
+    t.float "inner_peace_lived", default: 0.0
+    t.float "self_knowing_lived", default: 0.0
+    t.float "inner_resources_lived", default: 0.0
   end
 
   create_table "courses", force: :cascade do |t|
@@ -76,6 +90,7 @@ ActiveRecord::Schema.define(version: 2023_06_19_195607) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "spiritual_type"
+    t.string "practice_description"
   end
 
   create_table "seekers", force: :cascade do |t|
@@ -88,7 +103,8 @@ ActiveRecord::Schema.define(version: 2023_06_19_195607) do
     t.string "phone_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "active_course_id"
+    t.integer "active_course_id", default: 1
+    t.integer "active_lesson_id", default: 1
     t.index ["email"], name: "index_seekers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_seekers_on_reset_password_token", unique: true
   end

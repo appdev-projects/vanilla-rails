@@ -30,18 +30,27 @@
   </head>
   <nav class="navbar navbar-dark bg-dark" onload="ClearForm()">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><%= image_tag 'logo-white.png', height: "62.5rem", width: "125rem" %></a>
+      <a class="navbar-brand" href="<%= root_path()%>"><%= image_tag 'logo-white.png', height: "62.5rem", width: "125rem" %></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <% if (signed_in?) == true %>
-            <li class="nav-item">
-              <a class="nav-link" href="<%=edit_seeker_registration_path%>">My Sanctuary</a>
-            </li>
+            <% if current_seeker.type_score == nil %>
+              <li class="nav-item">
+                <a class="nav-link" style="text-decoration: line-through" href="#">My Sanctuary (Not Yet Available)</a>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=assessment_score_path(id: current_seeker.type_score.id)%>">My Sanctuary</a>
+              </li>
+            <% end %>
             <li class="nav-item">
               <a class="nav-link" href="<%=course_lesson_path({ course_id: @course, id: @lesson})%>">My Path</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= courses_path %>">Courses</a>
             </li>
             <li class="nav-item">
               <%= link_to "Sign Out", destroy_seeker_session_path, class: "nav-link", method: :delete  %>
@@ -58,13 +67,15 @@
   <body style="background-image: url(<%= image_url('/assets/welcome-background.svg')%>); background-position-y: bottom; background-size: cover; background-attachment: fixed; background-position: bottom; background-repeat: no-repeat">
     <div class="container-fluid">
       <div class="alert alert-danger alert-dismissible collapse fade" id="alert" role="alert">
-        <p><%= alert %></p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      <div class="alert alert-success alert-dismissible collapse fade" id="notice" role="notice">
-        <p><%= notice %></p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
+        <div class="card">
+          <p><%= alert %></p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <div class="alert alert-success alert-dismissible collapse fade" id="notice" role="notice">
+            <p><%= notice %></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <%= yield %>

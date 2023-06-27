@@ -1,7 +1,6 @@
 class AssessmentQuestionsController < ApplicationController
   before_action :set_assessment_question, only: %i[ show edit update destroy ]
-  before_action :set_course, only: %i[ export ]
-  before_action :set_lesson, only: %i[ export ]
+  before_action :set_score
 
   # GET /assessment_questions or /assessment_questions.json
   def index

@@ -14,11 +14,11 @@
 one:
   spiritual_type: MyString
   title: MyString
-  short-description: MyString
+  short_description: MyString
   lessons_count: 1
 
 two:
   spiritual_type: MyString
   title: MyString
-  short-description: MyString
+  short_description: MyString
   lessons_count: 1

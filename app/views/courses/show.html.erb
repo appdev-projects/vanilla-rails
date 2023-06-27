@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <strong>Short-description:</strong>
-  <%= @course.short-description %>
+  <strong>short_description:</strong>
+  <%= @course.short_description %>
 </p>
 
 <p>
@@ -20,5 +20,5 @@
   <%= @course.lessons_count %>
 </p>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= render partial: "devise/registrations/edit", locals: {resource: :seeker,resource_name: current_seeker} %>
 <%= link_to 'Back', courses_path %>

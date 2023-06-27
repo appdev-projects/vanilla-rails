@@ -1,0 +1,10 @@
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), course: course, html: { method: :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.hidden_field :active_course_id, required: true, autofocus: true, value: course.id %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, "Go", class: "btn btn-primary container-fluid" %>
+  </div>
+<% end %>

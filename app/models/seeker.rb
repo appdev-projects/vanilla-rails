@@ -12,6 +12,8 @@
 #  phone_number           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  active_course_id       :integer          default(1)
+#  active_lesson_id       :integer          default(1)
 #
 class Seeker < ApplicationRecord
   # Include default devise modules. Others available are:
