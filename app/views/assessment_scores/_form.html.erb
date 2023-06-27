@@ -34,9 +34,6 @@
           Very Important
         </div>
       </div>
-      <div class="field">
-        <%= form.hidden_field assessment_question.name, id: assessment_question.name, value: 5 %>
-      </div>
       <script>
         $(document).on('input', '#<%=assessment_question.name%>_range', function() {
           var <%=assessment_question.name%>_score = Number($(this).val());
@@ -49,7 +46,79 @@
   <div class="field">
     <%= form.hidden_field :seeker_id, value: current_seeker.id %>
   </div>
-<br>
+  <div class="field">
+    <%= form.hidden_field :divine_relationship, id: "divine_relationship", value: assessment_score.divine_relationship %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :something_more, id: "something_more", value: assessment_score.something_more %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :creator_relationship, id: "creator_relationship", value: assessment_score.creator_relationship %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :love_others, id: "love_others", value: assessment_score.love_others %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :chain_link, id: "chain_link", value: assessment_score.chain_link %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :authentic_vulnerable, id: "authentic_vulnerable", value: assessment_score.authentic_vulnerable %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :nature_oneness, id: "nature_oneness", value: assessment_score.nature_oneness %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :magic_vibrations, id: "magic_vibrations", value: assessment_score.magic_vibrations %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :environment_harmony, id: "environment_harmony", value: assessment_score.environment_harmony %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :inner_peace, id: "inner_peace", value: assessment_score.inner_peace %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :self_knowing, id: "self_knowing", value: assessment_score.self_knowing %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :inner_resources, id: "inner_resources", value: assessment_score.inner_resources %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :divine_relationship_lived, id: "divine_relationship_lived", value: assessment_score.divine_relationship_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :something_more_lived, id: "something_more_lived", value: assessment_score.something_more_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :creator_relationship_lived, id: "creator_relationship_lived", value: assessment_score.creator_relationship_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :love_others_lived, id: "love_others_lived", value: assessment_score.love_others_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :chain_link_lived, id: "chain_link_lived", value: assessment_score.chain_link_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :authentic_vulnerable_lived, id: "authentic_vulnerable_lived", value: assessment_score.authentic_vulnerable_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :nature_oneness_lived, id: "nature_oneness_lived", value: assessment_score.nature_oneness_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :magic_vibrations_lived, id: "magic_vibrations_lived", value: assessment_score.magic_vibrations_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :environment_harmony_lived, id: "environment_harmony_lived", value: assessment_score.environment_harmony_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :inner_peace_lived, id: "inner_peace_lived", value: assessment_score.inner_peace_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :self_knowing_lived, id: "self_knowing_lived", value: assessment_score.self_knowing_lived %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field :inner_resources_lived, id: "inner_resources_lived", value: assessment_score.inner_resources_lived %>
+  </div>
+  <br>
   <div class="actions d-flex justify-content-center">
     <%= form.submit "Submit My Answers", class: "btn btn-secondary" %>
   </div>

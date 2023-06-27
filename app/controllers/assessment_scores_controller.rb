@@ -16,7 +16,53 @@ class AssessmentScoresController < ApplicationController
   # PATCH/PUT /assessment_scores/1 or /assessment_scores/1.json
   def update
     respond_to do |format|
+      
+    divine_relationship = params.dig( :assessment_score, divine_relationship.to_f )
+    something_more = params.dig( :assessment_score, :something_more )
+    creator_relationship = params.dig( :assessment_score, :creator_relationship )
+    love_others = params.dig( :assessment_score, :love_others )
+    chain_link = params.dig( :assessment_score, :chain_link )
+    authentic_vulnerable = params.dig( :assessment_score, :authentic_vulnerable )
+    nature_oneness = params.dig( :assessment_score, :nature_oneness )
+    magic_vibrations = params.dig( :assessment_score, :magic_vibrations )
+    environment_harmony = params.dig( :assessment_score, :environment_harmony )
+    inner_peace = params.dig( :assessment_score, :inner_peace )
+    self_knowing = params.dig( :assessment_score, :self_knowing )
+    inner_resources = params.dig( :assessment_score, :inner_resources )
+    divine_relationship_lived = params.dig( :assessment_score, :divine_relationship_lived )
+    something_more_lived = params.dig( :assessment_score, :something_more_lived )
+    creator_relationship_lived = params.dig( :assessment_score, :creator_relationship_lived )
+    love_others_lived = params.dig( :assessment_score, :love_others_lived )
+    chain_link_lived = params.dig( :assessment_score, :chain_link_lived )
+    authentic_vulnerable_lived = params.dig( :assessment_score, :authentic_vulnerable_lived )
+    nature_oneness_lived = params.dig( :assessment_score, :nature_oneness_lived )
+    magic_vibrations_lived = params.dig( :assessment_score, :magic_vibrations_lived )
+    environment_harmony_lived = params.dig( :assessment_score, :environment_harmony_lived )
+    inner_peace_lived = params.dig( :assessment_score, :inner_peace_lived )
+    self_knowing_lived = params.dig( :assessment_score, :self_knowing_lived )
+    inner_resources_lived = params.dig( :assessment_score, :inner_resources_lived )
+
+    personalist_array = [inner_peace, self_knowing, inner_resources] 
+    personalist_score = personalist_array.sum.to_f / 3
+
+    communalist_array = [love_others, chain_link, authentic_vulnerable] 
+    communalist_score = communalist_array.sum.to_f / 3
+
+    environmentalist_array = [nature_oneness, magic_vibrations, environment_harmony] 
+    environmentalist_score = environmentalist_array.sum.to_f / 3
+
+    transcendentalist_array = [divine_relationship, something_more, creator_relationship] 
+    transcendentalist_score = transcendentalist_array.sum.to_f / 3
+
+    p divine_relationship.class
+    p personalist_score.class
+    p transcendentalist_score
+
+    AssessmentScore.update(@type_score.id, :personalist => personalist_score, :environmentalist => environmentalist_score, :communalist => communalist_score, :transcendentalist => transcendentalist_score)
+
       if @type_score.update(assessment_score_params)
+
+
         format.html { redirect_back_or_to course_lesson_path({ course_id: @study_session.lesson.course_id, id: Lesson.find_by(id: @study_session.lesson_id + 1) }), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @type_score }
         format.js do

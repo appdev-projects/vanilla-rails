@@ -49,14 +49,12 @@ class ApplicationController < ActionController::Base
 
   # def current user's score
   def set_score
-    if AssessmentScore.find_by(seeker_id: current_seeker.id) == true
-      @type_score = AssessmentScore.find(seeker_id: current_seeker)
-
-    else
+    if AssessmentScore.find_by(seeker_id: current_seeker.id) == nil
       @type_score = AssessmentScore.create({
         seeker_id: current_seeker.id,
-      })
-
+      })   
+    else
+      @type_score = AssessmentScore.find_by(seeker_id: current_seeker)
     end
   end
 
