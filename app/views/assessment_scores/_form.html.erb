@@ -10,11 +10,6 @@
       </ul>
     </div>
   <% end %>
-  <script>
-    var scoresArray = new Array();
-    var score = new Array();
-    var scoresList = new Array();
-  </script>
 
   <% AssessmentQuestion.where(spiritual_type: type_assessment.downcase, assessment: "spiritual_type").each do |assessment_question| %>
     <div class="row list-group-item">
@@ -22,7 +17,7 @@
         <label for="question-<%= assessment_question.number%>"><%= assessment_question.question %></label>
       </div>
       <div class="row">
-        <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="question-<%= assessment_question.number%>" step=".25" name="question-<%= assessment_question.number%>" list="tickmarks" score=1>
+        <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="<%= assessment_question.name %>_range" step=".25" name="<%= assessment_question.name %>" list="tickmarks" score=1>
         <datalist id="tickmarks">
           <option value="1" label="1"></option>
           <option value="2" label="2"></option>
@@ -39,38 +34,23 @@
           Very Important
         </div>
       </div>
+      <div class="field">
+        <%= form.hidden_field assessment_question.name, id: assessment_question.name, value: 5 %>
+      </div>
+      <script>
+        $(document).on('input', '#<%=assessment_question.name%>_range', function() {
+          var <%=assessment_question.name%>_score = Number($(this).val());
+          console.log( <%=assessment_question.name%>_score );
+          $('#<%=assessment_question.name%>').attr('value', <%=assessment_question.name%>_score);
+          })
+      </script>
     </div>
-    <script>
-      $(document).on('input', '#question-<%=assessment_question.number%>', function() {
-        var score<%=assessment_question.number%> = Number($(this).val());
-        scoresArray.score<%=assessment_question.number%> = score<%=assessment_question.number%>;
-        console.log( scoresArray );
-        });
-    </script>
   <% end %>
-
-  <script>
-    $(document).on('input', '.slider', function() {
-     scoresList =  Object.values(scoresArray);
-     console.log( scoresList );
-     var scoreTotal = scoresList.reduce((a, b) => a + b);
-     console.log(scoreTotal);
-     score = scoreTotal / scoresList.length;
-    console.log(score);
-    $('#assessment_score_<%=type_assessment.downcase%>').attr('value', score)
-    });
-
-  </script>
-
   <div class="field">
     <%= form.hidden_field :seeker_id, value: current_seeker.id %>
   </div>
-
-  <div class="field">
-    <%= form.hidden_field type_assessment, value: 5 %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Done" %>
+<br>
+  <div class="actions d-flex justify-content-center">
+    <%= form.submit "Submit My Answers", class: "btn btn-secondary" %>
   </div>
 <% end %>

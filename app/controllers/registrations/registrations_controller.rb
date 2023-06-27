@@ -22,7 +22,14 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
       @active_course = Course.find(current_seeker.active_course_id)
       @active_lesson = Lesson.find( current_seeker.active_lesson_id )
 
+      @study_session = LessonEvent.create(
+        seeker_id: current_seeker.id,
+        status: 0,
+        lesson_id: @active_lesson.id
+      )
+
       redirect_to course_lesson_path(@active_course, @active_lesson)
+      
     end
 
   protected
