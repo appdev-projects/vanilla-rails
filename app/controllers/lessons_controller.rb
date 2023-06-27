@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
   before_action :set_course, only: %i[ show export ]
   before_action :set_lesson, only: %i[ show export ]
   before_action :set_lesson_event, only: %i[ show ]
-  before_action :set_score
+  before_action :set_score, only: %i[ show ]
   
 
 

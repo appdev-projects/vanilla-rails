@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :require_login, except: %i[ welcome ]
-  before_action :set_course, except: %i[ welcome ]
-  before_action :set_lesson, except: %i[ welcome ]
+
 
   def welcome
     if signed_in? == false
@@ -31,11 +30,20 @@ class ApplicationController < ActionController::Base
   end
 
   def set_lesson
-    @lesson = Lesson.find(current_seeker.active_lesson_id)
+    if current_seeker.lesson_events.last == nil
+      @lesson = Lesson.find( current_seeker.active_lesson_id )
+    elsif current_seeker.lesson_events.last.status == "complete"
+      last_session = current_seeker.lesson_events.last
+      @lesson = Lesson.find( last_session.lesson_id.to_i + 1)
+    else
+      last_session = current_seeker.lesson_events.last
+      @lesson = Lesson.find( last_session.lesson_id.to_i)
+    end
   end
+    
 
   def set_lesson_event
-    if current_seeker.lesson_events.last.status == 3
+    if current_seeker.lesson_events.last.status == "complete"
 
       @study_session = LessonEvent.create({
         seeker_id: current_seeker.id,

@@ -1,5 +1,8 @@
 class CoursesController < ApplicationController
   before_action :require_login
+  before_action :set_course, only: %i[ index ]
+  before_action :set_lesson, only: %i[ index ]
+  
 
   # Action for data exports
 

@@ -1,14 +1,18 @@
 class LessonEventsController < ApplicationController
   before_action :require_login
-  before_action :set_lesson_event
-  before_action :set_score
+
 
   # PATCH/PUT /lesson_events/1 or /lesson_events/1.json
   def update
+
+    @study_session = LessonEvent.find( params.fetch( :id ) )
+
     respond_to do |format|
+
       if @study_session.update(lesson_event_params) == true && @study_session.status == "complete"
-        format.html { redirect_to course_lesson_path( @study_session.lesson.course, Lesson.find( @study_session.lesson_id + 1)), notice: "Well done, friend." }
-        format.json { render :show, status: :ok, location: @study_session.lesson_id }
+        next_lesson = Lesson.find( @study_session.lesson_id + 1)
+        format.html { redirect_to course_lesson_path( next_lesson.course, next_lesson), notice: "Well done, friend." }
+        format.json { render :show, status: :ok, location: next_lesson }
       elsif @study_session.update(lesson_event_params) == true && @study_session.status != "complete"
         flash[:notice] = "Remember the nearness of the Sacred."
         format.js do

@@ -1,12 +1,15 @@
 class AssessmentScoresController < ApplicationController
   before_action :require_login
   before_action :set_score
+  before_action :set_course, only: %i[ show ]
+  
 
   # GET /assessment_scores/1 or /assessment_scores/1.json
   def show
+    @lesson = Lesson.find( current_seeker.lesson_events.last.lesson_id)
     if current_seeker.type_score == nil
       render "not_yet"
-    elsif current_seeker.type_score.spiritual_type == "not set"
+    elsif current_seeker.type_score.spiritual_type == "not_set"
       render "not_yet"
     else
       render "sanctuary"
@@ -16,8 +19,9 @@ class AssessmentScoresController < ApplicationController
   # PATCH/PUT /assessment_scores/1 or /assessment_scores/1.json
   def update
     respond_to do |format|
-      
-    divine_relationship = params.dig( :assessment_score, divine_relationship.to_f )
+    
+      #Capture AssessmentScore parameters as variables
+    divine_relationship = params.dig( :assessment_score, :divine_relationship )
     something_more = params.dig( :assessment_score, :something_more )
     creator_relationship = params.dig( :assessment_score, :creator_relationship )
     love_others = params.dig( :assessment_score, :love_others )
@@ -42,26 +46,41 @@ class AssessmentScoresController < ApplicationController
     self_knowing_lived = params.dig( :assessment_score, :self_knowing_lived )
     inner_resources_lived = params.dig( :assessment_score, :inner_resources_lived )
 
-    personalist_array = [inner_peace, self_knowing, inner_resources] 
-    personalist_score = personalist_array.sum.to_f / 3
+    #Invoke Arrays that contain AssessmentScore data by type
+    personalist_array = [inner_peace.to_f, self_knowing.to_f, inner_resources.to_f] 
+    environmentalist_array = [nature_oneness.to_f, magic_vibrations.to_f, environment_harmony.to_f] 
+    transcendentalist_array = [divine_relationship.to_f, something_more.to_f, creator_relationship.to_f] 
+    communalist_array = [love_others.to_f, chain_link.to_f, authentic_vulnerable.to_f] 
 
-    communalist_array = [love_others, chain_link, authentic_vulnerable] 
+    #Calculate type scores
     communalist_score = communalist_array.sum.to_f / 3
-
-    environmentalist_array = [nature_oneness, magic_vibrations, environment_harmony] 
+    personalist_score = personalist_array.sum.to_f / 3
+    transcendentalist_score = transcendentalist_array.sum.to_f / 3
     environmentalist_score = environmentalist_array.sum.to_f / 3
 
-    transcendentalist_array = [divine_relationship, something_more, creator_relationship] 
-    transcendentalist_score = transcendentalist_array.sum.to_f / 3
-
-    p divine_relationship.class
-    p personalist_score.class
-    p transcendentalist_score
-
+    #Update Type Scores
     AssessmentScore.update(@type_score.id, :personalist => personalist_score, :environmentalist => environmentalist_score, :communalist => communalist_score, :transcendentalist => transcendentalist_score)
 
-      if @type_score.update(assessment_score_params)
+    #Update Spiritual Type
+    if @type_score.personalist.to_f > 0 && @type_score.communalist.to_f > 0 && @type_score.environmentalist.to_f > 0 && @type_score.transcendentalist.to_f > 0
 
+      scores_array = Array.new
+      scores_array.push( @type_score.personalist.to_f ) 
+      scores_array.push( @type_score.communalist.to_f ) 
+      scores_array.push( @type_score.environmentalist.to_f ) 
+      scores_array.push( @type_score.transcendentalist.to_f )
+      
+      top_score = scores_array.sort.at( 3 ) 
+
+      scores_hash = Hash.new
+      scores_hash.store( :personalist, @type_score.personalist.to_f ) 
+      scores_hash.store( :communalist, @type_score.communalist.to_f ) 
+      scores_hash.store( :environmentalist, @type_score.environmentalist.to_f ) 
+      scores_hash.store( :transcendentalist, @type_score.transcendentalist.to_f )
+
+      AssessmentScore.update(@type_score.id, :spiritual_type => scores_hash.key( top_score ))
+    end
+      if @type_score.update(assessment_score_params)
 
         format.html { redirect_back_or_to course_lesson_path({ course_id: @study_session.lesson.course_id, id: Lesson.find_by(id: @study_session.lesson_id + 1) }), notice: "Well done, friend." }
         format.json { render :show, status: :ok, location: @type_score }
@@ -75,14 +94,6 @@ class AssessmentScoresController < ApplicationController
     end
   end
 
-  # CHANGE TO CALCULATION OF SPIRITUAL TYPE FIELD
-  # if @type_score.personalist != nil && @type_score.communalist != nil && @type_score.environmentalist != nil && @type_score.transcendentalist != nil
-  #   scores = Array.new
-  #   scores = [{type: :personalist, score: @type_score.personalist}, { type: :communalist, score:  @type_score.communalist},{ type: :environmentalist, score:  @type_score.environmentalist},{ type: :transcendentalist, score:  @type_score.transcendentalist} ]
-
-  #   @type_score.spiritual_type = scores.max_by{|k| k[:score] }[:type].to_s
-  #   @type_score.save
-  # end
 
   def export
     as = AssessmentScore.all
@@ -134,4 +145,5 @@ class AssessmentScoresController < ApplicationController
       :inner_resources_lived
     )
   end
+
 end
