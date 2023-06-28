@@ -4,6 +4,11 @@
   <div class="form-inputs">
     <%= f.hidden_field :active_course_id, required: true, autofocus: true, value: course.id %>
   </div>
+
+    <div class="form-inputs">
+    <%= f.hidden_field :active_lesson_id, required: true, autofocus: true, value: course.lessons.first %>
+  </div>
+
   <div class="form-actions">
     <%= f.button :submit, "Go", class: "btn btn-primary container-fluid" %>
   </div>

@@ -10,7 +10,7 @@ $("#collapseTwoButton").removeClass("collapsed");
 
 console.log("Teaching Done");
 
-<% elsif @study_session.status == "practice_done" && @lesson.day < 5 %>
+<% elsif @study_session.status == "practice_done" && @study_session.lesson.day < 5 %>
 
 $("#collapseTwo").removeClass("show");
 $("#collapseThree").addClass("show");
