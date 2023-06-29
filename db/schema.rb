@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_27_155737) do
+ActiveRecord::Schema.define(version: 2023_06_29_172852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2023_06_27_155737) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "spiritual_type"
     t.string "practice_description"
+    t.boolean "has_assessment", default: false
   end
 
   create_table "seekers", force: :cascade do |t|
