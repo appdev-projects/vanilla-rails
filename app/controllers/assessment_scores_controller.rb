@@ -52,14 +52,28 @@ class AssessmentScoresController < ApplicationController
     transcendentalist_array = [divine_relationship.to_f, something_more.to_f, creator_relationship.to_f] 
     communalist_array = [love_others.to_f, chain_link.to_f, authentic_vulnerable.to_f] 
 
+    personalist_lived_array = [inner_peace_lived.to_f, self_knowing_lived.to_f, inner_resources_lived.to_f] 
+    environmentalist_lived_array = [nature_oneness_lived.to_f, magic_vibrations_lived.to_f, environment_harmony_lived.to_f] 
+    transcendentalist_lived_array = [divine_relationship_lived.to_f, something_more_lived.to_f, creator_relationship_lived.to_f] 
+    communalist_lived_array = [love_others_lived.to_f, chain_link_lived.to_f, authentic_vulnerable_lived.to_f] 
+
     #Calculate type scores
+    communalist_lived_score = communalist_lived_array.sum.to_f / 3
+    personalist_lived_score = personalist_lived_array.sum.to_f / 3
+    transcendentalist_lived_score = transcendentalist_lived_array.sum.to_f / 3
+    environmentalist_lived_score = environmentalist_lived_array.sum.to_f / 3
+
     communalist_score = communalist_array.sum.to_f / 3
     personalist_score = personalist_array.sum.to_f / 3
     transcendentalist_score = transcendentalist_array.sum.to_f / 3
     environmentalist_score = environmentalist_array.sum.to_f / 3
 
     #Update Type Scores
-    AssessmentScore.update(@type_score.id, :personalist => personalist_score, :environmentalist => environmentalist_score, :communalist => communalist_score, :transcendentalist => transcendentalist_score)
+  AssessmentScore.update(@type_score.id, :personalist => personalist_score, :environmentalist => environmentalist_score, :communalist => communalist_score, :transcendentalist => transcendentalist_score, :personalist_lived => personalist_lived_score, :environmentalist_lived => environmentalist_lived_score, :communalist_lived => communalist_lived_score, :transcendentalist_lived => transcendentalist_lived_score)
+
+  p personalist_lived_array
+  p personalist_lived_score
+  p current_seeker.type_score.personalist_lived
 
     #Update Spiritual Type
     if @type_score.personalist.to_f > 0 && @type_score.communalist.to_f > 0 && @type_score.environmentalist.to_f > 0 && @type_score.transcendentalist.to_f > 0

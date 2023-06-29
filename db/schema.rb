@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_29_173800) do
+ActiveRecord::Schema.define(version: 2023_06_29_225613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -61,6 +61,10 @@ ActiveRecord::Schema.define(version: 2023_06_29_173800) do
     t.float "inner_peace_lived", default: 0.0
     t.float "self_knowing_lived", default: 0.0
     t.float "inner_resources_lived", default: 0.0
+    t.float "personalist_lived", default: 0.0
+    t.float "communalist_lived", default: 0.0
+    t.float "transcendentalist_lived", default: 0.0
+    t.float "environmentalist_lived", default: 0.0
   end
 
   create_table "courses", force: :cascade do |t|

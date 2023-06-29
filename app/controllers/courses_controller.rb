@@ -20,7 +20,6 @@ class CoursesController < ApplicationController
   end
 
   def index
-    @courses = Course.all
   end
 
 

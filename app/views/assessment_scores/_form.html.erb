@@ -13,38 +13,38 @@
 
   <% if type_assessment == "lived" %>
 
-  <% AssessmentQuestion.all.each do |assessment_question| %>
-    <div class="row list-group-item">
-      <div class="row container-fluid text-center">
-        <label for="question-<%= assessment_question.number%>"><%= assessment_question.question %></label>
-      </div>
-      <div class="row">
-        <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="<%= assessment_question.name %>_lived_range" step=".1" name="<%= assessment_question.name %>_lived" list="tickmarks" score=1>
-        <datalist id="tickmarks">
-          <option value="1" label="1"></option>
-          <option value="2" label="2"></option>
-          <option value="3" label="3"></option>
-          <option value="4" label="4"></option>
-          <option value="5" label="5"></option>
-        </datalist>
-      </div>
-      <div class="row">
-        <div class="col text-left">
-          Very Unimportant
+    <% AssessmentQuestion.all.each do |assessment_question| %>
+      <div class="row list-group-item">
+        <div class="row container-fluid text-center">
+          <label for="question-<%= assessment_question.number%>"><%= assessment_question.question %></label>
         </div>
-        <div class="col text-end">
-          Very Important
+        <div class="row">
+          <input type="range" min="1" max="5" value="1" class="slider form-control-range" id="<%= assessment_question.name %>_lived_range" step=".1" name="<%= assessment_question.name %>_lived" list="tickmarks" score=1>
+          <datalist id="tickmarks">
+            <option value="1" label="1"></option>
+            <option value="2" label="2"></option>
+            <option value="3" label="3"></option>
+            <option value="4" label="4"></option>
+            <option value="5" label="5"></option>
+          </datalist>
         </div>
+        <div class="row">
+          <div class="col text-left">
+            Very Unimportant
+          </div>
+          <div class="col text-end">
+            Very Important
+          </div>
+        </div>
+        <script>
+          $(document).on('input', '#<%=assessment_question.name%>_lived_range', function() {
+            var <%=assessment_question.name%>_lived_score = Number($(this).val());
+            console.log( <%=assessment_question.name%>_lived_score );
+            $('#<%=assessment_question.name%>_lived').attr('value', <%=assessment_question.name%>_lived_score);
+            })
+        </script>
       </div>
-      <script>
-        $(document).on('input', '#<%=assessment_question.name%>_lived_range', function() {
-          var <%=assessment_question.name%>_lived_score = Number($(this).val());
-          console.log( <%=assessment_question.name%>_lived_score );
-          $('#<%=assessment_question.name%>_lived').attr('value', <%=assessment_question.name%>_lived_score);
-          })
-      </script>
-    </div>
-  <% end %>
+    <% end %>
 
   <% else %>
 
