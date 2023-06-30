@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get "/welcome/index", to: "registrations#welcome"
   end
 
+  #information
+  get "/assessment_scores/science-of-spirituality", to: "assessment_scores#info"
+
   #data to csv export routes
   get("/export_courses", { :controller => "courses", :action => "export" })
   get("/export_lessons", { :controller => "lessons", :action => "export" })

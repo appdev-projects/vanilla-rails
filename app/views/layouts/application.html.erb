@@ -10,7 +10,6 @@
     <!-- Make it responsive to small screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <!--Connect JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -29,6 +28,9 @@
 
     <!-- Connect Plot.ly -->
     <script src="https://cdn.plot.ly/plotly-2.24.1.min.js" charset="utf-8"></script>
+
+    <!-- Custom Stylesheet -->
+    <%= stylesheet_link_tag 'application', media: 'all' %>
 
   </head>
   <nav class="navbar navbar-dark bg-dark" onload="ClearForm()">

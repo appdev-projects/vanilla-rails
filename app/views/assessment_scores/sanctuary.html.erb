@@ -1,34 +1,39 @@
 <div class="container">
-  <div class="card" style="margin-top: 10vh; margin-bottom: 10vh">
+  <div class="card" style="margin-top: 5vh; margin-bottom: 5vh">
     <div class="card-header">
       <div class="row">
-        <h1 class="text-center">
+        <h2 class="text-center">
           My Spirituality Profile
-        </h1>
+        </h2>
       </div>
     </div>
-    <div class="card-body">
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <h2 class="text-center">
+          My Worldview
+        </h2>
+      </div>
+    </div>
+    <div class="card-body"style="margin-top: 5vh; margin-bottom: 5vh">
       <div class="container-fluid">
         <div id="spiritChart">
         </div>
       </div>
     </div>
   </div>
-  <div class="card" style="margin-bottom: 10vh">
-    <div class="card-body col-12 container-fluid">
+  <div class="card" style="margin-top: 5vh; margin-bottom: 5vh">
+    <div class="card-header col-12 container-fluid">
       <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button id="collapseOneButton" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              My Spiritual Type
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <h5> My leading spiritual type is <%= current_seeker.type_score.spiritual_type %>.</h5>
-              <p>Everyone has the capacity to connect with the sacred on many dimension, but it seems like  <%= current_seeker.type_score.spiritual_type %> is the way you tend to gravitate. Read below about what that means, how we came up with this, and what the other spiritual types are like.</p>
-              <p><%= render partial: "devise/shared/spiritual_types"%></p>
-            </div>
+        <div id="collapseOneButton" class="card-header h4 accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          My Spiritual Type
+        </div>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <h5> My leading spiritual type is <%= current_seeker.type_score.spiritual_type %>.</h5>
+            <p>Everyone has the capacity to connect with the sacred on many dimension, but it seems like  <%= current_seeker.type_score.spiritual_type %> is the way you tend to gravitate. Read below about what that means, how we came up with this, and what the other spiritual types are like.</p>
+            <p><%= link_to "Read more about the research behind spiritual types here", "science-of-spirituality" %></p>
           </div>
         </div>
       </div>
@@ -36,28 +41,28 @@
   </div>
   <div class="card" style="margin-bottom: 10vh">
     <div class="card-body col-12 container-fluid">
-      <h4>My Spiritual Type Scores</h4>
+      <h4>My Spiritual Health</h4>
     </div>
   </div>
   <div class="container col-12 align-items-center justify-content-middle">
     <div class="card-columns">
-        <div class="card">
-          <div id="transcendentalConnection">
-          </div>
-        </div>
-        <div class="card">
-          <div id="personalConnection">
-          </div>
-        </div>
-        <div class="card">
-          <div id="communalConnection">
-          </div>
-        </div>
-        <div class="card">
-          <div id="environmentalConnection">
-          </div>
+      <div class="card">
+        <div id="transcendentalConnection">
         </div>
       </div>
+      <div class="card">
+        <div id="personalConnection">
+        </div>
+      </div>
+      <div class="card">
+        <div id="communalConnection">
+        </div>
+      </div>
+      <div class="card">
+        <div id="environmentalConnection">
+        </div>
+      </div>
+    </div>
     <div class="card" style="margin-bottom: 10vh">
       <div class="card-body col-12 container-fluid">
         <div class="accordion-item">

@@ -108,6 +108,9 @@ class AssessmentScoresController < ApplicationController
     end
   end
 
+  def info
+    render template "devise/shared/spiritual_types"
+  end
 
   def export
     as = AssessmentScore.all

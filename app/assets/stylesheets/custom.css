@@ -3386,6 +3386,7 @@ input[type="button"].btn-block {
 
 .card-header {
   padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0);
   margin-bottom: 0; }
   .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0; }
@@ -3437,8 +3438,9 @@ input[type="button"].btn-block {
 
 @media (min-width: 576px) {
   .card-deck {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: .5rem;
     margin-right: -15px;
     margin-left: -15px; }
     .card-deck .card {
@@ -3484,7 +3486,7 @@ input[type="button"].btn-block {
 
 @media (min-width: 576px) {
   .card-columns {
-    column-count: 3;
+    column-count: 2;
     column-gap: 1.25rem;
     orphans: 1;
     widows: 1; }
@@ -3504,6 +3506,11 @@ input[type="button"].btn-block {
   .accordion > .card > .card-header {
     border-radius: 0;
     margin-bottom: -1px; }
+
+    .accordion-button:not(.collapsed) {
+      background-color: white;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0)
+    }
 
 .breadcrumb {
   display: flex;
