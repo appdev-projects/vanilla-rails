@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
       <div class="container-fluid">
-        <div id="spiritChart" class="col-12 container-fluid">
+        <div id="spiritChart">
         </div>
       </div>
     </div>
@@ -32,161 +32,179 @@
           </div>
         </div>
       </div>
-
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button id="collapseTwoButton"class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            My Spiritual Type Scores
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <div class="container-fluid col-12">
-              <div class="container-fluid col-6" id="transcendentalConnection">
-              </div>
-              <div class="container-fluid col-6" id="personalConnection">
-              </div>
-              <div class="container-fluid col-6" id="communalConnection">
-              </div>
-              <div class="container-fluid col-6" id="environmentalConnection">
-              </div>
-            </div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom: 10vh">
+    <div class="card-body col-12 container-fluid">
+      <h4>My Spiritual Type Scores</h4>
+    </div>
+  </div>
+  <div class="container col-12 align-items-center justify-content-middle">
+    <div class="card-columns">
+        <div class="card">
+          <div id="transcendentalConnection">
+          </div>
+        </div>
+        <div class="card">
+          <div id="personalConnection">
+          </div>
+        </div>
+        <div class="card">
+          <div id="communalConnection">
+          </div>
+        </div>
+        <div class="card">
+          <div id="environmentalConnection">
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button id="collapseThreeButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Edit My Account
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <div class="row">
-              <%= render partial: "devise/registrations/old_edit", locals: {resource: :seeker, resource_name: current_seeker}%>
+    <div class="card" style="margin-bottom: 10vh">
+      <div class="card-body col-12 container-fluid">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button id="collapseThreeButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Edit My Account
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="row">
+                <%= render partial: "devise/registrations/old_edit", locals: {resource: :seeker, resource_name: current_seeker}%>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<script>
-  data = [{
-    type: 'scatterpolar',
-    r: [<%= current_seeker.type_score.communalist.to_f %>, <%= current_seeker.type_score.environmentalist.to_f %>,<%= current_seeker.type_score.personalist.to_f %>, <%= current_seeker.type_score.transcendentalist.to_f %> ],
-    theta: ['Communalist','Environmentalist','Personalist', 'Transcendentalist'],
-    fill: 'toself'
-  }]
+  <script>
+    data = [{
+      type: 'scatterpolar',
+      r: [<%= current_seeker.type_score.communalist.to_f %>, <%= current_seeker.type_score.environmentalist.to_f %>,<%= current_seeker.type_score.personalist.to_f %>, <%= current_seeker.type_score.transcendentalist.to_f %> ],
+      theta: ['Communalist','Environmentalist','Personalist', 'Transcendentalist'],
+      fill: 'toself'
+    }]
 
-  layout = {
-    showlegend: false,
-    polar: {
-      radialaxis: {
-        visible: true,
-        range: [0, 5]
+    layout = {
+      showlegend: false,
+      polar: {
+        radialaxis: {
+          visible: true,
+          range: [0, 5]
+        }
+      },
+      modebar: {
+        remove: ["autoScale2d", "autoscale", "editInChartStudio", "editinchartstudio", "hoverCompareCartesian", "hovercompare", "lasso", "lasso2d", "orbitRotation", "orbitrotation", "pan", "pan2d", "pan3d", "reset", "resetCameraDefault3d", "resetCameraLastSave3d", "resetGeo", "resetSankeyGroup", "resetScale2d", "resetViewMapbox", "resetViews", "resetcameradefault", "resetcameralastsave", "resetsankeygroup", "resetscale", "resetview", "resetviews", "select", "select2d", "sendDataToCloud", "senddatatocloud", "tableRotation", "tablerotation", "toImage", "toggleHover", "toggleSpikelines", "togglehover", "togglespikelines", "toimage", "zoom", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMapbox", "zoomOut2d", "zoomOutGeo", "zoomOutMapbox", "zoomin", "zoomout"],
+      },
+      margin: {
+        b: 40,
+        t: 40,
+        l: 90,
+        r: 90,
       }
-    },
-    modebar: {
-      remove: ["autoScale2d", "autoscale", "editInChartStudio", "editinchartstudio", "hoverCompareCartesian", "hovercompare", "lasso", "lasso2d", "orbitRotation", "orbitrotation", "pan", "pan2d", "pan3d", "reset", "resetCameraDefault3d", "resetCameraLastSave3d", "resetGeo", "resetSankeyGroup", "resetScale2d", "resetViewMapbox", "resetViews", "resetcameradefault", "resetcameralastsave", "resetsankeygroup", "resetscale", "resetview", "resetviews", "select", "select2d", "sendDataToCloud", "senddatatocloud", "tableRotation", "tablerotation", "toImage", "toggleHover", "toggleSpikelines", "togglehover", "togglespikelines", "toimage", "zoom", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMapbox", "zoomOut2d", "zoomOutGeo", "zoomOutMapbox", "zoomin", "zoomout"],
-    },
-    margin: {
-      b: 40,
-      t: 40,
-      l: 90,
-      r: 90,
+    };
+
+    config = {responsive: true}
+
+    Plotly.newPlot("spiritChart", data, layout, config, {showLink: false});
+  </script>
+  <script>
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: <%= current_seeker.type_score.transcendentalist_lived.to_f / current_seeker.type_score.transcendentalist.to_f %>,
+        title: { text: "T Connection" },
+        type: "indicator",
+        mode: "gauge",
+        gauge: { axis: {
+          range: [null, 1],
+          dtick: .25,
+          labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
+        } }
+      }
+    ];
+    layout = {
+      margin: {
+        l: 40,
+        r: 40
+      }
     }
-  };
+    var config = {responsive: true}
 
-  config = {responsive: true}
-
-  Plotly.newPlot("spiritChart", data, layout, config, {showLink: false});
-</script>
-<script>
-  var data = [
-    {
-      domain: { x: [0, 1], y: [0, 1] },
-      value: <%= current_seeker.type_score.transcendentalist_lived.to_f / current_seeker.type_score.transcendentalist.to_f %>,
-      title: { text: "Transcendental Connection" },
-      type: "indicator",
-      mode: "gauge",
-      gauge: { axis: {
-        range: [null, 1],
-        dtick: .25,
-        labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
-      } }
+    Plotly.newPlot('transcendentalConnection', data, layout, config);
+  </script>
+  <script>
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: <%= current_seeker.type_score.personalist_lived.to_f / current_seeker.type_score.personalist.to_f %>,
+        title: { text: "P Connection" },
+        type: "indicator",
+        mode: "gauge",
+        gauge: { axis: {
+          range: [null, 1],
+          dtick: .25,
+          labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
+        } }
+      }
+    ];
+    layout = {
+      margin: {
+        l: 40,
+        r: 40
+      }
     }
-  ];
+    config = {responsive: true};
 
-  var layout = { width: 600, height: 400 };
-
-  var config = {responsive: true}
-
-  Plotly.newPlot('transcendentalConnection', data, layout, config);
-</script>
-<script>
-  var data = [
-    {
-      domain: { x: [0, 1], y: [0, 1] },
-      value: <%= current_seeker.type_score.personalist_lived.to_f / current_seeker.type_score.personalist.to_f %>,
-      title: { text: "Personal Connection" },
-      type: "indicator",
-      mode: "gauge",
-      gauge: { axis: {
-        range: [null, 1],
-        dtick: .25,
-        labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
-      } }
+    Plotly.newPlot('personalConnection', data, layout, config);
+  </script>
+  <script>
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: <%= current_seeker.type_score.environmentalist_lived.to_f / current_seeker.type_score.environmentalist.to_f %>,
+        title: { text: "E Connection" },
+        type: "indicator",
+        mode: "gauge",
+        gauge: { axis: {
+          range: [null, 1],
+          dtick: .25,
+          labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
+        } }
+      }
+    ];
+    layout = {
+      margin: {
+        l: 40,
+        r: 40
+      }
     }
-  ];
+    config = {responsive: true};
 
-  var layout = { width: 600, height: 400 };
-
-  config = {responsive: true};
-
-  Plotly.newPlot('personalConnection', data, layout, config);
-</script>
-<script>
-  var data = [
-    {
-      domain: { x: [0, 1], y: [0, 1] },
-      value: <%= current_seeker.type_score.environmentalist_lived.to_f / current_seeker.type_score.environmentalist.to_f %>,
-      title: { text: "environmental Connection" },
-      type: "indicator",
-      mode: "gauge",
-      gauge: { axis: {
-        range: [null, 1],
-        dtick: .25,
-        labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
-      } }
+    Plotly.newPlot('environmentalConnection', data, layout, config);
+  </script>
+  <script>
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: <%= current_seeker.type_score.communalist_lived.to_f / current_seeker.type_score.communalist.to_f %>,
+        title: { text: "C Connection" },
+        type: "indicator",
+        mode: "gauge",
+        gauge: { axis: {
+          range: [null, 1],
+          dtick: .25,
+          labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
+        } }
+      }
+    ];
+    layout = {
+      margin: {
+        l: 40,
+        r: 40
+      }
     }
-  ];
+    config = {responsive: true};
 
-  var layout = { width: 600, height: 400 };
-
-  config = {responsive: true};
-
-  Plotly.newPlot('environmentalConnection', data, layout, config);
-</script>
-<script>
-  var data = [
-    {
-      domain: { x: [0, 1], y: [0, 1] },
-      value: <%= current_seeker.type_score.communalist_lived.to_f / current_seeker.type_score.communalist.to_f %>,
-      title: { text: "communal Connection" },
-      type: "indicator",
-      mode: "gauge",
-      gauge: { axis: {
-        range: [null, 1],
-        dtick: .25,
-        labelalias: {0:"Empty", .25:"Struggling", .5:"Getting There",.75:"Strong", 1:"Full!"}
-      } }
-    }
-  ];
-
-  var layout = { width: 600, height: 400 };
-
-  config = {responsive: true};
-
-  Plotly.newPlot('communalConnection', data, layout, config);
-</script>
+    Plotly.newPlot('communalConnection', data, layout, config);
+  </script>
